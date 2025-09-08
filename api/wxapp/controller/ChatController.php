@@ -43,7 +43,7 @@ class ChatController extends AuthController
      *    @OA\Response(response="default", description="An example resource")
      * )
      *
-     *  https://hl212.wxselling.com/api/wxapp/chat/get_uid?token=72795924cc8484d4d9ad4eca1c221d95b384a279526c35ae54bed453764ab949
+     *  https://xcxkf186.aubye.com/api/wxapp/chat/get_uid?token=72795924cc8484d4d9ad4eca1c221d95b384a279526c35ae54bed453764ab949
      *
      */
     public function get_uid()

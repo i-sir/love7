@@ -14,8 +14,8 @@ namespace api\wxapp\controller;
  *     "create_time"             =>"2024-08-21 18:15:46",
  *     "version"                 =>"1.0",
  *     "use"                     => new \api\wxapp\controller\LoveEmotionController();
- *     "test_environment"        =>"http://love0212.ikun/api/wxapp/love_emotion/index",
- *     "official_environment"    =>"https://hl212.wxselling.com/api/wxapp/love_emotion/index",
+ *     "test_environment"        =>"http://love7.ikun:9090/api/wxapp/love_emotion/index",
+ *     "official_environment"    =>"https://xcxkf186.aubye.com/api/wxapp/love_emotion/index",
  * )
  */
 
@@ -43,7 +43,7 @@ class LoveEmotionController extends AuthController
     /**
      * 默认接口
      * /api/wxapp/love_emotion/index
-     * https://hl212.wxselling.com/api/wxapp/love_emotion/index
+     * https://xcxkf186.aubye.com/api/wxapp/love_emotion/index
      */
     public function index()
     {
@@ -94,8 +94,8 @@ class LoveEmotionController extends AuthController
      * )
      *
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/love_emotion/find_love_emotion_list
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/love_emotion/find_love_emotion_list
+     *   test_environment: http://love7.ikun:9090/api/wxapp/love_emotion/find_love_emotion_list
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/love_emotion/find_love_emotion_list
      *   api:  /wxapp/love_emotion/find_love_emotion_list
      *   remark_name: 情感测试 列表
      *
@@ -148,8 +148,8 @@ class LoveEmotionController extends AuthController
      *     @OA\Response(response="default", description="An example resource")
      * )
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/love_emotion/find_love_emotion
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/love_emotion/find_love_emotion
+     *   test_environment: http://love7.ikun:9090/api/wxapp/love_emotion/find_love_emotion
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/love_emotion/find_love_emotion
      *   api:  /wxapp/love_emotion/find_love_emotion
      *   remark_name: 情感测试 详情
      *

@@ -14,8 +14,8 @@ namespace api\wxapp\controller;
  *     "create_time"             =>"2024-08-24 09:38:05",
  *     "version"                 =>"1.0",
  *     "use"                     => new \api\wxapp\controller\LoveLikeController();
- *     "test_environment"        =>"http://love0212.ikun/api/wxapp/love_like/index",
- *     "official_environment"    =>"https://hl212.wxselling.com/api/wxapp/love_like/index",
+ *     "test_environment"        =>"http://love7.ikun:9090/api/wxapp/love_like/index",
+ *     "official_environment"    =>"https://xcxkf186.aubye.com/api/wxapp/love_like/index",
  * )
  */
 
@@ -43,7 +43,7 @@ class LoveLikeController extends AuthController
     /**
      * 默认接口
      * /api/wxapp/love_like/index
-     * https://hl212.wxselling.com/api/wxapp/love_like/index
+     * https://xcxkf186.aubye.com/api/wxapp/love_like/index
      */
     public function index()
     {
@@ -104,8 +104,8 @@ class LoveLikeController extends AuthController
      *     @OA\Response(response="default", description="An example resource")
      * )
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/love_like/edit_like
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/love_like/edit_like
+     *   test_environment: http://love7.ikun:9090/api/wxapp/love_like/edit_like
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/love_like/edit_like
      *   api:  /wxapp/love_like/edit_like
      *   remark_name: 收藏&取消收藏
      *
@@ -162,8 +162,8 @@ class LoveLikeController extends AuthController
      *     @OA\Response(response="default", description="An example resource")
      * )
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/love_like/find_like_list
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/love_like/find_like_list
+     *   test_environment: http://love7.ikun:9090/api/wxapp/love_like/find_like_list
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/love_like/find_like_list
      *   api:  /wxapp/love_like/find_like_list
      *   remark_name: 收藏列表 (不用)
      *

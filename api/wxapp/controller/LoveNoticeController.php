@@ -14,8 +14,8 @@ namespace api\wxapp\controller;
  *     "create_time"             =>"2024-08-28 09:53:30",
  *     "version"                 =>"1.0",
  *     "use"                     => new \api\wxapp\controller\LoveNoticeController();
- *     "test_environment"        =>"http://love0212.ikun/api/wxapp/love_notice/index",
- *     "official_environment"    =>"https://hl212.wxselling.com/api/wxapp/love_notice/index",
+ *     "test_environment"        =>"http://love7.ikun:9090/api/wxapp/love_notice/index",
+ *     "official_environment"    =>"https://xcxkf186.aubye.com/api/wxapp/love_notice/index",
  * )
  */
 
@@ -43,7 +43,7 @@ class LoveNoticeController extends AuthController
     /**
      * 默认接口
      * /api/wxapp/love_notice/index
-     * https://hl212.wxselling.com/api/wxapp/love_notice/index
+     * https://xcxkf186.aubye.com/api/wxapp/love_notice/index
      */
     public function index()
     {
@@ -94,8 +94,8 @@ class LoveNoticeController extends AuthController
      * )
      *
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/love_notice/find_love_notice_list
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/love_notice/find_love_notice_list
+     *   test_environment: http://love7.ikun:9090/api/wxapp/love_notice/find_love_notice_list
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/love_notice/find_love_notice_list
      *   api:  /wxapp/love_notice/find_love_notice_list
      *   remark_name: 系统通知 列表
      *
@@ -149,8 +149,8 @@ class LoveNoticeController extends AuthController
      *     @OA\Response(response="default", description="An example resource")
      * )
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/love_notice/find_love_notice
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/love_notice/find_love_notice
+     *   test_environment: http://love7.ikun:9090/api/wxapp/love_notice/find_love_notice
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/love_notice/find_love_notice
      *   api:  /wxapp/love_notice/find_love_notice
      *   remark_name: 系统通知 详情
      *
@@ -212,8 +212,8 @@ class LoveNoticeController extends AuthController
      *     @OA\Response(response="default", description="An example resource")
      * )
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/love_notice/examine
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/love_notice/examine
+     *   test_environment: http://love7.ikun:9090/api/wxapp/love_notice/examine
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/love_notice/examine
      *   api:  /wxapp/love_notice/examine
      *   remark_name: 审核
      *

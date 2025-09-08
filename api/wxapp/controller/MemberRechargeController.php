@@ -14,8 +14,8 @@ namespace api\wxapp\controller;
  *     "create_time"             =>"2024-08-26 15:28:08",
  *     "version"                 =>"1.0",
  *     "use"                     => new \api\wxapp\controller\MemberRechargeController();
- *     "test_environment"        =>"http://love0212.ikun/api/wxapp/member_recharge/index",
- *     "official_environment"    =>"https://hl212.wxselling.com/api/wxapp/member_recharge/index",
+ *     "test_environment"        =>"http://love7.ikun:9090/api/wxapp/member_recharge/index",
+ *     "official_environment"    =>"https://xcxkf186.aubye.com/api/wxapp/member_recharge/index",
  * )
  */
 
@@ -43,7 +43,7 @@ class MemberRechargeController extends AuthController
     /**
      * 默认接口
      * /api/wxapp/member_recharge/index
-     * https://hl212.wxselling.com/api/wxapp/member_recharge/index
+     * https://xcxkf186.aubye.com/api/wxapp/member_recharge/index
      */
     public function index()
     {
@@ -94,8 +94,8 @@ class MemberRechargeController extends AuthController
      * )
      *
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/member_recharge/find_member_recharge_list
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/member_recharge/find_member_recharge_list
+     *   test_environment: http://love7.ikun:9090/api/wxapp/member_recharge/find_member_recharge_list
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/member_recharge/find_member_recharge_list
      *   api:  /wxapp/member_recharge/find_member_recharge_list
      *   remark_name: 充值管理 列表
      *
@@ -162,8 +162,8 @@ class MemberRechargeController extends AuthController
      * )
      *
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/member_recharge/add_order
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/member_recharge/add_order
+     *   test_environment: http://love7.ikun:9090/api/wxapp/member_recharge/add_order
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/member_recharge/add_order
      *   api:  /wxapp/member_recharge/add_order
      *   remark_name: 下单
      *

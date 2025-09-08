@@ -48,8 +48,8 @@ class OrderPayController extends AuthController
      *     @OA\Response(response="default", description="An example resource")
      * )
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/order_pay/wx_pay_mp
-     *   official_environment:  https://hl212.wxselling.com/api/wxapp/order_pay/wx_pay_mp
+     *   test_environment: http://love7.ikun:9090/api/wxapp/order_pay/wx_pay_mp
+     *   official_environment:  https://xcxkf186.aubye.com/api/wxapp/order_pay/wx_pay_mp
      *   api: /wxapp/order_pay/wx_pay_mp
      *   remark_name: 微信公众号支付
      *
@@ -159,8 +159,8 @@ class OrderPayController extends AuthController
      *     @OA\Response(response="default", description="An example resource")
      * )
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/order_pay/wx_pay_mini
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/order_pay/wx_pay_mini
+     *   test_environment: http://love7.ikun:9090/api/wxapp/order_pay/wx_pay_mini
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/order_pay/wx_pay_mini
      *   api: /wxapp/order_pay/wx_pay_mini
      *   remark_name: 微信小程序支付
      *
@@ -210,7 +210,7 @@ class OrderPayController extends AuthController
     }
 
 
-    // 测试用 https://hl212.wxselling.com/api/wxapp/order_pay/wx_pay_mini2
+    // 测试用 https://xcxkf186.aubye.com/api/wxapp/order_pay/wx_pay_mini2
     public function wx_pay_mini2()
     {
 
@@ -249,8 +249,8 @@ class OrderPayController extends AuthController
      *
      * @return void
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/order_pay/wx_pay_refund_test
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/order_pay/wx_pay_refund_test
+     *   test_environment: http://love7.ikun:9090/api/wxapp/order_pay/wx_pay_refund_test
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/order_pay/wx_pay_refund_test
      *   api: /wxapp/order_pay/wx_pay_refund_test
      *
      *   order_num 订单号

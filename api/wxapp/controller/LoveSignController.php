@@ -14,8 +14,8 @@ namespace api\wxapp\controller;
  *     "create_time"             =>"2024-08-22 10:55:41",
  *     "version"                 =>"1.0",
  *     "use"                     => new \api\wxapp\controller\LoveSignController();
- *     "test_environment"        =>"http://love0212.ikun/api/wxapp/love_sign/index",
- *     "official_environment"    =>"https://hl212.wxselling.com/api/wxapp/love_sign/index",
+ *     "test_environment"        =>"http://love7.ikun:9090/api/wxapp/love_sign/index",
+ *     "official_environment"    =>"https://xcxkf186.aubye.com/api/wxapp/love_sign/index",
  * )
  */
 
@@ -44,7 +44,7 @@ class LoveSignController extends AuthController
     /**
      * 默认接口
      * /api/wxapp/love_sign/index
-     * https://hl212.wxselling.com/api/wxapp/love_sign/index
+     * https://xcxkf186.aubye.com/api/wxapp/love_sign/index
      */
     public function index()
     {
@@ -106,8 +106,8 @@ class LoveSignController extends AuthController
      * )
      *
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/love_sign/find_date_list
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/love_sign/find_date_list
+     *   test_environment: http://love7.ikun:9090/api/wxapp/love_sign/find_date_list
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/love_sign/find_date_list
      *   api:  /wxapp/love_sign/find_date_list
      *   remark_name: 日期列表
      *
@@ -215,8 +215,8 @@ class LoveSignController extends AuthController
      * )
      *
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/love_sign/find_already_date_list
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/love_sign/find_already_date_list
+     *   test_environment: http://love7.ikun:9090/api/wxapp/love_sign/find_already_date_list
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/love_sign/find_already_date_list
      *   api:  /wxapp/love_sign/find_already_date_list
      *   remark_name: 已签到日期列表
      *
@@ -262,8 +262,8 @@ class LoveSignController extends AuthController
      *     @OA\Response(response="default", description="An example resource")
      * )
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/love_sign/add_sign
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/love_sign/add_sign
+     *   test_environment: http://love7.ikun:9090/api/wxapp/love_sign/add_sign
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/love_sign/add_sign
      *   api:  /wxapp/love_sign/add_sign
      *   remark_name: 签到
      *
@@ -353,8 +353,8 @@ class LoveSignController extends AuthController
      *     @OA\Response(response="default", description="An example resource")
      * )
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/love_sign/get_consecutive_days
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/love_sign/get_consecutive_days
+     *   test_environment: http://love7.ikun:9090/api/wxapp/love_sign/get_consecutive_days
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/love_sign/get_consecutive_days
      *   api:  /wxapp/love_sign/get_consecutive_days
      *   remark_name: 连续签到天数等信息
      *

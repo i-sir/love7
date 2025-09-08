@@ -14,8 +14,8 @@ namespace api\wxapp\controller;
  *     "create_time"             =>"2024-08-22 15:29:20",
  *     "version"                 =>"1.0",
  *     "use"                     => new \api\wxapp\controller\LoveSquareController();
- *     "test_environment"        =>"http://love0212.ikun/api/wxapp/love_square/index",
- *     "official_environment"    =>"https://hl212.wxselling.com/api/wxapp/love_square/index",
+ *     "test_environment"        =>"http://love7.ikun:9090/api/wxapp/love_square/index",
+ *     "official_environment"    =>"https://xcxkf186.aubye.com/api/wxapp/love_square/index",
  * )
  */
 
@@ -43,7 +43,7 @@ class LoveSquareController extends AuthController
     /**
      * 默认接口
      * /api/wxapp/love_square/index
-     * https://hl212.wxselling.com/api/wxapp/love_square/index
+     * https://xcxkf186.aubye.com/api/wxapp/love_square/index
      */
     public function index()
     {
@@ -118,8 +118,8 @@ class LoveSquareController extends AuthController
      * )
      *
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/love_square/find_love_square_list
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/love_square/find_love_square_list
+     *   test_environment: http://love7.ikun:9090/api/wxapp/love_square/find_love_square_list
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/love_square/find_love_square_list
      *   api:  /wxapp/love_square/find_love_square_list
      *   remark_name: 广场管理 列表
      *
@@ -175,8 +175,8 @@ class LoveSquareController extends AuthController
      *     @OA\Response(response="default", description="An example resource")
      * )
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/love_square/find_love_square
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/love_square/find_love_square
+     *   test_environment: http://love7.ikun:9090/api/wxapp/love_square/find_love_square
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/love_square/find_love_square
      *   api:  /wxapp/love_square/find_love_square
      *   remark_name: 广场管理 详情
      *
@@ -266,8 +266,8 @@ class LoveSquareController extends AuthController
      *     @OA\Response(response="default", description="An example resource")
      * )
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/love_square/edit_love_square
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/love_square/edit_love_square
+     *   test_environment: http://love7.ikun:9090/api/wxapp/love_square/edit_love_square
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/love_square/edit_love_square
      *   api:  /wxapp/love_square/edit_love_square
      *   remark_name: 广场管理 编辑&添加
      *
@@ -338,8 +338,8 @@ class LoveSquareController extends AuthController
      *     @OA\Response(response="default", description="An example resource")
      * )
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/love_square/delete_love_square
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/love_square/delete_love_square
+     *   test_environment: http://love7.ikun:9090/api/wxapp/love_square/delete_love_square
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/love_square/delete_love_square
      *   api:  /wxapp/love_square/delete_love_square
      *   remark_name: 广场管理 删除
      *

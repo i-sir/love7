@@ -16,8 +16,8 @@ use initmodel\MemberModel;
  *     "create_time"             =>"2024-04-24 17:16:22",
  *     "version"                 =>"1.0",
  *     "use"                     => new \api\wxapp\controller\InitController();
- *     "test_environment"        =>"http://love0212.ikun/api/wxapp/init/index",
- *     "official_environment"    =>"https://hl212.wxselling.com/api/wxapp/init/index",
+ *     "test_environment"        =>"http://love7.ikun:9090/api/wxapp/init/index",
+ *     "official_environment"    =>"https://xcxkf186.aubye.com/api/wxapp/init/index",
  * )
  */
 class InitController
@@ -30,7 +30,7 @@ class InitController
     /**
      * 给上级发放佣金
      * @param $p_user_id
-     * https://hl212.wxselling.com/api/wxapp/init/send_invitation_commission?p_user_id=2
+     * https://xcxkf186.aubye.com/api/wxapp/init/send_invitation_commission?p_user_id=2
      */
     public function send_invitation_commission($p_user_id = 0)
     {

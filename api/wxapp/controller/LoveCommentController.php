@@ -14,8 +14,8 @@ namespace api\wxapp\controller;
  *     "create_time"             =>"2024-08-24 09:38:18",
  *     "version"                 =>"1.0",
  *     "use"                     => new \api\wxapp\controller\LoveCommentController();
- *     "test_environment"        =>"http://love0212.ikun/api/wxapp/love_comment/index",
- *     "official_environment"    =>"https://hl212.wxselling.com/api/wxapp/love_comment/index",
+ *     "test_environment"        =>"http://love7.ikun:9090/api/wxapp/love_comment/index",
+ *     "official_environment"    =>"https://xcxkf186.aubye.com/api/wxapp/love_comment/index",
  * )
  */
 
@@ -43,7 +43,7 @@ class LoveCommentController extends AuthController
     /**
      * 默认接口
      * /api/wxapp/love_comment/index
-     * https://hl212.wxselling.com/api/wxapp/love_comment/index
+     * https://xcxkf186.aubye.com/api/wxapp/love_comment/index
      */
     public function index()
     {
@@ -106,8 +106,8 @@ class LoveCommentController extends AuthController
      * )
      *
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/love_comment/find_comment_list
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/love_comment/find_comment_list
+     *   test_environment: http://love7.ikun:9090/api/wxapp/love_comment/find_comment_list
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/love_comment/find_comment_list
      *   api:  /wxapp/love_comment/add_comment
      *   remark_name: 评论列表
      *
@@ -281,8 +281,8 @@ class LoveCommentController extends AuthController
      *     @OA\Response(response="default", description="An example resource")
      * )
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/love_comment/add_comment
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/love_comment/add_comment
+     *   test_environment: http://love7.ikun:9090/api/wxapp/love_comment/add_comment
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/love_comment/add_comment
      *   api:  /wxapp/love_comment/add_comment
      *   remark_name: 添加评论
      *
@@ -362,8 +362,8 @@ class LoveCommentController extends AuthController
      *     @OA\Response(response="default", description="An example resource")
      * )
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/love_comment/delete
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/love_comment/delete
+     *   test_environment: http://love7.ikun:9090/api/wxapp/love_comment/delete
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/love_comment/delete
      *   api:  /wxapp/love_comment/delete
      *   remark_name: 删除评论
      *

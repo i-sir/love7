@@ -25,8 +25,8 @@ class MemberController extends AuthController
     /**
      * 测试用
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/member/index
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/member/index
+     *   test_environment: http://love7.ikun:9090/api/wxapp/member/index
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/member/index
      *   api: /wxapp/member/index
      *   remark_name: 测试用
      *
@@ -71,8 +71,8 @@ class MemberController extends AuthController
      *     @OA\Response(response="default", description="An example resource")
      * )
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/member/find_member
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/member/find_member
+     *   test_environment: http://love7.ikun:9090/api/wxapp/member/find_member
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/member/find_member
      *   api: /wxapp/member/find_member
      *   remark_name: 查询会员信息
      *
@@ -148,8 +148,8 @@ class MemberController extends AuthController
      *     @OA\Response(response="default", description="An example resource")
      * )
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/member/pass_login
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/member/pass_login
+     *   test_environment: http://love7.ikun:9090/api/wxapp/member/pass_login
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/member/pass_login
      *   api: /wxapp/member/pass_login
      *   remark_name: 查询会员信息
      *
@@ -314,8 +314,8 @@ class MemberController extends AuthController
      *     @OA\Response(response="default", description="An example resource")
      * )
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/member/update_member
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/member/update_member
+     *   test_environment: http://love7.ikun:9090/api/wxapp/member/update_member
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/member/update_member
      *   api: /wxapp/member/update_member
      *   remark_name: 更新会员信息
      *
@@ -424,8 +424,8 @@ class MemberController extends AuthController
      *     @OA\Response(response="default", description="An example resource")
      * )
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/member/find_balance_list
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/member/find_balance_list
+     *   test_environment: http://love7.ikun:9090/api/wxapp/member/find_balance_list
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/member/find_balance_list
      *   api: /wxapp/member/find_balance_list
      *   remark_name: 账户(余额)变动明细
      *
@@ -483,8 +483,8 @@ class MemberController extends AuthController
      *     @OA\Response(response="default", description="An example resource")
      * )
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/member/find_user
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/member/find_user
+     *   test_environment: http://love7.ikun:9090/api/wxapp/member/find_user
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/member/find_user
      *   api: /wxapp/member/find_user
      *   remark_name: 查询用户信息
      *
@@ -595,8 +595,8 @@ class MemberController extends AuthController
      *     @OA\Response(response="default", description="An example resource")
      * )
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/member/find_user_list
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/member/find_user_list
+     *   test_environment: http://love7.ikun:9090/api/wxapp/member/find_user_list
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/member/find_user_list
      *   api: /wxapp/member/find_user_list
      *   remark_name: 用户列表
      *
@@ -674,8 +674,8 @@ class MemberController extends AuthController
      *     @OA\Response(response="default", description="An example resource")
      * )
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/member/update_ranking
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/member/update_ranking
+     *   test_environment: http://love7.ikun:9090/api/wxapp/member/update_ranking
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/member/update_ranking
      *   api: /wxapp/member/update_ranking
      *   remark_name: 更新排名
      *
@@ -733,8 +733,8 @@ class MemberController extends AuthController
      *     @OA\Response(response="default", description="An example resource")
      * )
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/member/get_auth
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/member/get_auth
+     *   test_environment: http://love7.ikun:9090/api/wxapp/member/get_auth
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/member/get_auth
      *   api: /wxapp/member/get_auth
      *   remark_name: 查询权限
      *

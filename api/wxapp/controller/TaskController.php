@@ -28,8 +28,8 @@ class TaskController
     /**
      * 执行定时任务
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/task/index
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/task/index
+     *   test_environment: http://love7.ikun:9090/api/wxapp/task/index
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/task/index
      *   api: /wxapp/task/index
      *   remark_name: 执行定时任务
      *

@@ -14,8 +14,8 @@ namespace api\wxapp\controller;
  *     "create_time"             =>"2024-08-27 18:37:31",
  *     "version"                 =>"1.0",
  *     "use"                     => new \api\wxapp\controller\LoveMateController();
- *     "test_environment"        =>"http://love0212.ikun/api/wxapp/love_mate/index",
- *     "official_environment"    =>"https://hl212.wxselling.com/api/wxapp/love_mate/index",
+ *     "test_environment"        =>"http://love7.ikun:9090/api/wxapp/love_mate/index",
+ *     "official_environment"    =>"https://xcxkf186.aubye.com/api/wxapp/love_mate/index",
  * )
  */
 
@@ -43,7 +43,7 @@ class LoveMateController extends AuthController
     /**
      * 默认接口
      * /api/wxapp/love_mate/index
-     * https://hl212.wxselling.com/api/wxapp/love_mate/index
+     * https://xcxkf186.aubye.com/api/wxapp/love_mate/index
      */
     public function index()
     {
@@ -110,8 +110,8 @@ class LoveMateController extends AuthController
      *     @OA\Response(response="default", description="An example resource")
      * )
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/love_mate/add_love_mate
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/love_mate/add_love_mate
+     *   test_environment: http://love7.ikun:9090/api/wxapp/love_mate/add_love_mate
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/love_mate/add_love_mate
      *   api:  /wxapp/love_mate/add_love_mate
      *   remark_name: 牵线管理  添加
      *

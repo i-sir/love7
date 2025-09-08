@@ -14,8 +14,8 @@ namespace api\wxapp\controller;
  *     "create_time"             =>"2024-08-26 09:27:36",
  *     "version"                 =>"1.0",
  *     "use"                     => new \api\wxapp\controller\ShopController();
- *     "test_environment"        =>"http://love0212.ikun/api/wxapp/shop/index",
- *     "official_environment"    =>"https://hl212.wxselling.com/api/wxapp/shop/index",
+ *     "test_environment"        =>"http://love7.ikun:9090/api/wxapp/shop/index",
+ *     "official_environment"    =>"https://xcxkf186.aubye.com/api/wxapp/shop/index",
  * )
  */
 
@@ -43,7 +43,7 @@ class ShopController extends AuthController
     /**
      * 默认接口
      * /api/wxapp/shop/index
-     * https://hl212.wxselling.com/api/wxapp/shop/index
+     * https://xcxkf186.aubye.com/api/wxapp/shop/index
      */
     public function index()
     {
@@ -94,8 +94,8 @@ class ShopController extends AuthController
      * )
      *
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/shop/find_class_list
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/shop/find_class_list
+     *   test_environment: http://love7.ikun:9090/api/wxapp/shop/find_class_list
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/shop/find_class_list
      *   api:  /wxapp/shop/find_class_list
      *   remark_name: 店铺类型 列表
      *
@@ -162,8 +162,8 @@ class ShopController extends AuthController
      * )
      *
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/shop/find_shop_list
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/shop/find_shop_list
+     *   test_environment: http://love7.ikun:9090/api/wxapp/shop/find_shop_list
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/shop/find_shop_list
      *   api:  /wxapp/shop/find_shop_list
      *   remark_name: 店铺管理 列表
      *
@@ -220,8 +220,8 @@ class ShopController extends AuthController
      *     @OA\Response(response="default", description="An example resource")
      * )
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/shop/find_shop
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/shop/find_shop
+     *   test_environment: http://love7.ikun:9090/api/wxapp/shop/find_shop
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/shop/find_shop
      *   api:  /wxapp/shop/find_shop
      *   remark_name: 店铺管理 详情
      *
@@ -544,8 +544,8 @@ class ShopController extends AuthController
      *     @OA\Response(response="default", description="An example resource")
      * )
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/shop/edit_shop
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/shop/edit_shop
+     *   test_environment: http://love7.ikun:9090/api/wxapp/shop/edit_shop
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/shop/edit_shop
      *   api:  /wxapp/shop/edit_shop
      *   remark_name: 店铺管理 编辑&添加
      *
@@ -605,8 +605,8 @@ class ShopController extends AuthController
      *     @OA\Response(response="default", description="An example resource")
      * )
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/shop/add_order
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/shop/add_order
+     *   test_environment: http://love7.ikun:9090/api/wxapp/shop/add_order
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/shop/add_order
      *   api:  /wxapp/shop/add_order
      *   remark_name: 管理费,缴纳
      *

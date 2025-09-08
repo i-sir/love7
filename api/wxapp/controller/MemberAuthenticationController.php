@@ -14,8 +14,8 @@ namespace api\wxapp\controller;
  *     "create_time"             =>"2024-08-22 14:55:19",
  *     "version"                 =>"1.0",
  *     "use"                     => new \api\wxapp\controller\MemberAuthenticationController();
- *     "test_environment"        =>"http://love0212.ikun/api/wxapp/member_authentication/index",
- *     "official_environment"    =>"https://hl212.wxselling.com/api/wxapp/member_authentication/index",
+ *     "test_environment"        =>"http://love7.ikun:9090/api/wxapp/member_authentication/index",
+ *     "official_environment"    =>"https://xcxkf186.aubye.com/api/wxapp/member_authentication/index",
  * )
  */
 
@@ -43,7 +43,7 @@ class MemberAuthenticationController extends AuthController
     /**
      * 默认接口
      * /api/wxapp/member_authentication/index
-     * https://hl212.wxselling.com/api/wxapp/member_authentication/index
+     * https://xcxkf186.aubye.com/api/wxapp/member_authentication/index
      */
     public function index()
     {
@@ -94,8 +94,8 @@ class MemberAuthenticationController extends AuthController
      * )
      *
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/member_authentication/find_authentication_list
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/member_authentication/find_authentication_list
+     *   test_environment: http://love7.ikun:9090/api/wxapp/member_authentication/find_authentication_list
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/member_authentication/find_authentication_list
      *   api:  /wxapp/member_authentication/find_authentication_list
      *   remark_name: 自己认证列表
      *
@@ -182,8 +182,8 @@ class MemberAuthenticationController extends AuthController
      *     @OA\Response(response="default", description="An example resource")
      * )
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/member_authentication/find_authentication
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/member_authentication/find_authentication
+     *   test_environment: http://love7.ikun:9090/api/wxapp/member_authentication/find_authentication
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/member_authentication/find_authentication
      *   api:  /wxapp/member_authentication/find_authentication
      *   remark_name: 认证管理 详情
      *
@@ -263,8 +263,8 @@ class MemberAuthenticationController extends AuthController
      *     @OA\Response(response="default", description="An example resource")
      * )
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/member_authentication/add_authentication
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/member_authentication/add_authentication
+     *   test_environment: http://love7.ikun:9090/api/wxapp/member_authentication/add_authentication
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/member_authentication/add_authentication
      *   api:  /wxapp/member_authentication/add_authentication
      *   remark_name: 认证管理  添加
      *

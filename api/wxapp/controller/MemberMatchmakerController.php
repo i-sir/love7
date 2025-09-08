@@ -14,8 +14,8 @@ namespace api\wxapp\controller;
  *     "create_time"             =>"2024-08-27 10:52:52",
  *     "version"                 =>"1.0",
  *     "use"                     => new \api\wxapp\controller\MemberMatchmakerController();
- *     "test_environment"        =>"http://love0212.ikun/api/wxapp/member_matchmaker/index",
- *     "official_environment"    =>"https://hl212.wxselling.com/api/wxapp/member_matchmaker/index",
+ *     "test_environment"        =>"http://love7.ikun:9090/api/wxapp/member_matchmaker/index",
+ *     "official_environment"    =>"https://xcxkf186.aubye.com/api/wxapp/member_matchmaker/index",
  * )
  */
 
@@ -43,7 +43,7 @@ class MemberMatchmakerController extends AuthController
     /**
      * 默认接口
      * /api/wxapp/member_matchmaker/index
-     * https://hl212.wxselling.com/api/wxapp/member_matchmaker/index
+     * https://xcxkf186.aubye.com/api/wxapp/member_matchmaker/index
      */
     public function index()
     {
@@ -94,8 +94,8 @@ class MemberMatchmakerController extends AuthController
      * )
      *
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/member_matchmaker/find_member_matchmaker_list
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/member_matchmaker/find_member_matchmaker_list
+     *   test_environment: http://love7.ikun:9090/api/wxapp/member_matchmaker/find_member_matchmaker_list
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/member_matchmaker/find_member_matchmaker_list
      *   api:  /wxapp/member_matchmaker/find_member_matchmaker_list
      *   remark_name: 红娘管理 列表
      *
@@ -157,8 +157,8 @@ class MemberMatchmakerController extends AuthController
      *     @OA\Response(response="default", description="An example resource")
      * )
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/member_matchmaker/find_member_matchmaker
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/member_matchmaker/find_member_matchmaker
+     *   test_environment: http://love7.ikun:9090/api/wxapp/member_matchmaker/find_member_matchmaker
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/member_matchmaker/find_member_matchmaker
      *   api:  /wxapp/member_matchmaker/find_member_matchmaker
      *   remark_name: 红娘管理 详情
      *
@@ -222,8 +222,8 @@ class MemberMatchmakerController extends AuthController
      *     @OA\Response(response="default", description="An example resource")
      * )
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/member_matchmaker/binding
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/member_matchmaker/binding
+     *   test_environment: http://love7.ikun:9090/api/wxapp/member_matchmaker/binding
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/member_matchmaker/binding
      *   api:  /wxapp/member_matchmaker/binding
      *   remark_name: 找她牵线 (绑定)
      *
@@ -288,8 +288,8 @@ class MemberMatchmakerController extends AuthController
      *     @OA\Response(response="default", description="An example resource")
      * )
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/member_matchmaker/pass_login
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/member_matchmaker/pass_login
+     *   test_environment: http://love7.ikun:9090/api/wxapp/member_matchmaker/pass_login
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/member_matchmaker/pass_login
      *   api:  /wxapp/member_matchmaker/pass_login
      *   remark_name: 红娘登录
      *

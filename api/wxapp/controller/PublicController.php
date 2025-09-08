@@ -79,8 +79,8 @@ class PublicController extends AuthController
      * 测试接口
      *
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/public/index
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/public/index
+     *   test_environment: http://love7.ikun:9090/api/wxapp/public/index
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/public/index
      *   api: /wxapp/public/index
      *   remark_name: 测试接口
      *
@@ -112,8 +112,8 @@ class PublicController extends AuthController
      * )
      *
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/public/find_setting
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/public/find_setting
+     *   test_environment: http://love7.ikun:9090/api/wxapp/public/find_setting
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/public/find_setting
      *   api: /wxapp/public/find_setting
      *   remark_name: 查询系统配置信息
      *
@@ -184,8 +184,8 @@ class PublicController extends AuthController
      *     @OA\Response(response="default", description="An example resource")
      * )
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/public/find_agreement_list
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/public/find_agreement_list
+     *   test_environment: http://love7.ikun:9090/api/wxapp/public/find_agreement_list
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/public/find_agreement_list
      *   api: /wxapp/public/find_agreement_list
      *   remark_name: 查询协议列表
      *
@@ -233,8 +233,8 @@ class PublicController extends AuthController
      *     @OA\Response(response="default", description="An example resource")
      * )
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/public/upload_asset
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/public/upload_asset
+     *   test_environment: http://love7.ikun:9090/api/wxapp/public/upload_asset
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/public/upload_asset
      *   api: /wxapp/public/upload_asset
      *   remark_name: 上传图片
      *
@@ -286,8 +286,8 @@ class PublicController extends AuthController
      *     @OA\Response(response="default", description="An example resource")
      * )
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/public/find_slide
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/public/find_slide
+     *   test_environment: http://love7.ikun:9090/api/wxapp/public/find_slide
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/public/find_slide
      *   api: /wxapp/public/find_slide
      *   remark_name: 查询幻灯片
      *
@@ -335,8 +335,8 @@ class PublicController extends AuthController
      *     @OA\Response(response="default", description="An example resource")
      * )
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/public/find_navs
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/public/find_navs
+     *   test_environment: http://love7.ikun:9090/api/wxapp/public/find_navs
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/public/find_navs
      *   api: /wxapp/public/find_navs
      *   remark_name: 查询导航列表
      *
@@ -401,8 +401,8 @@ class PublicController extends AuthController
      *     @OA\Response(response="default", description="An example resource")
      * )
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/public/get_opneid
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/public/get_opneid
+     *   test_environment: http://love7.ikun:9090/api/wxapp/public/get_opneid
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/public/get_opneid
      *   api: /wxapp/public/get_opneid
      *   remark_name: 静默获取openid
      *
@@ -525,8 +525,8 @@ class PublicController extends AuthController
      *     @OA\Response(response="default", description="An example resource")
      * )
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/public/send_sms
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/public/send_sms
+     *   test_environment: http://love7.ikun:9090/api/wxapp/public/send_sms
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/public/send_sms
      *   api: /wxapp/public/send_sms
      *   remark_name: 获取手机验证码
      *
@@ -567,8 +567,8 @@ class PublicController extends AuthController
      *     @OA\Response(response="default", description="An example resource")
      * )
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/public/find_area
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/public/find_area
+     *   test_environment: http://love7.ikun:9090/api/wxapp/public/find_area
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/public/find_area
      *   api: /wxapp/public/find_area
      *   remark_name: 获取 省市区
      *
@@ -634,8 +634,8 @@ class PublicController extends AuthController
      *     @OA\Response(response="default", description="An example resource")
      * )
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/public/translate
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/public/translate
+     *   test_environment: http://love7.ikun:9090/api/wxapp/public/translate
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/public/translate
      *   api: /wxapp/public/translate
      *   remark_name: 翻译 误删
      *
@@ -659,8 +659,8 @@ class PublicController extends AuthController
      * @return mixed
      *
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/public/get_stable_access_token
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/public/get_stable_access_token
+     *   test_environment: http://love7.ikun:9090/api/wxapp/public/get_stable_access_token
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/public/get_stable_access_token
      *   api: /wxapp/public/get_stable_access_token
      *   remark_name: 获取超稳定 access_token
      *

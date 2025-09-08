@@ -14,8 +14,8 @@ namespace api\wxapp\controller;
  *     "create_time"             =>"2024-08-26 11:10:17",
  *     "version"                 =>"1.0",
  *     "use"                     => new \api\wxapp\controller\MemberVipController();
- *     "test_environment"        =>"http://love0212.ikun/api/wxapp/member_vip/index",
- *     "official_environment"    =>"https://hl212.wxselling.com/api/wxapp/member_vip/index",
+ *     "test_environment"        =>"http://love7.ikun:9090/api/wxapp/member_vip/index",
+ *     "official_environment"    =>"https://xcxkf186.aubye.com/api/wxapp/member_vip/index",
  * )
  */
 
@@ -43,7 +43,7 @@ class MemberVipController extends AuthController
     /**
      * 默认接口
      * /api/wxapp/member_vip/index
-     * https://hl212.wxselling.com/api/wxapp/member_vip/index
+     * https://xcxkf186.aubye.com/api/wxapp/member_vip/index
      */
     public function index()
     {
@@ -109,8 +109,8 @@ class MemberVipController extends AuthController
      * )
      *
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/member_vip/find_member_vip_list
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/member_vip/find_member_vip_list
+     *   test_environment: http://love7.ikun:9090/api/wxapp/member_vip/find_member_vip_list
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/member_vip/find_member_vip_list
      *   api:  /wxapp/member_vip/find_member_vip_list
      *   remark_name: 用户等级 列表
      *
@@ -192,8 +192,8 @@ class MemberVipController extends AuthController
      * )
      *
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/member_vip/add_order
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/member_vip/add_order
+     *   test_environment: http://love7.ikun:9090/api/wxapp/member_vip/add_order
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/member_vip/add_order
      *   api:  /wxapp/member_vip/add_order
      *   remark_name: 开通vip
      *
@@ -274,8 +274,8 @@ class MemberVipController extends AuthController
      * )
      *
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/member_vip/find_order_list
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/member_vip/find_order_list
+     *   test_environment: http://love7.ikun:9090/api/wxapp/member_vip/find_order_list
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/member_vip/find_order_list
      *   api:  /wxapp/member_vip/find_order_list
      *   remark_name: 开通记录
      *
@@ -366,8 +366,8 @@ class MemberVipController extends AuthController
      * )
      *
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/member_vip/refund
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/member_vip/refund
+     *   test_environment: http://love7.ikun:9090/api/wxapp/member_vip/refund
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/member_vip/refund
      *   api:  /wxapp/member_vip/refund
      *   remark_name: 退款
      *

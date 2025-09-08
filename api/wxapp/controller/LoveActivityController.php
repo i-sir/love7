@@ -14,8 +14,8 @@ namespace api\wxapp\controller;
  *     "create_time"             =>"2024-08-22 10:03:06",
  *     "version"                 =>"1.0",
  *     "use"                     => new \api\wxapp\controller\LoveActivityController();
- *     "test_environment"        =>"http://love0212.ikun/api/wxapp/love_activity/index",
- *     "official_environment"    =>"https://hl212.wxselling.com/api/wxapp/love_activity/index",
+ *     "test_environment"        =>"http://love7.ikun:9090/api/wxapp/love_activity/index",
+ *     "official_environment"    =>"https://xcxkf186.aubye.com/api/wxapp/love_activity/index",
  * )
  */
 
@@ -45,7 +45,7 @@ class LoveActivityController extends AuthController
     /**
      * 默认接口
      * /api/wxapp/love_activity/index
-     * https://hl212.wxselling.com/api/wxapp/love_activity/index
+     * https://xcxkf186.aubye.com/api/wxapp/love_activity/index
      */
     public function index()
     {
@@ -119,8 +119,8 @@ class LoveActivityController extends AuthController
      * )
      *
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/love_activity/find_activity_list
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/love_activity/find_activity_list
+     *   test_environment: http://love7.ikun:9090/api/wxapp/love_activity/find_activity_list
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/love_activity/find_activity_list
      *   api:  /wxapp/love_activity/find_activity_list
      *   remark_name: 活动管理 列表
      *
@@ -180,8 +180,8 @@ class LoveActivityController extends AuthController
      *     @OA\Response(response="default", description="An example resource")
      * )
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/love_activity/find_activity
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/love_activity/find_activity
+     *   test_environment: http://love7.ikun:9090/api/wxapp/love_activity/find_activity
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/love_activity/find_activity
      *   api:  /wxapp/love_activity/find_activity
      *   remark_name: 活动管理 详情
      *
@@ -271,8 +271,8 @@ class LoveActivityController extends AuthController
      *     @OA\Response(response="default", description="An example resource")
      * )
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/love_activity/attend_activity
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/love_activity/attend_activity
+     *   test_environment: http://love7.ikun:9090/api/wxapp/love_activity/attend_activity
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/love_activity/attend_activity
      *   api:  /wxapp/love_activity/attend_activity
      *   remark_name: 报名
      *
@@ -354,8 +354,8 @@ class LoveActivityController extends AuthController
      *     @OA\Response(response="default", description="An example resource")
      * )
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/love_activity/attend_activity_list
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/love_activity/attend_activity_list
+     *   test_environment: http://love7.ikun:9090/api/wxapp/love_activity/attend_activity_list
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/love_activity/attend_activity_list
      *   api:  /wxapp/love_activity/attend_activity_list
      *   remark_name: 已报名列表
      *

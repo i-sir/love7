@@ -14,8 +14,8 @@ namespace api\wxapp\controller;
  *     "create_time"             =>"2024-08-26 10:46:44",
  *     "version"                 =>"1.0",
  *     "use"                     => new \api\wxapp\controller\ShopGoodsController();
- *     "test_environment"        =>"http://love0212.ikun/api/wxapp/shop_goods/index",
- *     "official_environment"    =>"https://hl212.wxselling.com/api/wxapp/shop_goods/index",
+ *     "test_environment"        =>"http://love7.ikun:9090/api/wxapp/shop_goods/index",
+ *     "official_environment"    =>"https://xcxkf186.aubye.com/api/wxapp/shop_goods/index",
  * )
  */
 
@@ -43,7 +43,7 @@ class ShopGoodsController extends AuthController
     /**
      * 默认接口
      * /api/wxapp/shop_goods/index
-     * https://hl212.wxselling.com/api/wxapp/shop_goods/index
+     * https://xcxkf186.aubye.com/api/wxapp/shop_goods/index
      */
     public function index()
     {
@@ -166,8 +166,8 @@ class ShopGoodsController extends AuthController
      * )
      *
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/shop_goods/find_shop_goods_list
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/shop_goods/find_shop_goods_list
+     *   test_environment: http://love7.ikun:9090/api/wxapp/shop_goods/find_shop_goods_list
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/shop_goods/find_shop_goods_list
      *   api:  /wxapp/shop_goods/find_shop_goods_list
      *   remark_name: 商品管理 列表
      *
@@ -239,8 +239,8 @@ class ShopGoodsController extends AuthController
      * )
      *
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/shop_goods/find_class_list
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/shop_goods/find_class_list
+     *   test_environment: http://love7.ikun:9090/api/wxapp/shop_goods/find_class_list
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/shop_goods/find_class_list
      *   api:  /wxapp/shop_goods/find_class_list
      *   remark_name: 分类管理
      *
@@ -288,8 +288,8 @@ class ShopGoodsController extends AuthController
      *     @OA\Response(response="default", description="An example resource")
      * )
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/shop_goods/find_shop_goods
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/shop_goods/find_shop_goods
+     *   test_environment: http://love7.ikun:9090/api/wxapp/shop_goods/find_shop_goods
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/shop_goods/find_shop_goods
      *   api:  /wxapp/shop_goods/find_shop_goods
      *   remark_name: 商品管理 详情
      *
@@ -396,8 +396,8 @@ class ShopGoodsController extends AuthController
      *     @OA\Response(response="default", description="An example resource")
      * )
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/shop_goods/edit_shop_goods
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/shop_goods/edit_shop_goods
+     *   test_environment: http://love7.ikun:9090/api/wxapp/shop_goods/edit_shop_goods
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/shop_goods/edit_shop_goods
      *   api:  /wxapp/shop_goods/edit_shop_goods
      *   remark_name: 商品管理 编辑&添加
      *
@@ -470,8 +470,8 @@ class ShopGoodsController extends AuthController
      *     @OA\Response(response="default", description="An example resource")
      * )
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/shop_goods/delete_shop_goods
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/shop_goods/delete_shop_goods
+     *   test_environment: http://love7.ikun:9090/api/wxapp/shop_goods/delete_shop_goods
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/shop_goods/delete_shop_goods
      *   api:  /wxapp/shop_goods/delete_shop_goods
      *   remark_name: 商品管理 删除
      *
@@ -528,8 +528,8 @@ class ShopGoodsController extends AuthController
      *     @OA\Response(response="default", description="An example resource")
      * )
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/shop_goods/show
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/shop_goods/show
+     *   test_environment: http://love7.ikun:9090/api/wxapp/shop_goods/show
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/shop_goods/show
      *   api:  /wxapp/shop_goods/show
      *   remark_name: 商品管理 上级,下架
      *

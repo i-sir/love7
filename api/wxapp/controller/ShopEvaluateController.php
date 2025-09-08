@@ -14,8 +14,8 @@ namespace api\wxapp\controller;
  *     "create_time"             =>"2024-08-26 10:56:55",
  *     "version"                 =>"1.0",
  *     "use"                     => new \api\wxapp\controller\ShopEvaluateController();
- *     "test_environment"        =>"http://love0212.ikun/api/wxapp/shop_evaluate/index",
- *     "official_environment"    =>"https://hl212.wxselling.com/api/wxapp/shop_evaluate/index",
+ *     "test_environment"        =>"http://love7.ikun:9090/api/wxapp/shop_evaluate/index",
+ *     "official_environment"    =>"https://xcxkf186.aubye.com/api/wxapp/shop_evaluate/index",
  * )
  */
 
@@ -43,7 +43,7 @@ class ShopEvaluateController extends AuthController
     /**
      * 默认接口
      * /api/wxapp/shop_evaluate/index
-     * https://hl212.wxselling.com/api/wxapp/shop_evaluate/index
+     * https://xcxkf186.aubye.com/api/wxapp/shop_evaluate/index
      */
     public function index()
     {
@@ -107,8 +107,8 @@ class ShopEvaluateController extends AuthController
      * )
      *
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/shop_evaluate/find_shop_evaluate_list
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/shop_evaluate/find_shop_evaluate_list
+     *   test_environment: http://love7.ikun:9090/api/wxapp/shop_evaluate/find_shop_evaluate_list
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/shop_evaluate/find_shop_evaluate_list
      *   api:  /wxapp/shop_evaluate/find_shop_evaluate_list
      *   remark_name: 店铺评价 列表
      *
@@ -162,8 +162,8 @@ class ShopEvaluateController extends AuthController
      *     @OA\Response(response="default", description="An example resource")
      * )
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/shop_evaluate/find_shop_evaluate
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/shop_evaluate/find_shop_evaluate
+     *   test_environment: http://love7.ikun:9090/api/wxapp/shop_evaluate/find_shop_evaluate
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/shop_evaluate/find_shop_evaluate
      *   api:  /wxapp/shop_evaluate/find_shop_evaluate
      *   remark_name: 店铺评价 详情
      *
@@ -214,8 +214,8 @@ class ShopEvaluateController extends AuthController
      *     @OA\Response(response="default", description="An example resource")
      * )
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/shop_evaluate/find_avg
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/shop_evaluate/find_avg
+     *   test_environment: http://love7.ikun:9090/api/wxapp/shop_evaluate/find_avg
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/shop_evaluate/find_avg
      *   api:  /wxapp/shop_evaluate/find_avg
      *   remark_name: 店铺评价 平均分
      *
@@ -317,8 +317,8 @@ class ShopEvaluateController extends AuthController
      *     @OA\Response(response="default", description="An example resource")
      * )
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/shop_evaluate/add_shop_evaluate
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/shop_evaluate/add_shop_evaluate
+     *   test_environment: http://love7.ikun:9090/api/wxapp/shop_evaluate/add_shop_evaluate
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/shop_evaluate/add_shop_evaluate
      *   api:  /wxapp/shop_evaluate/add_shop_evaluate
      *   remark_name: 店铺评价  添加
      *

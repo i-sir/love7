@@ -14,8 +14,8 @@ namespace api\wxapp\controller;
  *     "create_time"             =>"2024-08-27 16:24:10",
  *     "version"                 =>"1.0",
  *     "use"                     => new \api\wxapp\controller\LoveHelloController();
- *     "test_environment"        =>"http://love0212.ikun/api/wxapp/love_hello/index",
- *     "official_environment"    =>"https://hl212.wxselling.com/api/wxapp/love_hello/index",
+ *     "test_environment"        =>"http://love7.ikun:9090/api/wxapp/love_hello/index",
+ *     "official_environment"    =>"https://xcxkf186.aubye.com/api/wxapp/love_hello/index",
  * )
  */
 
@@ -43,7 +43,7 @@ class LoveHelloController extends AuthController
     /**
      * 默认接口
      * /api/wxapp/love_hello/index
-     * https://hl212.wxselling.com/api/wxapp/love_hello/index
+     * https://xcxkf186.aubye.com/api/wxapp/love_hello/index
      */
     public function index()
     {
@@ -119,8 +119,8 @@ class LoveHelloController extends AuthController
      * )
      *
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/love_hello/find_love_hello_list
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/love_hello/find_love_hello_list
+     *   test_environment: http://love7.ikun:9090/api/wxapp/love_hello/find_love_hello_list
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/love_hello/find_love_hello_list
      *   api:  /wxapp/love_hello/find_love_hello_list
      *   remark_name: 打招呼 列表
      *
@@ -175,8 +175,8 @@ class LoveHelloController extends AuthController
      *     @OA\Response(response="default", description="An example resource")
      * )
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/love_hello/find_love_hello
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/love_hello/find_love_hello
+     *   test_environment: http://love7.ikun:9090/api/wxapp/love_hello/find_love_hello
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/love_hello/find_love_hello
      *   api:  /wxapp/love_hello/find_love_hello
      *   remark_name: 打招呼 详情
      *
@@ -256,8 +256,8 @@ class LoveHelloController extends AuthController
      *     @OA\Response(response="default", description="An example resource")
      * )
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/love_hello/add_love_hello
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/love_hello/add_love_hello
+     *   test_environment: http://love7.ikun:9090/api/wxapp/love_hello/add_love_hello
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/love_hello/add_love_hello
      *   api:  /wxapp/love_hello/add_love_hello
      *   remark_name: 打招呼  添加
      *
@@ -332,8 +332,8 @@ class LoveHelloController extends AuthController
      *     @OA\Response(response="default", description="An example resource")
      * )
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/love_hello/delete_love_hello
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/love_hello/delete_love_hello
+     *   test_environment: http://love7.ikun:9090/api/wxapp/love_hello/delete_love_hello
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/love_hello/delete_love_hello
      *   api:  /wxapp/love_hello/delete_love_hello
      *   remark_name: 打招呼 删除
      *

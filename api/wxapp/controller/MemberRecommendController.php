@@ -14,8 +14,8 @@ namespace api\wxapp\controller;
  *     "create_time"             =>"2024-08-21 14:46:59",
  *     "version"                 =>"1.0",
  *     "use"                     => new \api\wxapp\controller\MemberRecommendController();
- *     "test_environment"        =>"http://love0212.ikun/api/wxapp/member_recommend/index",
- *     "official_environment"    =>"https://hl212.wxselling.com/api/wxapp/member_recommend/index",
+ *     "test_environment"        =>"http://love7.ikun:9090/api/wxapp/member_recommend/index",
+ *     "official_environment"    =>"https://xcxkf186.aubye.com/api/wxapp/member_recommend/index",
  * )
  */
 
@@ -43,7 +43,7 @@ class MemberRecommendController extends AuthController
     /**
      * 默认接口
      * /api/wxapp/member_recommend/index
-     * https://hl212.wxselling.com/api/wxapp/member_recommend/index
+     * https://xcxkf186.aubye.com/api/wxapp/member_recommend/index
      */
     public function index()
     {
@@ -69,8 +69,8 @@ class MemberRecommendController extends AuthController
      *     @OA\Response(response="default", description="An example resource")
      * )
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/member_recommend/find_member_recommend_list
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/member_recommend/find_member_recommend_list
+     *   test_environment: http://love7.ikun:9090/api/wxapp/member_recommend/find_member_recommend_list
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/member_recommend/find_member_recommend_list
      *   api:  /wxapp/member_recommend/find_member_recommend_list
      *   remark_name: 引荐人  列表
      *
@@ -173,8 +173,8 @@ class MemberRecommendController extends AuthController
      *     @OA\Response(response="default", description="An example resource")
      * )
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/member_recommend/add_member_recommend
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/member_recommend/add_member_recommend
+     *   test_environment: http://love7.ikun:9090/api/wxapp/member_recommend/add_member_recommend
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/member_recommend/add_member_recommend
      *   api:  /wxapp/member_recommend/add_member_recommend
      *   remark_name: 引荐人  申请
      *
@@ -263,8 +263,8 @@ class MemberRecommendController extends AuthController
      *     @OA\Response(response="default", description="An example resource")
      * )
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/member_recommend/pass_login
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/member_recommend/pass_login
+     *   test_environment: http://love7.ikun:9090/api/wxapp/member_recommend/pass_login
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/member_recommend/pass_login
      *   api:  /wxapp/member_recommend/pass_login
      *   remark_name: 引荐人  登录
      *
@@ -344,8 +344,8 @@ class MemberRecommendController extends AuthController
      *     @OA\Response(response="default", description="An example resource")
      * )
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/member_recommend/add_order
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/member_recommend/add_order
+     *   test_environment: http://love7.ikun:9090/api/wxapp/member_recommend/add_order
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/member_recommend/add_order
      *   api:  /wxapp/member_recommend/add_order
      *   remark_name: 开通管理费
      *
@@ -433,8 +433,8 @@ class MemberRecommendController extends AuthController
      *     @OA\Response(response="default", description="An example resource")
      * )
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/member_recommend/find_balance_list
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/member_recommend/find_balance_list
+     *   test_environment: http://love7.ikun:9090/api/wxapp/member_recommend/find_balance_list
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/member_recommend/find_balance_list
      *   api: /wxapp/member_recommend/find_balance_list
      *   remark_name: 账户(余额)变动明细
      *
@@ -490,8 +490,8 @@ class MemberRecommendController extends AuthController
      *     @OA\Response(response="default", description="An example resource")
      * )
      *
-     *   test_environment: http://love0212.ikun/api/wxapp/member_recommend/poster
-     *   official_environment: https://hl212.wxselling.com/api/wxapp/member_recommend/poster
+     *   test_environment: http://love7.ikun:9090/api/wxapp/member_recommend/poster
+     *   official_environment: https://xcxkf186.aubye.com/api/wxapp/member_recommend/poster
      *   api: /wxapp/member_recommend/poster
      *   remark_name: 获客海报&分享&推广二维码
      *
