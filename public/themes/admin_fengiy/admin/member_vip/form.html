@@ -1,0 +1,99 @@
+<div class="form-group" style="display: none;">
+    <label class="col-sm-2 control-label">pid控制:</label>
+    <div class="layui-input-block col-md-6 col-sm-10">
+        <input type="text" name="pid" class="form-control post-params item-left" value="0">
+    </div>
+</div>
+<div class="form-group">
+    <label class="col-sm-2 control-label">名称:</label>
+    <div class="layui-input-block col-md-6 col-sm-10">
+        <input type="text" name="name" class="form-control post-params item-left" value="{$name|default=''}">
+    </div>
+</div>
+<div class="form-group" style="display: none;">
+    <label class="col-sm-2 control-label">价格(男):</label>
+    <div class="layui-input-block col-md-6 col-sm-10">
+        <input type="number" name="price" class="form-control post-params item-left" value="{$price|default=''}">
+    </div>
+</div>
+<div class="form-group" style="display: none;">
+    <label class="col-sm-2 control-label">价格(女):</label>
+    <div class="layui-input-block col-md-6 col-sm-10">
+        <input type="number" name="price2" class="form-control post-params item-left" value="{$price2|default=''}">
+    </div>
+</div>
+<div class="form-group">
+    <label class="col-sm-2 control-label">封面:</label>
+    <div class="layui-input-block col-md-6 col-sm-10">
+        <input type="hidden" class="form-control post-params item-left" name="image" id="photo-0000005"
+               value="{$image}">
+        <if condition='!empty($image)'>
+            <a href="javascript:imagePreviewDialog('{:cmf_get_asset_url($image)}');">
+                <img src='{:cmf_get_image_preview_url($image)}' id='photo-0000005-preview'
+                     style='width: 85px;height: 80px'>
+            </a>
+            <else/>
+            <img src='/static/images/default.png' id='photo-0000005-preview' style='width: 85px;height: 80px'>
+        </if>
+        <a href="javascript:uploadOneImage('图片上传','#photo-0000005','image');">上传</a>
+        <a onclick="$('#photo-0000005-preview').attr('src','__TMPL__/public/assets/images/default-thumbnail.png');$('#photo-0000005').val('');return false;">取消图片</a>
+    </div>
+</div>
+<div class="form-group">
+    <label class="col-sm-2 control-label">图集:</label>
+    <div class="layui-input-block col-md-6 col-sm-10">
+<!--        <div class="help-block text-danger">长按图片可上下拖动,调整图片顺序</div>-->
+        <if condition="!empty($images)">
+            <ul id="photosGoods000001" class="pic-list list-unstyled form-inline">
+                <foreach name="images" item="vo">
+                    <li id="saved-goods-image-0000001-{$key}" style="margin-bottom: 5px;">
+                        <input id="photo-goods-0000001-{$key}" type="hidden" name="images[{$key}]" value="{$vo}">
+                        <img id="photo-goods-0000001-{$key}-preview" src="{:cmf_get_image_preview_url($vo)}"
+                             width="50" height="50" onclick="parent.imagePreviewDialog(this.src);">
+                        <a href="javascript:uploadOneImage('图片上传','#photo-goods-0000001-{$key}');">替换</a>
+                        <a href="javascript:(function(){$('#saved-goods-image-0000001-{$key}').remove();})();">移除</a>
+                    </li>
+                </foreach>
+            </ul>
+            <else/>
+            <ul id="photosGoods000001" class="pic-list list-unstyled form-inline">
+                <li id="saved-goods-image-0000001" style="margin-bottom: 5px;">
+                </li>
+            </ul>
+        </if>
+        <a href="javascript:uploadMultiImage('图片上传','#photosGoods000001','photos-goods-item-tpl-0000001');"
+           class="btn btn-sm btn-default">选择图片</a>
+        <script type="text/html" id="photos-goods-item-tpl-0000001">
+            <li id="saved-goods-image-0000001-{id}" style="margin-bottom: 5px;">
+                <input id="photo-goods-0000001-{id}" type="hidden" name="images[{id}]" value="{filepath}">
+                <img id="photo-goods-0000001-{id}-preview" src="{url}" width="50" height="50"
+                     onclick="imagePreviewDialog(this.src);">
+                <a href="javascript:uploadOneImage('图片上传','#photo-goods-0000001-{id}');">替换</a>
+                <a href="javascript:(function(){$('#saved-goods-image-0000001-{id}').remove();})();">移除</a>
+            </li>
+        </script>
+        <script>
+            // 多图上传支持排序
+            new Sortable(photosGoods000001, {
+                animation: 150,
+                ghostClass: 'blue-background-class'
+            });
+        </script>
+    </div>
+</div>
+
+<div class="form-group" style="display: none;">
+    <label class="col-sm-2 control-label">天数:</label>
+    <div class="layui-input-block col-md-6 col-sm-10">
+        <input type="number" name="day" class="form-control post-params item-left" value="{$day|default=''}">
+    </div>
+</div>
+<div class="form-group" style="display: none;">
+    <label class="col-sm-2 control-label">佣金比例:</label>
+    <div class="layui-input-block col-md-6 col-sm-10">
+        <input type="number" name="commission" class="form-control post-params item-left"
+               value="{$commission|default=''}">
+    </div>
+</div>
+
+

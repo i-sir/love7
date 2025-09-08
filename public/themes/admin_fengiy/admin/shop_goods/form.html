@@ -1,0 +1,72 @@
+    <div class="form-group">
+        <label class="col-sm-2 control-label">门店id:</label>
+        <div class="layui-input-block col-md-6 col-sm-10">
+                            <input type="text" name="shop_id" class="form-control post-params item-left" value="{$shop_id|default=''}">
+                    </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">商品名称:</label>
+        <div class="layui-input-block col-md-6 col-sm-10">
+                            <input type="text" name="goods_name" class="form-control post-params item-left" value="{$goods_name|default=''}">
+                    </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">封面:</label>
+        <div class="layui-input-block col-md-6 col-sm-10">
+                                <input type="hidden" class="form-control post-params item-left" name="image"  id="photo-0000003"  
+                           value="{$image}">
+<if condition='!empty($image)'>
+<a href="javascript:imagePreviewDialog('{:cmf_get_asset_url($image)}');">
+<img src='{:cmf_get_image_preview_url($image)}' id='photo-0000003-preview' style='width: 85px;height: 80px'>
+</a>
+<else/>
+<img src='/static/images/default.png' id='photo-0000003-preview' style='width: 85px;height: 80px'>
+</if>
+<a href="javascript:uploadOneImage('图片上传','#photo-0000003','image');">上传</a>
+<a onclick="$('#photo-0000003-preview').attr('src','__TMPL__/public/assets/images/default-thumbnail.png');$('#photo-0000003').val('');return false;">取消图片</a>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">图集:</label>
+        <div class="layui-input-block col-md-6 col-sm-10">
+                            <input type="text" name="images" class="form-control post-params item-left" value="{$images|default=''}">
+                    </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">价格:</label>
+        <div class="layui-input-block col-md-6 col-sm-10">
+                            <input type="text" name="price" class="form-control post-params item-left" value="{$price|default=''}">
+                    </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">售出数量:</label>
+        <div class="layui-input-block col-md-6 col-sm-10">
+                            <input type="text" name="sell_count" class="form-control post-params item-left" value="{$sell_count|default=''}">
+                    </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">是否置顶:</label>
+        <div class="layui-input-block col-md-6 col-sm-10">
+                            <input type="text" name="is_top" class="form-control post-params item-left" value="{$is_top|default=''}">
+                    </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">拒绝理由:</label>
+        <div class="layui-input-block col-md-6 col-sm-10">
+                            <input type="text" name="refuse" class="form-control post-params item-left" value="{$refuse|default=''}">
+                    </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">通过时间:</label>
+        <div class="layui-input-block col-md-6 col-sm-10">
+                            <input type="text" name="pass_time" class="form-control post-params item-left" value="{$pass_time|default=''}">
+                    </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">拒绝时间:</label>
+        <div class="layui-input-block col-md-6 col-sm-10">
+                            <input type="text" name="refuse_time" class="form-control post-params item-left" value="{$refuse_time|default=''}">
+                    </div>
+    </div>
+
+

@@ -1,0 +1,251 @@
+ <include file="public@header"/></head>
+<body xmlns="http://www.w3.org/1999/html">
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="{:url('index',['params'=>$params])}">用户表</a></li>
+
+                    <if condition="cmf_auth_check(cmf_get_current_admin_id(),'admin/Member1/add')">
+            <li><a href="{:url('add',['params'=>$params])}">添加</a></li>
+            </if>
+        
+    </ul>
+
+    <form class="well form-inline margin-top-20 layui-form ajax-form w-form-search" method="get" autocomplete="off">
+        关键字：
+        <div class="form-group layui-form">
+            <div class="layui-form-item" style="margin-bottom: 0 !important;">
+                <div class="col-md-12">
+                    <div class="layui-inline">
+                        <input type="text" class="form-control" name="keyword" style="width: 180px;"
+                               value="{:input('request.keyword/s','')}" placeholder="请输关键字搜索">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" class="layui-btn" style="margin-left: 10px">搜索</button>
+        <a class="layui-btn layui-bg-red" href="{:url('index',['params'=>$params])}">清空</a>
+
+
+        
+
+            <a class="layui-btn layui-bg-blue ajax-export" href="javascript:;">导出</a>
+            <input type="hidden" name="is_export" class="is_export" value="0">
+            </form>
+
+
+    <form class="js-ajax-form" method="post" autocomplete="off">
+
+        <br>
+        <div class="table-actions">
+
+            
+
+        </div>
+
+
+        <table class="table table-hover table-bordered">
+            <thead>
+            <tr>
+                                    <th style="width: 60px">ID</th>
+                                    <th style="width: 60px">状态</th>
+                                    <th style="width: 60px">手机号</th>
+                                    <th style="width: 60px">openid</th>
+                                    <th style="width: 60px">上级码</th>
+                                    <th style="width: 60px">昵称</th>
+                                    <th style="width: 60px">头像</th>
+                                    <th style="width: 60px">出生日期</th>
+                                    <th style="width: 60px">属相</th>
+                                    <th style="width: 60px">学历</th>
+                                    <th style="width: 60px">性别</th>
+                                    <th style="width: 60px">身高</th>
+                                    <th style="width: 60px">体重</th>
+                                    <th style="width: 60px">民族</th>
+                                    <th style="width: 60px">工作行业</th>
+                                    <th style="width: 60px">职业</th>
+                                    <th style="width: 60px">收入(年)</th>
+                                    <th style="width: 60px">户籍地-省</th>
+                                    <th style="width: 60px">户籍地-市</th>
+                                    <th style="width: 60px">工作地-省</th>
+                                    <th style="width: 60px">工作地-市</th>
+                                    <th style="width: 60px">期望结婚时间</th>
+                                    <th style="width: 60px">婚姻情况</th>
+                                    <th style="width: 60px">有无孩子</th>
+                                    <th style="width: 60px">子女性别</th>
+                                    <th style="width: 60px">子女归属</th>
+                                    <th style="width: 60px">子女年龄</th>
+                                    <th style="width: 60px">父母情况</th>
+                                    <th style="width: 60px">兄弟姐妹</th>
+                                    <th style="width: 60px">是否饮酒</th>
+                                    <th style="width: 60px">养宠物吗</th>
+                                    <th style="width: 60px">休息习惯</th>
+                                    <th style="width: 60px">锻炼习惯</th>
+                                    <th style="width: 60px">是否有房</th>
+                                    <th style="width: 60px">是否有车</th>
+                                    <th style="width: 60px">兴趣爱好</th>
+                                    <th style="width: 60px">父母联系方式</th>
+                                    <th style="width: 60px">qq</th>
+                                    <th style="width: 60px">微信</th>
+                                    <th style="width: 60px">微信二维码</th>
+                                    <th style="width: 60px">家庭情况</th>
+                                    <th style="width: 60px">年龄范围</th>
+                                    <th style="width: 60px">最低学历</th>
+                                    <th style="width: 60px">身高范围</th>
+                                    <th style="width: 60px">体重范围</th>
+                                    <th style="width: 60px">最低年收入</th>
+                                    <th style="width: 60px">居住地</th>
+                                    <th style="width: 60px">婚姻情况</th>
+                                    <th style="width: 60px">是否有车</th>
+                                    <th style="width: 60px">是否有房</th>
+                                    <th style="width: 60px">是否接收带娃</th>
+                                    <th style="width: 60px">择偶简介</th>
+                                    <th style="width: 60px">我的视频</th>
+                                    <th style="width: 60px">是否离异</th>
+                                    <th style="width: 60px">密码</th>
+                                    <th style="width: 60px">余额</th>
+                                    <th style="width: 60px">积分</th>
+                                    <th style="width: 60px">登录ip地址</th>
+                                    <th style="width: 60px">登录城市</th>
+                                    <th style="width: 60px">上级</th>
+                                    <th style="width: 60px">拒绝理由</th>
+                                    <th style="width: 60px">会员</th>
+                                    <th style="width: 60px">会员等级</th>
+                                    <th style="width: 60px">会员到期时间</th>
+                                    <th style="width: 60px">最后登录时间</th>
+                                    <th style="width: 60px">创建时间</th>
+                                    <th style="width: 60px">通过时间</th>
+                                    <th style="width: 60px">拒绝时间</th>
+                
+                <th style="width: 80px">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+             <foreach name="list" item="vo">            <tr>
+                                    <td>{$vo.id}</td>
+                                    <td>{$vo.status_name}</td>
+                                    <td>{$vo.phone}</td>
+                                    <td>{$vo.openid}</td>
+                                    <td>{$vo.p_invite_code}</td>
+                                    <td>{$vo.nickname}</td>
+                                    <td>{$vo.avatar}</td>
+                                    <td>{$vo.birth}</td>
+                                    <td>{$vo.genus}</td>
+                                    <td>{$vo.education}</td>
+                                    <td>{$vo.gender}</td>
+                                    <td>{$vo.height}</td>
+                                    <td>{$vo.weight}</td>
+                                    <td>{$vo.nation}</td>
+                                    <td>{$vo.industry}</td>
+                                    <td>{$vo.occupation}</td>
+                                    <td>{$vo.income}</td>
+                                    <td>{$vo.domicile_province}</td>
+                                    <td>{$vo.domicile_city}</td>
+                                    <td>{$vo.work_province}</td>
+                                    <td>{$vo.work_city}</td>
+                                    <td>{$vo.marry_date}</td>
+                                    <td>{$vo.marriage_status}</td>
+                                    <td>{$vo.is_child}</td>
+                                    <td>{$vo.child_gender}</td>
+                                    <td>{$vo.child_belong}</td>
+                                    <td>{$vo.child_age}</td>
+                                    <td>{$vo.parents_status}</td>
+                                    <td>{$vo.sibling}</td>
+                                    <td>{$vo.is_drink}</td>
+                                    <td>{$vo.pet}</td>
+                                    <td>{$vo.rest_habits}</td>
+                                    <td>{$vo.exercise_habits}</td>
+                                    <td>{$vo.is_room}</td>
+                                    <td>{$vo.is_car}</td>
+                                    <td>{$vo.hobby}</td>
+                                    <td>{$vo.parents_phone}</td>
+                                    <td>{$vo.qq}</td>
+                                    <td>{$vo.wx}</td>
+                                    <td><if condition='!empty($vo.wx_image)'>
+<a href="javascript:imagePreviewDialog('{:cmf_get_asset_url($vo.wx_image)}');">
+<img src='{:cmf_get_asset_url($vo.wx_image)}' style='width: 35px;height: 35px'>
+</a>
+<else/>
+暂无上传
+</if>
+</td>
+                                    <td>{$vo.family_status}</td>
+                                    <td>{$vo.select_age}</td>
+                                    <td>{$vo.select_education}</td>
+                                    <td>{$vo.select_height}</td>
+                                    <td>{$vo.select_weight}</td>
+                                    <td>{$vo.select_income}</td>
+                                    <td>{$vo.select_address}</td>
+                                    <td>{$vo.select_marriage_status}</td>
+                                    <td>{$vo.select_is_car}</td>
+                                    <td>{$vo.select_is_room}</td>
+                                    <td>{$vo.select_is_child}</td>
+                                    <td>{$vo.select_introduce}</td>
+                                    <td><if condition='!empty($vo.video)'>
+<a href="{:cmf_get_file_download_url($vo.video)}"
+										target="_blank">下载</a>
+</a>
+<else/>
+暂无上传
+</if>
+</td>
+                                    <td>{$vo.is_divorce_name}</td>
+                                    <td>{$vo.pass}</td>
+                                    <td>{$vo.balance}</td>
+                                    <td>{$vo.point}</td>
+                                    <td>{$vo.ip}</td>
+                                    <td>{$vo.login_city}</td>
+                                    <td>{$vo.pid}</td>
+                                    <td>{$vo.refuse}</td>
+                                    <td>{$vo.is_vip_name}</td>
+                                    <td>{$vo.vip_id}</td>
+                                    <td>{$vo.end_time}</td>
+                                    <td>{$vo.login_time}</td>
+                                    <td>{$vo.create_time|date='Y-m-d H:i:s'}</td>
+                                    <td>{$vo.pass_time}</td>
+                                    <td>{$vo.refuse_time}</td>
+                
+                <td>
+                                            <if condition="cmf_auth_check(cmf_get_current_admin_id(),'admin/Member1/edit')">
+                        <a class="layui-btn layui-btn-primary layui-border-green layui-btn-xs" href="{:url('edit',['id'=>$vo.id,'params'=>$params])}">编辑</a>
+                        </if>
+                                            <if condition="cmf_auth_check(cmf_get_current_admin_id(),'admin/Member1/find')">
+                        <a class="layui-btn layui-btn-primary layui-border-blue layui-btn-xs"
+                           href="javascript:parent.openIframeLayer('{:url('find',['id'=>$vo.id,'params'=>$params])}','[{$vo.name}]查看',{ area: ['65%', '85%'],move:'.layui-layer-title'});"
+                        >查看</a>
+                        </if>
+                                            <if condition="cmf_auth_check(cmf_get_current_admin_id(),'admin/Member1/delete')">
+                        <a class="layui-btn layui-btn-primary layui-border-red layui-btn-xs js-ajax-delete" href="{:url('delete',['id'=>$vo.id,'params'=>$params])}">删除</a>
+                        </if>
+                    
+
+                </td>
+            </tr>
+            </foreach>            </tbody>
+        </table>
+    </form>
+
+    <div class="pagination">{$page|default=''}</div></div>
+<script src="__STATIC__/js/admin.js"></script>
+</body>
+</html>
+
+
+<!--导出,筛选查询-->
+<script>
+    //导出
+    $(".ajax-export").click(function () {
+        //alert("正在开发中...");
+        $(".is_export").val(1);
+        $(".ajax-form").submit();
+        $(".is_export").val(0);
+        return false;
+    });
+
+    //搜索
+    $(".bt_search").click(function () {
+        $(".w-form-search").removeAttr('action');
+        $(".w-form-search").attr('action', "/index.html");
+        $(".w-form-search").submit();
+    });
+</script>
+

@@ -1,0 +1,252 @@
+<div class="form-group">
+    <label class="col-sm-2 control-label">名称:</label>
+    <div class="layui-input-block col-md-6 col-sm-10">
+        <input type="text" name="name" class="form-control post-params item-left" value="{$name|default=''}">
+    </div>
+</div>
+<div class="form-group">
+    <label class="col-sm-2 control-label">服务电话:</label>
+    <div class="layui-input-block col-md-6 col-sm-10">
+        <input type="text" name="phone" class="form-control post-params item-left" value="{$phone|default=''}">
+    </div>
+</div>
+<div class="form-group" style="display: none;">
+    <label class="col-sm-2 control-label">人数:</label>
+    <div class="layui-input-block col-md-6 col-sm-10">
+        <input type="text" name="number" class="form-control post-params item-left" value="{$number|default=''}">
+    </div>
+</div>
+<div class="form-group" style="display: none;">
+    <label class="col-sm-2 control-label">费用:</label>
+    <div class="layui-input-block col-md-6 col-sm-10">
+        <input type="text" name="price" class="form-control post-params item-left" value="{$price|default=''}">
+    </div>
+</div>
+
+<div class="form-group">
+    <label class="col-sm-2 control-label">封面:</label>
+    <div class="layui-input-block col-md-6 col-sm-10">
+        <input type="hidden" class="form-control post-params item-left" name="image" id="photo-0000006"
+               value="{$image}">
+        <if condition='!empty($image)'>
+            <a href="javascript:imagePreviewDialog('{:cmf_get_asset_url($image)}');">
+                <img src='{:cmf_get_image_preview_url($image)}' id='photo-0000006-preview'
+                     style='width: 85px;height: 80px'>
+            </a>
+            <else/>
+            <img src='/static/images/default.png' id='photo-0000006-preview' style='width: 85px;height: 80px'>
+        </if>
+        <a href="javascript:uploadOneImage('图片上传','#photo-0000006','image');">上传</a>
+        <a onclick="$('#photo-0000006-preview').attr('src','__TMPL__/public/assets/images/default-thumbnail.png');$('#photo-0000006').val('');return false;">取消图片</a>
+    </div>
+</div>
+
+
+<div class="form-group">
+    <label class="col-sm-2 control-label">活动时间:</label>
+    <div class="layui-input-block col-md-6 col-sm-10">
+        <div>
+            <div class="layui-inline">
+                <if condition='$begin_time'>
+                    <input type="text" name="begin_time" required placeholder="开始时间"
+                           class="form-control post-params item-left js-bootstrap-date"
+                           value="{$begin_time|date='Y-m-d'}">
+                    <else/>
+                    <input type="text" name="begin_time" required placeholder="开始时间"
+                           class="form-control post-params item-left js-bootstrap-date">
+                </if>
+            </div>
+            <div class="layui-inline">
+                <if condition='$end_time'>
+                    <input type="text" name="end_time"
+                           class="form-control post-params item-left js-bootstrap-date"
+                           value="{$end_time|date='Y-m-d'}" required placeholder="结束时间">
+                    <else/>
+                    <input type="text" name="end_time" required placeholder="结束时间"
+                           class="form-control post-params item-left js-bootstrap-date">
+                </if>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="form-group">
+    <label class="col-sm-2 control-label">地址</label>
+    <div class="col-md-6 col-sm-10">
+        <div style="display: flex;">
+            <input class="form-control post-params item-left" id="address" name="address"
+                   onblur="searchAddress()"
+                   placeholder="请输入详细地址" required
+                   type="text" value="{$address}">
+            <a class="btn btn-primary" href="javascript:" onclick="searchAddress()"
+               style="margin-left: 10px;">搜索</a>
+        </div>
+        <div id="container" style="margin-top:10px;width:800px;height:400px;"></div>
+    </div>
+</div>
+<div class="form-group">
+    <label class="col-sm-2 control-label">经纬度</label>
+    <input class="form-control post-params item-left" id="lng" name="lng" type="hidden" value="{$lng}">
+    <input class="form-control post-params item-left" id="lat" name="lat" type="hidden" value="{$lat}">
+    <div class="col-md-6 col-sm-10">
+        <input class="form-control post-params" id="lnglat" name="lnglat" placeholder="" readonly required
+               type="text"
+               value="{$lnglat}">
+    </div>
+</div>
+
+
+<div class="form-group">
+    <label class="col-sm-2 control-label">介绍:</label>
+    <div class="layui-input-block col-md-6 col-sm-10">
+        <script type="text/plain" id="content" name="content">
+            {:cmf_replace_content_file_url(htmlspecialchars_decode($content))}
+        </script>
+        <script type="text/javascript">
+            //编辑器路径定义
+            var editorURL = GV.WEB_ROOT;
+        </script>
+        <script type="text/javascript" src="/static/js/ueditor/ueditor.config.js?v=00001"></script>
+        <script type="text/javascript" src="/static/js/ueditor/ueditor.all.min.js"></script>
+        <!--编辑器支持秀米-->
+        <script type="text/javascript" src="/static/js/ueditor/xiumi/xiumi-ue-dialog-v5.js"></script>
+        <link rel="stylesheet" type="text/css" href="/static/js/ueditor/xiumi/xiumi-ue-v5.css"/>
+        <script type="text/javascript">
+            $(function () {
+                editorcontent = new baidu.editor.ui.Editor();
+                editorcontent.render('content');
+                try {
+                    editorcontent.sync();
+                } catch (err) {
+                }
+            });
+        </script>
+    </div>
+</div>
+
+
+
+<!--高德地图板块-->
+<script src="https://webapi.amap.com/maps?v=1.4.15&key=0f7cbfb881a2bea61d912a4cc920b663"></script>
+<script>
+
+    //定义地图中心点坐标
+    var already_lat = $("#lat").val();
+    var already_lng = $("#lng").val();
+
+    if (already_lat == '') {
+        already_lat = 39.916706;
+        already_lng = 116.403119;
+    }
+
+    var map = new AMap.Map('container', {
+        center: [already_lng, already_lat],
+        zoom: 16
+    });
+
+    var marker;
+    //设置圆形位置
+    // var center = new AMap.LngLat(already_lng, already_lat);
+    //设置圆的半径大小
+    // var radius = $("#delivery_distance").val() //单位:px
+    // radius = radius * 1000
+
+    //创建圆形 Circle 实例
+    // var circle = new AMap.Circle({
+    //     center: center, //圆心
+    //     radius: radius, //半径
+    //     borderWeight: 3, //描边的宽度
+    //     strokeColor: "", //轮廓线颜色
+    //     strokeOpacity: 1, //轮廓线透明度
+    //     strokeWeight: 6, //轮廓线宽度
+    //     fillOpacity: 0.4, //圆形填充透明度
+    //     strokeStyle: "dashed", //轮廓线样式
+    //     strokeDasharray: [10, 10],
+    //     fillColor: "#1791fc", //圆形填充颜色
+    //     zIndex: 50, //圆形的叠加顺序
+    // });
+
+    //圆形 Circle 对象添加到 Map
+    //map.add(circle);//不需要画圆
+    //根据覆盖物范围调整视野
+    //map.setFitView([circle]);//这里也不需要覆盖
+
+
+    map.on('click', function (e) {
+        // console.log(e)
+        // console.log('cccccccccccc')
+        var lng = e.lnglat.lng
+        var lat = e.lnglat.lat
+
+        let url = "{:url('reverse_address_ii')}";
+        $.get(url, {lng: lng, lat: lat}, function (res) {
+            // debugger;
+            //console.log(res)
+            if (res.code == 1) {
+                let address = res.data;
+                $("#lnglat").val(lng + "," + lat);
+                $("#address").val(address);
+                addMarker(lng, lat);
+            } else {
+                layer.msg(res.msg);
+            }
+        });
+
+    });
+
+    addMarker(already_lng, already_lat)
+
+    function searchAddress() {
+        var province_code = $("#province_code option:selected").text();
+        var city_code = $("#city_code option:selected").text();
+        var district = $("#county_code option:selected").text();
+
+        // if(province_code == '请选择'){
+        //     layer.msg('请选择地区');
+        //     return;
+        // }
+        // if(city_code == '请选择' || district == '请选择'){
+        //     layer.msg('请选择地区');
+        //     return;
+        // }
+        let address = $("#address").val();
+        var full_address = province_code + city_code + district + address;//可以根据具体位置直接搜索
+        let url = "{:url('search_address_ii')}";
+        $.get(url, {address: full_address}, function (res) {
+            // debugger;
+            if (res.code == 1) {
+                let location = res.data;
+                console.log(location)
+                $("#lnglat").val(location[0].lon + "," + location[0].lat);
+                addMarker(location[0].lon, location[0].lat);//画图标
+            } else {
+                layer.msg(res.msg);
+            }
+        });
+    }
+
+    function addMarker(lng, lat) {
+        console.log(11)
+        clearMarker();
+        var position = new AMap.LngLat(lng, lat);
+
+        map.setCenter([lng, lat])
+        marker = new AMap.Marker({
+            //icon: "//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-red.png",
+            position: position,
+        });
+        map.add(marker);
+    }
+
+    //移除marker事件
+    function clearMarker() {
+        if (marker) {
+            marker.setMap(null);
+            marker = null;
+        }
+    }
+</script>
+

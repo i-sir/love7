@@ -1,0 +1,224 @@
+<include file="public@header"/></head>
+<body xmlns="http://www.w3.org/1999/html">
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="{:url('index',['user_id'=>$user_id])}">认证管理</a></li>
+         <li><a href="{:url('auth_list',['user_id'=>$user_id])}"> 点亮列表</a></li>
+
+    </ul>
+
+    <!--    <form class="well form-inline margin-top-20 layui-form ajax-form w-form-search" method="get" autocomplete="off">-->
+    <!--        关键字：-->
+    <!--        <div class="form-group layui-form">-->
+    <!--            <div class="layui-form-item" style="margin-bottom: 0 !important;">-->
+    <!--                <div class="col-md-12">-->
+    <!--                    <div class="layui-inline">-->
+    <!--                        <input type="text" class="form-control" name="keyword" style="width: 180px;"-->
+    <!--                               value="{:input('request.keyword/s','')}" placeholder="请输关键字搜索">-->
+    <!--                    </div>-->
+    <!--                </div>-->
+    <!--            </div>-->
+    <!--        </div>-->
+
+    <!--        <button type="submit" class="layui-btn" style="margin-left: 10px">搜索</button>-->
+    <!--        <a class="layui-btn layui-bg-red" href="{:url('index',['user_id'=>$user_id])}">清空</a>-->
+
+
+    <!--        <a class="layui-btn layui-bg-blue ajax-export" href="javascript:;">导出</a>-->
+    <!--        <input type="hidden" name="is_export" class="is_export" value="0">-->
+    <!--    </form>-->
+
+
+    <form class="js-ajax-form" method="post" autocomplete="off">
+
+        <br>
+        <div class="table-actions">
+
+
+        </div>
+
+
+        <table class="table table-hover table-bordered">
+            <thead>
+            <tr>
+                <!--                <th style="width: 60px">ID</th>-->
+                <th style="width: 60px">认证类型</th>
+                <th style="width: 60px">认证信息</th>
+
+                <th style="width: 60px">状态</th>
+                <th style="width: 60px">创建时间</th>
+
+                <th style="width: 80px">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <foreach name="list" item="vo">
+                <tr>
+                    <!--                    <td>{$vo.id}</td>-->
+                    <td>{$vo.type_name}</td>
+                    <td>
+                        <if condition="$vo.type == 1">
+                            {$vo.content.phone}
+                        </if>
+
+                        <if condition="$vo.type == 2">
+                            <if condition="!empty($vo.content)">
+                                <a href="javascript:imagePreviewDialog('{$vo.content}');">
+                                    <img src="{$vo.content}"
+                                         style="width:40px;height:40px; ">
+                                </a>
+                            </if>
+                        </if>
+
+
+                        <if condition="$vo.type == 3">
+                            姓名:{$vo.content.true_name}
+                            <br>
+                            身份证号码:{$vo.content.id_card}
+                            <br>
+                            <if condition="!empty($vo.content.id_card_z)">
+                                <a href="javascript:imagePreviewDialog('{:cmf_get_image_preview_url($vo.content.id_card_z)}');">
+                                    <img src="{:cmf_get_image_preview_url($vo.content.id_card_z)}"
+                                         style="width:40px;height:40px; ">
+                                </a>
+                            </if>
+                            <if condition="!empty($vo.content.id_card_f)">
+                                <a href="javascript:imagePreviewDialog('{:cmf_get_image_preview_url($vo.content.id_card_f)}');">
+                                    <img src="{:cmf_get_image_preview_url($vo.content.id_card_f)}"
+                                         style="width:40px;height:40px; ">
+                                </a>
+                            </if>
+                        </if>
+
+
+                        <if condition="$vo.type == 4">
+                            姓名:{$vo.content.true_name}
+                            <br>
+                            身份证号码:{$vo.content.id_card}
+                            <br>
+                            <if condition="!empty($vo.content.house_cert)">
+                                <foreach name="$vo.content.house_cert" item="value">
+                                    <a href="javascript:imagePreviewDialog('{:cmf_get_image_preview_url($value)}');">
+                                        <img src="{:cmf_get_image_preview_url($value)}"
+                                             style="width:40px;height:40px; ">
+                                    </a>
+                                </foreach>
+                            </if>
+                        </if>
+
+                        <if condition="$vo.type == 5">
+                            姓名:{$vo.content.true_name}
+                            <br>
+                            身份证号码:{$vo.content.id_card}
+                            <br>
+                            <if condition="!empty($vo.content.car_cert)">
+                                <foreach name="$vo.content.car_cert" item="value">
+                                    <a href="javascript:imagePreviewDialog('{:cmf_get_image_preview_url($value)}');">
+                                        <img src="{:cmf_get_image_preview_url($value)}"
+                                             style="width:40px;height:40px; ">
+                                    </a>
+                                </foreach>
+                            </if>
+                        </if>
+
+
+                        <if condition="$vo.type == 6">
+                            <if condition="!empty($vo.content.income_image)">
+                                <foreach name="$vo.content.income_image" item="value">
+                                    <a href="javascript:imagePreviewDialog('{:cmf_get_image_preview_url($value)}');">
+                                        <img src="{:cmf_get_image_preview_url($value)}"
+                                             style="width:40px;height:40px; ">
+                                    </a>
+                                </foreach>
+                            </if>
+                        </if>
+
+
+                        <if condition="$vo.type == 7">
+                            姓名:{$vo.content.true_name}
+                            <br>
+                            身份证号码:{$vo.content.id_card}
+                            <br>
+                            <if condition="!empty($vo.content.edu_cert)">
+                                <foreach name="$vo.content.edu_cert" item="value">
+                                    <a href="javascript:imagePreviewDialog('{:cmf_get_image_preview_url($value)}');">
+                                        <img src="{:cmf_get_image_preview_url($value)}"
+                                             style="width:40px;height:40px; ">
+                                    </a>
+                                </foreach>
+                            </if>
+                        </if>
+
+
+                        <if condition="$vo.type == 8">
+                            <if condition="!empty($vo.content.health_image)">
+                                <foreach name="$vo.content.health_image" item="value">
+                                    <a href="javascript:imagePreviewDialog('{:cmf_get_image_preview_url($value)}');">
+                                        <img src="{:cmf_get_image_preview_url($value)}"
+                                             style="width:40px;height:40px; ">
+                                    </a>
+                                </foreach>
+                            </if>
+                        </if>
+
+
+                        <if condition="$vo.type == 9">
+                            <if condition="!empty($vo.content.income_image)">
+                                <foreach name="$vo.content.income_image" item="value">
+                                    <a href="javascript:imagePreviewDialog('{:cmf_get_image_preview_url($value)}');">
+                                        <img src="{:cmf_get_image_preview_url($value)}"
+                                             style="width:40px;height:40px; ">
+                                    </a>
+                                </foreach>
+                            </if>
+                        </if>
+
+                    </td>
+
+                    <td>{$vo.status_name}</td>
+                    <td>{$vo.create_time|date='Y-m-d H:i:s'}</td>
+
+                    <td>
+                        <!--通过无页面+拒绝窗口-->
+                        <if condition="$vo.status == 1">
+                            <a class="layui-btn layui-btn-primary layui-border-green layui-btn-xs js-ajax-dialog-btn"
+                               data-msg="确认同意？"
+                               href="{:url('audit_post',['id'=>$vo.id,'status'=>2,'user_id'=>$user_id])}">同意</a>
+                            <a class="layui-btn layui-btn-primary layui-border-red layui-btn-xs"
+                               href="javascript:parent.openIframeLayer('{:url('refuse',['id'=>$vo.id,'status'=>3,'user_id'=>$user_id])}','',{ area: ['45%', '55%'],move:'.layui-layer-title'});"
+                            >拒绝</a>
+                        </if>
+
+                    </td>
+                </tr>
+            </foreach>
+            </tbody>
+        </table>
+    </form>
+
+    <div class="pagination">{$page|default=''}</div>
+</div>
+<script src="__STATIC__/js/admin.js"></script>
+</body>
+</html>
+
+
+<!--导出,筛选查询-->
+<script>
+    //导出
+    $(".ajax-export").click(function () {
+        //alert("正在开发中...");
+        $(".is_export").val(1);
+        $(".ajax-form").submit();
+        $(".is_export").val(0);
+        return false;
+    });
+
+    //搜索
+    $(".bt_search").click(function () {
+        $(".w-form-search").removeAttr('action');
+        $(".w-form-search").attr('action', "/index.html");
+        $(".w-form-search").submit();
+    });
+</script>
+

@@ -1,0 +1,62 @@
+<div class="form-group">
+    <label class="col-sm-2 control-label">类型:
+        <p style="font-size: 12px;color: red;">注:见面邀请,需要对方审核</p>
+    </label>
+    <div class="layui-input-block col-md-6 col-sm-10" style="z-index: 2000!important;">
+        <if condition="!empty($type)">
+            <select class="form-control post-params" lay-search name="type">
+                <foreach item="vo" key="key" name="type_list">
+                    <option value="{$key}"
+                    <if condition="$type eq $key ">selected</if>
+                    >{$vo}</option>
+                </foreach>
+            </select>
+            <else/>
+            <select class="form-control post-params" lay-search name="type">
+                <foreach item="vo" key="key" name="type_list">
+                    <option value="{$key}">{$vo}</option>
+                </foreach>
+            </select>
+        </if>
+    </div>
+</div>
+
+<!--layui 复选框 (checkbox)  -->
+<div class="form-group">
+    <label class="col-sm-2 control-label">通知人:
+        <p style="font-size: 12px;color: red;">注:第一个人为发起人</p>
+    </label>
+    <div class="layui-input-block col-md-6 col-sm-10">
+        <input class="form-control post-params" lay-skin="tag" name="user1"
+               title="(ID:{$mate_info.user_id}) {$mate_info.user_info.nickname}" type="checkbox"
+        <if condition="$user_id">
+            checked
+        </if>
+        >
+        <input class="form-control post-params" lay-skin="tag" name="user2"
+               title="(ID:{$mate_info.to_user_id}) {$mate_info.to_user_info.nickname}" type="checkbox"
+        <if condition="$to_user_id">
+            checked
+        </if>
+        >
+    </div>
+</div>
+
+
+<div class="form-group">
+    <label class="col-sm-2 control-label">内容:</label>
+    <div class="layui-input-block col-md-6 col-sm-10">
+        <textarea class="form-control post-params item-left" name="content">{$content|default=''}</textarea>
+    </div>
+</div>
+
+
+<!--红娘id-->
+<input type="hidden" name="matchmaker_id" value="{$matchmaker_id|default=''}">
+
+<!--发起人id-->
+<input type="hidden" name="user_id" value="{$mate_info.user_id|default=''}">
+
+
+<!--接收人id-->
+<input type="hidden" name="to_user_id" value="{$mate_info.to_user_id|default=''}">

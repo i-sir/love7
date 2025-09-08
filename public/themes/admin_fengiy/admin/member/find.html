@@ -1,0 +1,442 @@
+<include file="public@header"/>
+<style>
+    textarea {
+        border: 0;
+        outline: none;
+        background-color: rgba(0, 0, 0, 0);
+    }
+
+    input {
+        border: 0;
+        outline: none;
+        background-color: rgba(0, 0, 0, 0);
+    }
+
+    .col-md-6 {
+        margin-top: 7px;
+    }
+</style>
+
+</head>
+<body>
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="{:url('find',array('id'=>$id,'params'=>$params))}"> 查看</a></li>
+    </ul>
+    <form method="post" class="form-horizontal js-ajax-form margin-top-20 layui-form" autocomplete="off"
+          action="{:url('edit_post',array('id'=>$id,'params'=>$params))}">
+
+        <h3 style="margin-top: 2%;margin-left: 5%;margin-bottom: 2%;color: red;">基础信息:</h3>
+
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">昵称:</label>
+            <div class="layui-input-block col-md-6 col-sm-10">
+                {$nickname|default=''}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">头像</label>
+            <div class="layui-input-block col-md-6 col-sm-10">
+                <if condition="!empty($avatar)">
+                    <a href="javascript:imagePreviewDialog('{:cmf_get_image_preview_url($avatar)}');">
+                        <img src="{:cmf_get_image_preview_url($avatar)}"
+                             id="photo-1000000-preview" style="width: 80px;height: 80px">
+                    </a>
+                    <else/>
+
+                </if>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">手机号:</label>
+            <div class="layui-input-block col-md-6 col-sm-10">
+                <if condition="!empty($admin_matchmaker_id)">
+                    <php>$encryptedPhone =!empty($phone)? (strlen($phone) > 7? substr($phone, 0, 3).'****'.substr($phone, -4) : $phone) : '';</php>
+                    {$encryptedPhone}
+                    <else/>
+                    {$phone}
+                </if>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">出生日期:</label>
+            <div class="layui-input-block col-md-6 col-sm-10">
+                {$birth|default=''}
+            </div>
+        </div>
+
+
+        <!--下拉框-类型 (type)(type_list) 数组格式转给后台是value  展示的数组的值 -->
+        <div class="form-group">
+            <label class="col-sm-2 control-label">属相:</label>
+            <div class="layui-input-block col-md-6 col-sm-10" style="zaaaaa: 100000!important;">
+                {$genus}
+            </div>
+        </div>
+
+
+        <!--下拉框-类型 (type)(type_list) 数组格式转给后台是value  展示的数组的值 -->
+        <div class="form-group">
+            <label class="col-sm-2 control-label">学历:</label>
+            <div class="layui-input-block col-md-6 col-sm-10" style="zaaaaa: 90000!important;">
+                {$education}
+            </div>
+        </div>
+
+        <!--下拉框-类型 (gender)(固定值) 男/女 -->
+        <div class="form-group">
+            <label class="col-sm-2 control-label">性别:</label>
+            <div class="layui-input-block col-md-6 col-sm-10" style="zaaaaa: 80000!important;">
+                {$gender}
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">身高:</label>
+            <div class="layui-input-block col-md-6 col-sm-10">
+                {$height|default=''}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">体重:</label>
+            <div class="layui-input-block col-md-6 col-sm-10">
+                {$weight|default=''}
+            </div>
+        </div>
+
+
+        <!--下拉框-类型 (type)(type_list) 数组格式转给后台是value  展示的数组的值 -->
+        <div class="form-group">
+            <label class="col-sm-2 control-label">民族:</label>
+            <div class="layui-input-block col-md-6 col-sm-10" style="zaaaaa: 70000!important;">
+                {$nation}
+            </div>
+        </div>
+
+
+        <!--下拉框-类型 (type)(type_list) 数组格式转给后台是value  展示的数组的值 -->
+        <div class="form-group">
+            <label class="col-sm-2 control-label">工作行业:</label>
+            <div class="layui-input-block col-md-6 col-sm-10" style="zaaaaa: 16000!important;">
+                {$industry}
+            </div>
+        </div>
+
+        <!--下拉框-类型 (type)(type_list) 数组格式转给后台是value  展示的数组的值 -->
+        <div class="form-group">
+            <label class="col-sm-2 control-label">民族:</label>
+            <div class="layui-input-block col-md-6 col-sm-10" style="zaaaaa: 60000!important;">
+                {$nation}
+            </div>
+        </div>
+
+
+        <!--下拉框-类型 (type)(type_list) 数组格式转给后台是value  展示的数组的值 -->
+        <div class="form-group">
+            <label class="col-sm-2 control-label">职业:</label>
+            <div class="layui-input-block col-md-6 col-sm-10" style="zaaaaa: 50000!important;">
+                {$occupation}
+            </div>
+        </div>
+
+        <!--下拉框-类型 (type)(type_list) 数组格式转给后台是value  展示的数组的值 -->
+        <div class="form-group">
+            <label class="col-sm-2 control-label">收入(年):</label>
+            <div class="layui-input-block col-md-6 col-sm-10" style="zaaaaa: 40000!important;">
+                {$income}
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">户籍地:</label>
+            <div class="layui-input-block col-md-6 col-sm-10" style="zaaaaa: 40000!important;">
+                {$domicile_province} {$domicile_city} {$domicile_county}
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">工作地:</label>
+            <div class="layui-input-block col-md-6 col-sm-10" style="zaaaaa: 40000!important;">
+                {$work_province} {$work_city} {$work_county}
+            </div>
+        </div>
+
+
+        <!--下拉框-类型 (type)(type_list) 数组格式转给后台是value  展示的数组的值 -->
+        <div class="form-group">
+            <label class="col-sm-2 control-label">期望结婚时间:</label>
+            <div class="layui-input-block col-md-6 col-sm-10" style="zaaaaa: 30000!important;">
+                {$marry_date}
+            </div>
+        </div>
+
+
+        <!--下拉框-类型 (type)(type_list) 数组格式转给后台是value  展示的数组的值 -->
+        <div class="form-group">
+            <label class="col-sm-2 control-label">婚姻情况:</label>
+            <div class="layui-input-block col-md-6 col-sm-10" style="zaaaaa: 20000!important;">
+                {$marriage_status}
+            </div>
+        </div>
+
+
+        <!--下拉框-类型 (gender)(固定值) 男/女 -->
+        <div class="form-group">
+            <label class="col-sm-2 control-label">有无孩子:</label>
+            <div class="layui-input-block col-md-6 col-sm-10" style="zaaaaa: 10000!important;">
+                {$is_child}
+            </div>
+        </div>
+
+
+        <!--下拉框-类型 (type)(type_list) 数组格式转给后台是value  展示的数组的值 -->
+        <div class="form-group">
+            <label class="col-sm-2 control-label">子女性别:</label>
+            <div class="layui-input-block col-md-6 col-sm-10" style="zaaaaa: 19000!important;">
+                {$child_gender}
+            </div>
+        </div>
+
+
+        <!--下拉框-类型 (type)(type_list) 数组格式转给后台是value  展示的数组的值 -->
+        <div class="form-group">
+            <label class="col-sm-2 control-label">子女归属:</label>
+            <div class="layui-input-block col-md-6 col-sm-10" style="zaaaaa: 19000!important;">
+                {$child_belong}
+            </div>
+        </div>
+
+
+        <!--下拉框-类型 (type)(type_list) 数组格式转给后台是value  展示的数组的值 -->
+        <div class="form-group">
+            <label class="col-sm-2 control-label">子女年龄:</label>
+            <div class="layui-input-block col-md-6 col-sm-10" style="zaaaaa: 19000!important;">
+                {$child_age}
+            </div>
+        </div>
+
+
+
+        <!--下拉框-类型 (type)(type_list) 数组格式转给后台是value  展示的数组的值 -->
+        <div class="form-group">
+            <label class="col-sm-2 control-label">兄弟姐妹:</label>
+            <div class="layui-input-block col-md-6 col-sm-10" style="zaaaaa: 18000!important;">
+                {$sibling}
+            </div>
+        </div>
+
+
+        <!--下拉框-类型 (gender)(固定值) 男/女 -->
+        <div class="form-group">
+            <label class="col-sm-2 control-label">是否饮酒:</label>
+            <div class="layui-input-block col-md-6 col-sm-10" style="zaaaaa: 17000!important;">
+                {$is_drink}
+            </div>
+        </div>
+
+
+        <!--下拉框-类型 (type)(type_list) 数组格式转给后台是value  展示的数组的值 -->
+        <div class="form-group">
+            <label class="col-sm-2 control-label">婚姻情况:</label>
+            <div class="layui-input-block col-md-6 col-sm-10" style="zaaaaa: 16000!important;">
+                {$marriage_status}
+            </div>
+        </div>
+
+
+        <!--layui多选框,分类列表 (checkbox)  -->
+        <!--
+        edit编辑
+
+              //处理分类结果值
+                if ($params['class_ids']) {
+                    $class_ids           = array_keys($params['class_ids']);//提取key
+                    $params['class_ids'] = $this->setParams($class_ids);
+                }
+        -->
+        <div class="form-group">
+            <label class="col-sm-2 control-label">养宠物吗:</label>
+            <div class="layui-input-block col-md-6 col-sm-10">
+                <foreach item="value" name="pet_list">
+                    <div class="layui-col-xs3">
+                        <if condition="in_array($value,$pet)">
+                            <button type="button" class="layui-btn layui-btn-primary layui-btn-xs">{$value}</button>
+                        </if>
+                    </div>
+                </foreach>
+            </div>
+        </div>
+
+
+        <!--下拉框-类型 (type)(type_list) 数组格式转给后台是value  展示的数组的值 -->
+        <div class="form-group">
+            <label class="col-sm-2 control-label">休息习惯:</label>
+            <div class="layui-input-block col-md-6 col-sm-10" style="zaaaaa: 15000!important;">
+                {$rest_habits}
+            </div>
+        </div>
+
+
+        <!--下拉框-类型 (type)(type_list) 数组格式转给后台是value  展示的数组的值 -->
+        <div class="form-group">
+            <label class="col-sm-2 control-label">锻炼习惯:</label>
+            <div class="layui-input-block col-md-6 col-sm-10" style="zaaaaa: 14000!important;">
+                {$exercise_habits}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">是否有房:</label>
+            <div class="layui-input-block col-md-6 col-sm-10">
+                {$is_room}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">是否有车:</label>
+            <div class="layui-input-block col-md-6 col-sm-10">
+                {$is_car}
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">兴趣爱好</label>
+            <div class="layui-input-block col-md-6 col-sm-10">
+                <foreach item="value" name="hobby_list">
+                    <div class="layui-col-xs3">
+                        <if condition="in_array($value,$hobby)">
+                            <button type="button" class="layui-btn layui-btn-primary layui-btn-xs">{$value}</button>
+                        </if>
+                    </div>
+                </foreach>
+            </div>
+        </div>
+
+
+
+
+
+
+        <h3 style="margin-top: 2%;margin-left: 5%;margin-bottom: 2%;color: red;">择偶要求:</h3>
+
+
+        <!--下拉框-类型 (type)(type_list) 数组格式转给后台是value  展示的数组的值 -->
+        <div class="form-group">
+            <label class="col-sm-2 control-label">年龄范围:</label>
+            <div class="layui-input-block col-md-6 col-sm-10" style="zaaaaa: 12000!important;">
+                {$select_age}
+            </div>
+        </div>
+
+
+        <!--下拉框-类型 (type)(type_list) 数组格式转给后台是value  展示的数组的值 -->
+        <div class="form-group">
+            <label class="col-sm-2 control-label">最低学历:</label>
+            <div class="layui-input-block col-md-6 col-sm-10" style="zaaaaa: 11000!important;">
+                {$select_education}
+            </div>
+        </div>
+
+        <!--下拉框-类型 (type)(type_list) 数组格式转给后台是value  展示的数组的值 -->
+        <div class="form-group">
+            <label class="col-sm-2 control-label">最低学历:</label>
+            <div class="layui-input-block col-md-6 col-sm-10" style="zaaaaa: 10000!important;">
+                {$select_weight}
+            </div>
+        </div>
+
+        <!--下拉框-类型 (type)(type_list) 数组格式转给后台是value  展示的数组的值 -->
+        <div class="form-group">
+            <label class="col-sm-2 control-label">最低年收入:</label>
+            <div class="layui-input-block col-md-6 col-sm-10" style="zaaaaa: 9000!important;">
+                {$select_income}
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">居住地:</label>
+            <div class="layui-input-block col-md-6 col-sm-10">
+                {$select_address}
+            </div>
+        </div>
+
+
+        <!--下拉框-类型 (type)(type_list) 数组格式转给后台是value  展示的数组的值 -->
+        <div class="form-group">
+            <label class="col-sm-2 control-label">婚姻情况:</label>
+            <div class="layui-input-block col-md-6 col-sm-10" style="zaaaaa: 8000!important;">
+                {$select_marriage_status}
+            </div>
+        </div>
+
+
+        <!--下拉框-类型 (gender)(固定值) 男/女 -->
+        <div class="form-group">
+            <label class="col-sm-2 control-label">是否有车:</label>
+            <div class="layui-input-block col-md-6 col-sm-10" style="zaaaaa: 7000!important;">
+                {$select_is_car}
+            </div>
+        </div>
+
+        <!--下拉框-类型 (gender)(固定值) 男/女 -->
+        <div class="form-group">
+            <label class="col-sm-2 control-label">是否有房:</label>
+            <div class="layui-input-block col-md-6 col-sm-10" style="zaaaaa: 6000!important;">
+                {$select_is_room}
+            </div>
+        </div>
+
+
+        <!--下拉框-类型 (gender)(固定值) 男/女 -->
+        <div class="form-group">
+            <label class="col-sm-2 control-label">是否有房:</label>
+            <div class="layui-input-block col-md-6 col-sm-10" style="zaaaaa: 5000!important;">
+                {$select_is_child}
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">择偶简介:</label>
+            <div class="layui-input-block col-md-6 col-sm-10">
+                {$select_introduce}
+            </div>
+        </div>
+
+
+
+        <h3 style="margin-top: 2%;margin-left: 5%;margin-bottom: 2%;color: red;">相册:</h3>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">相册:</label>
+            <div class="layui-input-block col-md-6 col-sm-10">
+                <if condition="!empty($images)">
+                    <foreach name="images" item="value">
+                        <a href="javascript:imagePreviewDialog('{:cmf_get_image_preview_url($value)}');">
+                            <img src="{:cmf_get_image_preview_url($value)}"
+                                 style="width:40px;height:40px; ">
+                        </a>
+                    </foreach>
+                </if>
+            </div>
+        </div>
+
+
+    </form>
+
+</div>
+<script src="__STATIC__/js/admin.js"></script>
+</body>
+</html>
+
+
+

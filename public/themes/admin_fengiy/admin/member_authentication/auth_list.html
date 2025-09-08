@@ -1,0 +1,149 @@
+<include file="public@header"/></head>
+<body>
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li><a href="{:url('index',['user_id'=>$user_id])}">认证管理</a></li>
+        <li class="active"><a href="{:url('auth_list',['id'=>$id,'user_id'=>$user_id])}"> 点亮列表</a></li>
+    </ul>
+    <form method="post" class="form-horizontal js-ajax-form margin-top-20 layui-form"
+          action="{:url('auth_post',['id'=>$id,'user_id'=>$user_id])}" autocomplete="off">
+
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">认证管理:</label>
+            <div class="layui-input-block col-md-6 col-sm-10">
+                <foreach item="class_value" name="list">
+                    <input class="form-control post-params" lay-skin="tag" name="ids[{$class_value.id}]"
+                           title="{$class_value.name}"
+                           type="checkbox"
+                    <if condition="$class_value.checked">
+                        checked
+                    </if>
+                      <if condition="$admin_recommend_id">
+                          disabled
+                    </if>
+                    >
+                </foreach>
+            </div>
+        </div>
+
+
+<!--        <div class="form-group">-->
+<!--            <label class="col-sm-2 control-label">认证内容:</label>-->
+<!--            <div class="layui-input-block col-md-6 col-sm-10">-->
+<!--                <script type="text/plain" id="authentication" name="authentication">-->
+<!--               {:cmf_replace_content_file_url(htmlspecialchars_decode($authentication))}-->
+<!--                </script>-->
+<!--            </div> -->
+<!--        </div> -->
+
+
+
+
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">图集:</label>
+            <div class="layui-input-block col-md-6 col-sm-10">
+                <if condition="!empty($authentication_images)">
+                    <ul class="pic-list list-unstyled form-inline" id="photos-goods-0000001">
+                        <foreach item="vo" name="authentication_images">
+                            <li id="saved-goods-image-0000001-{$key}" style="margin-bottom: 5px;">
+                                <input id="photo-goods-0000001-{$key}" name="authentication_images[{$key}]" type="hidden"
+                                       class="form-control post-params item-left"
+                                       value="{$vo}">
+                                <img id="photo-goods-0000001-{$key}-preview"
+                                     onclick="parent.imagePreviewDialog(this.src);"
+                                     src="{:cmf_get_image_preview_url($vo)}" width="35">
+                                <a href="javascript:uploadOneImage('图片上传','#photo-goods-0000001-{$key}');">替换</a>
+                                <a href="javascript:(function(){$('#saved-goods-image-0000001-{$key}').remove();})();">移除</a>
+                            </li>
+                        </foreach>
+                    </ul>
+                    <else/>
+                    <ul class="pic-list list-unstyled form-inline" id="photos-goods-0000001">
+                        <li id="saved-goods-image-0000001" style="margin-bottom: 5px;">
+                        </li>
+                    </ul>
+                </if>
+                <a class="btn btn-sm btn-default"
+                   href="javascript:uploadMultiImage('图片上传','#photos-goods-0000001','photos-goods-item-tpl-0000001');">选择图片</a>
+                <script id="photos-goods-item-tpl-0000001" type="text/html">
+                    <li id="saved-goods-image-0000001-{id}" style="margin-bottom: 5px;">
+                        <input id="photo-goods-0000001-{id}" type="hidden" name="authentication_images[{id}]"
+                               class="form-control post-params item-left"
+                               value="{filepath}">
+                        <img id="photo-goods-0000001-{id}-preview" src="{url}" width="35"
+                             onclick="imagePreviewDialog(this.src);">
+                        <a href="javascript:uploadOneImage('图片上传','#photo-goods-0000001-{id}');">替换</a>
+                        <a href="javascript:(function(){$('#saved-goods-image-0000001-{id}').remove();})();">移除</a>
+                    </li>
+                </script>
+            </div>
+        </div>
+
+
+
+        <!-- 主键id -->
+        <input type="text" name="id" value="{$id}" class="form-control post-params item-left" style="display: none">
+
+        <if condition="!$admin_recommend_id">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="layui-btn js-ajax-submit" id="save">保存</button>
+                <a class="layui-btn layui-btn-primary" href="javascript:history.back(-1);">返回</a>
+            </div>
+        </if>
+    </form>
+
+</div>
+<script src="__STATIC__/js/admin.js"></script>
+</body>
+</html>
+
+
+<script type="text/javascript">
+    //编辑器路径定义
+    var editorURL = GV.WEB_ROOT;
+
+</script>
+<script type="text/javascript" src="/static/js/ueditor/ueditor.config.js?v=00001"></script>
+<script type="text/javascript" src="/static/js/ueditor/ueditor.all.min.js"></script>
+<!--编辑器支持秀米-->
+<script type="text/javascript" src="/static/js/ueditor/xiumi/xiumi-ue-dialog-v5.js"></script>
+<link rel="stylesheet" type="text/css" href="/static/js/ueditor/xiumi/xiumi-ue-v5.css"/>
+<script type="text/javascript">
+    $(function () {
+        editorcontent = new baidu.editor.ui.Editor();
+        editorcontent.render('authentication');
+
+        var admin_recommend_id = "{$admin_recommend_id}";
+
+        // 禁用
+        if(admin_recommend_id) {
+            editorcontent.ready(function () {
+                editorcontent.setDisabled();
+            });
+        }
+
+        try {
+            editorcontent.sync();
+        } catch (err) {
+        }
+    });
+</script>
+
+<script>
+    function preventEnterSubmit(event) {
+        // 检查是否按下了回车键
+        if (event.key === 'Enter') {
+            event.preventDefault(); // 阻止默认行为
+        }
+    }
+
+    // 当文档加载完成后，设置事件监听
+    document.addEventListener('DOMContentLoaded', function() {
+        var form = document.getElementById('moods_form');
+        form.addEventListener('keypress', preventEnterSubmit);
+    });
+</script>
+
+

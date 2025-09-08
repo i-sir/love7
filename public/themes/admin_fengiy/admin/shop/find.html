@@ -1,0 +1,409 @@
+ <include file="public@header"/>
+<style>
+    textarea {
+        border: 0;
+        outline: none;
+        background-color: rgba(0, 0, 0, 0);
+    }
+
+    input {
+        border: 0;
+        outline: none;
+        background-color: rgba(0, 0, 0, 0);
+    }
+
+    .col-md-6 {
+        margin-top: 7px;
+    }
+</style>
+
+</head>
+<body>
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="{:url('find',['id'=>$id,'params'=>$params])}">查看</a></li>
+    </ul>
+    <form method="post" class="form-horizontal js-ajax-form margin-top-20 layui-form" autocomplete="off"
+          action="{:url('edit_post',['id'=>$id,'params'=>$params])}">
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">用户信息:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                <if condition='!empty($user_info)'>
+<div style="">
+<p>(ID:{$user_info.id})</p>
+<a href="javascript:imagePreviewDialog('{:cmf_get_asset_url($user_info.avatar)}');">
+<img src='{:cmf_get_asset_url($user_info.avatar)}' style='width: 35px;height: 35px;border-radius:30px;'>
+</a>
+<span ondblclick="copyContent('{$user_info.openid}')">{$user_info.nickname}</span>
+</div>
+<else/>
+已删除
+</if>
+
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">店铺名字:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$name|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">分类id:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$class_id|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">logo:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                <if condition='!empty($logo_image)'>
+<a href="javascript:imagePreviewDialog('{:cmf_get_asset_url($logo_image)}');">
+<img src='{:cmf_get_asset_url($logo_image)}' style='width: 35px;height: 35px'>
+</a>
+<else/>
+暂无上传
+</if>
+
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">轮播图:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$images|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">介绍:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                            <textarea rows="4" class="form-control post-paramsitem-left" cols="60"
+                                  name="introduce">{$introduce|default=''}</textarea>
+                        
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">负责人:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$username|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">手机号:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$phone|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">营业日期:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$date|default=''}
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">营业时间:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$time|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">人均消费:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$avg_price|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">地址信息:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$address|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">经度:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$lng|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">纬度:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$lat|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">经纬度:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                <div style="display: flex;">
+                                <input type="text" class="form-control" name="address" id="address"
+                                       value="address" placeholder="请输入" required>
+                                <a class="btn btn-primary" href="javascript:;" style="margin-left: 10px;"
+                                   onclick="searchAddress()">搜索</a>
+                                <input type="hidden" class="form-control" id="lnglat" name="lnglat"
+                                       value="{$lnglat|default=''}">
+                            </div>
+                            <div id="container" style="margin-top:10px;width:600px;height:300px;"></div>
+                            <script src="https://map.qq.com/api/gljs?v=1.exp&key=3JXBZ-6NKWX-RW54N-ZJYDI-OMQEO-74F7X"></script>
+                            <script>
+                                //定义地图中心点坐标
+                                var center = new TMap.LatLng("116.397128, 39.916527")
+                                //定义map变量，调用 TMap.Map() 构造函数创建地图
+                                var map = new TMap.Map(document.getElementById('container'), {
+                                    center: center,//设置地图中心点坐标
+                                    zoom: 17, //设置地图缩放级别
+                                    viewMode: '3D'
+                                });
+                                let markerLayer = new TMap.MultiMarker({
+                                    id: 'marker-layer',
+                                    map: map
+                                });
+                                var clickHandler = function (evt) {
+                                    var lat = evt.latLng.getLat().toFixed(6);
+                                    var lng = evt.latLng.getLng().toFixed(6);
+                                    $("#lnglat").val(lat + "," + lng);
+                                    removeMarker("search_res");
+                                    addMarker(new TMap.LatLng(lat, lng), "search_res");
+                                    let url = "/public/reverse_address.html";
+                                    $.get(url, {lnglat: lat + "," + lng}, function (res) {
+                                        debugger;
+                                        res = JSON.parse(res)
+                                        if (res.status == 0) {
+                                            $("#address").val(res.result.formatted_addresses.recommend);
+                                        }
+                                    });
+                                }
+                                map.on("click", clickHandler)
+
+                                function addMarker(latLng, id) {
+                                    markerLayer.add({
+                                        id: id,
+                                        position: latLng
+                                    });
+                                    let lng = latLng.lng
+                                    let lat = latLng.lat
+                                    map.setCenter(new TMap.LatLng(lat, lng)); // 坐标为天安门
+                                }
+
+                                //移除marker事件
+                                function removeMarker(id) {
+                                    markerLayer.remove(id)
+                                }
+
+                                function searchAddress() {
+                                    let address = $("#address").val();
+                                    let url = "/public/search_address.html";
+                                    $.get(url, {address: address}, function (res) {
+                                        debugger;
+                                        res = JSON.parse(res)
+                                        if (res.status == 0) {
+                                            let location = res.result.location
+                                            $("#lnglat").val(location.lat + "," + location.lng);
+                                            removeMarker("search_res");
+                                            addMarker(new TMap.LatLng(location.lat, location.lng), "searc h_res");
+                                        }
+                                    });
+                                }
+                            </script>
+                        
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">省id:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$province_id|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">市id:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$city_id|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">区id:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$county_id|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">省name:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$province|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">市name:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$city|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">区name:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$county|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">省code:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$province_code|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">市code:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$city_code|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">区code:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$county_code|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">人气:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$list_order|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">推荐:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$is_recommend_name|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">状态:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$is_shop_name|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">到期时间:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$end_time|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+
+        <!-- 主键id -->
+        <input type="text" name="id" value="{$id}" class="form-control post-params item-left" style="display: none">
+
+
+    </form>
+
+</div>
+<script src="__STATIC__/js/admin.js"></script>
+</body>
+</html>
+
+
+

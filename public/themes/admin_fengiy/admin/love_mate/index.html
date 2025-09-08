@@ -1,0 +1,168 @@
+<include file="public@header"/></head>
+<body xmlns="http://www.w3.org/1999/html">
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="{:url('index',['params'=>$params])}">牵线管理</a></li>
+
+
+    </ul>
+
+    <form class="well form-inline margin-top-20 layui-form ajax-form w-form-search" method="get" autocomplete="off">
+        关键字：
+        <div class="form-group layui-form">
+            <div class="layui-form-item" style="margin-bottom: 0 !important;">
+                <div class="col-md-12">
+                    <div class="layui-inline">
+                        <input type="text" class="form-control" name="keyword" style="width: 180px;"
+                               value="{:input('request.keyword/s','')}" placeholder="请输关键字搜索">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <if condition="empty($admin_matchmaker_id)">
+            红娘
+            <div class="form-group">
+                <div class="layui-form-item">
+                    <div class="col-md-6 col-sm-10" style="z-index: 2000;display: flex;margin-top: 10px;width: 180px;">
+                        <select name="matchmaker_id" lay-search>
+                            <option value=""
+                            <if condition="$matchmaker_id eq '' ">selected</if>
+                            >暂不选择</option>
+
+                            <foreach name="matchmaker_list" key="key" item="vo">
+                                <option value="{$vo.id}"
+                                <if condition="$matchmaker_id eq $vo.id ">selected</if>
+                                > {$vo.nickname}</option>
+                            </foreach>
+
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </if>
+
+        <button type="submit" class="layui-btn" style="margin-left: 10px">搜索</button>
+        <a class="layui-btn layui-bg-red" href="{:url('index',['params'=>$params])}">清空</a>
+
+
+        <input type="hidden" name="is_export" class="is_export" value="0">
+    </form>
+
+
+    <form class="js-ajax-form" method="post" autocomplete="off">
+
+        <br>
+        <div class="table-actions">
+
+
+        </div>
+
+
+        <table class="table table-hover table-bordered">
+            <thead>
+            <tr>
+                <th style="width: 60px">ID</th>
+                <th style="width: 60px">关联红娘</th>
+                <th style="width: 60px">用户信息</th>
+                <th style="width: 60px">接收人</th>
+                <!--                <th style="width: 60px">状态</th>-->
+                <!--                <th style="width: 60px">内容</th>-->
+                <th style="width: 60px">创建时间</th>
+
+                <th style="width: 80px">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <foreach name="list" item="vo">
+                <tr>
+                    <td>{$vo.id}</td>
+                    <td>
+                        <if condition='!empty($vo.matchmaker_info)'>
+                            <div style="">
+                                <p>(ID:{$vo.matchmaker_info.id})</p>
+                                <a href="javascript:imagePreviewDialog('{:cmf_get_asset_url($vo.matchmaker_info.avatar)}');">
+                                    <img src='{:cmf_get_asset_url($vo.matchmaker_info.avatar)}'
+                                         style='width: 35px;height: 35px;border-radius:30px;'>
+                                </a>
+                                <span ondblclick="copyContent('{$vo.matchmaker_info.openid}')">{$vo.matchmaker_info.nickname}</span>
+                            </div>
+                            <else/>
+                            已删除
+                        </if>
+                    <td>
+                        <if condition='!empty($vo.user_info)'>
+                            <div style="">
+                                <p>(ID:{$vo.user_info.id})</p>
+                                <a href="javascript:imagePreviewDialog('{:cmf_get_asset_url($vo.user_info.avatar)}');">
+                                    <img src='{:cmf_get_asset_url($vo.user_info.avatar)}'
+                                         style='width: 35px;height: 35px;border-radius:30px;'>
+                                </a>
+                                <span ondblclick="copyContent('{$vo.user_info.openid}')">{$vo.user_info.nickname}</span>
+                            </div>
+                            <else/>
+                            已删除
+                        </if>
+                    </td>
+                    <td>
+                        <if condition='!empty($vo.to_user_info)'>
+                            <div style="">
+                                <p>(ID:{$vo.user_info.id})</p>
+                                <a href="javascript:imagePreviewDialog('{:cmf_get_asset_url($vo.to_user_info.avatar)}');">
+                                    <img src='{:cmf_get_asset_url($vo.to_user_info.avatar)}'
+                                         style='width: 35px;height: 35px;border-radius:30px;'>
+                                </a>
+                                <span ondblclick="copyContent('{$vo.to_user_info.openid}')">{$vo.to_user_info.nickname}</span>
+                            </div>
+                            <else/>
+                            已删除
+                        </if>
+                    </td>
+                    <!--                    <td>{$vo.status_name}</td>-->
+                    <!--                    <td>{$vo.content}</td>-->
+                    <td>{$vo.create_time|date='Y-m-d H:i:s'}</td>
+
+                    <td>
+
+
+                        <if condition="cmf_auth_check(cmf_get_current_admin_id(),'admin/LoveMate/find')">
+                            <a class="layui-btn layui-btn-primary layui-border-blue layui-btn-xs"
+                               href="javascript:parent.openIframeLayer('{:url('love_notice/index',['matchmaker_id'=>$vo.matchmaker_id,'pid'=>$vo.id])}','',{ area: ['65%', '85%'],move:'.layui-layer-title'});"
+                            >系统通知</a>
+                        </if>
+
+
+                    </td>
+                </tr>
+            </foreach>
+            </tbody>
+        </table>
+    </form>
+
+    <div class="pagination">{$page|default=''}</div>
+</div>
+<script src="__STATIC__/js/admin.js"></script>
+</body>
+</html>
+
+
+<!--导出,筛选查询-->
+<script>
+    //导出
+    $(".ajax-export").click(function () {
+        //alert("正在开发中...");
+        $(".is_export").val(1);
+        $(".ajax-form").submit();
+        $(".is_export").val(0);
+        return false;
+    });
+
+    //搜索
+    $(".bt_search").click(function () {
+        $(".w-form-search").removeAttr('action');
+        $(".w-form-search").attr('action', "/index.html");
+        $(".w-form-search").submit();
+    });
+</script>
+

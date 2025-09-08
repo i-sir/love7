@@ -1,0 +1,1129 @@
+<h3 style="margin-top: 2%;margin-left: 5%;margin-bottom: 2%;color: red;">基础信息:</h3>
+
+
+<div class="form-group">
+    <label class="col-sm-2 control-label">评论:</label>
+    <div class="layui-input-block col-md-6 col-sm-10">
+        <textarea class="form-control post-params item-left" name="comment">{$comment|default=''}</textarea>
+    </div>
+</div>
+
+<input type="hidden" name="status" class="form-control item-left" value="{$status}">
+
+
+<div class="form-group">
+    <label class="col-sm-2 control-label">昵称:</label>
+    <div class="layui-input-block col-md-6 col-sm-10">
+        <input type="text" name="nickname" class="form-control item-left" value="{$nickname|default=''}">
+    </div>
+</div>
+
+
+
+<div class="form-group">
+    <label class="col-sm-2 control-label">头像</label>
+    <div class="layui-input-block col-md-6 col-sm-10">
+        <input id="photo-1000000" type="hidden" class="form-control post-params item-left" name="avatar"
+               value="{$avatar|default=''}">
+        <if condition="!empty($avatar)">
+            <a href="javascript:imagePreviewDialog('{:cmf_get_image_preview_url($avatar)}');">
+                <img src="{:cmf_get_image_preview_url($avatar)}"
+                     id="photo-1000000-preview" style="width: 80px;height: 80px">
+            </a>
+            <else/>
+            <img src="/static/images/default.png"
+                 id="photo-1000000-preview" style="width: 80px;height: 80px">
+        </if>
+        <a href="javascript:uploadOneImage('图片上传','#photo-1000000');">上传</a>
+        <a onclick="$('#photo-1000000-preview').attr('src','__TMPL__/public/assets/images/default-thumbnail.png');$('#photo-1000000').val('');return false;">取消图片</a>
+    </div>
+</div>
+
+
+<div class="form-group">
+    <label class="col-sm-2 control-label">手机号:</label>
+    <div class="layui-input-block col-md-6 col-sm-10">
+        <input type="text" name="phone" class="form-control item-left" value="{$phone|default=''}">
+        <input type="hidden" name="old_phone" value="{$phone|default=''}">
+    </div>
+</div>
+
+
+<div class="form-group">
+    <label class="col-sm-2 control-label">出生日期:</label>
+    <div class="layui-input-block col-md-6 col-sm-10">
+        <input type="text" name="birth" class="form-control post-params item-left js-date"
+               value="{$birth|default=''}">
+    </div>
+</div>
+
+
+<!--下拉框-类型 (type)(type_list) 数组格式转给后台是value  展示的数组的值 -->
+<div class="form-group">
+    <label class="col-sm-2 control-label">属相:</label>
+    <div class="layui-input-block col-md-6 col-sm-10" style="zaaaaa: 100000!important;">
+        <if condition="!empty($genus)">
+            <select class="form-control post-params" lay-search name="genus">
+                <foreach item="vo" key="key" name="genus_list">
+                    <option value="{$vo}"
+                    <if condition="$genus eq $vo ">selected</if>
+                    >{$vo}</option>
+                </foreach>
+            </select>
+            <else/>
+            <select class="form-control post-params" lay-search name="genus">
+                <foreach item="vo" key="key" name="genus_list">
+                    <option value="{$vo}">{$vo}</option>
+                </foreach>
+            </select>
+        </if>
+    </div>
+</div>
+
+
+<!--下拉框-类型 (type)(type_list) 数组格式转给后台是value  展示的数组的值 -->
+<div class="form-group">
+    <label class="col-sm-2 control-label">学历:</label>
+    <div class="layui-input-block col-md-6 col-sm-10" style="zaaaaa: 90000!important;">
+        <if condition="!empty($education)">
+            <select class="form-control post-params" lay-search name="education">
+                <foreach item="vo" key="key" name="education_list">
+                    <option value="{$vo}"
+                    <if condition="$education eq $vo ">selected</if>
+                    >{$vo}</option>
+                </foreach>
+            </select>
+            <else/>
+            <select class="form-control post-params" lay-search name="education">
+                <foreach item="vo" key="key" name="education_list">
+                    <option value="{$vo}">{$vo}</option>
+                </foreach>
+            </select>
+        </if>
+    </div>
+</div>
+
+<!--下拉框-类型 (gender)(固定值) 男/女 -->
+<div class="form-group">
+    <label class="col-sm-2 control-label">性别:</label>
+    <div class="layui-input-block col-md-6 col-sm-10" style="zaaaaa: 80000!important;">
+        <select class="post-params" lay-search name="gender">
+            <option value="男"
+            <if condition="$gender eq '男' ">selected</if>
+            >男</option>
+
+            <option value="女"
+            <if condition="$gender eq '女' ">selected</if>
+            >女</option>
+        </select>
+    </div>
+</div>
+
+
+<div class="form-group">
+    <label class="col-sm-2 control-label">身高:</label>
+    <div class="layui-input-block col-md-6 col-sm-10">
+        <input type="text" name="height" class="form-control post-params item-left" value="{$height|default=''}">
+    </div>
+</div>
+<div class="form-group">
+    <label class="col-sm-2 control-label">体重:</label>
+    <div class="layui-input-block col-md-6 col-sm-10">
+        <input type="text" name="weight" class="form-control post-params item-left" value="{$weight|default=''}">
+    </div>
+</div>
+
+
+<!--下拉框-类型 (type)(type_list) 数组格式转给后台是value  展示的数组的值 -->
+<div class="form-group">
+    <label class="col-sm-2 control-label">民族:</label>
+    <div class="layui-input-block col-md-6 col-sm-10" style="zaaaaa: 70000!important;">
+        <if condition="!empty($nation)">
+            <select class="form-control post-params" lay-search name="nation">
+                <foreach item="vo" key="key" name="nation_list">
+                    <option value="{$vo}"
+                    <if condition="$nation eq $vo ">selected</if>
+                    >{$vo}</option>
+                </foreach>
+            </select>
+            <else/>
+            <select class="form-control post-params" lay-search name="nation">
+                <foreach item="vo" key="key" name="nation_list">
+                    <option value="{$vo}">{$vo}</option>
+                </foreach>
+            </select>
+        </if>
+    </div>
+</div>
+
+
+<!--下拉框-类型 (type)(type_list) 数组格式转给后台是value  展示的数组的值 -->
+<div class="form-group">
+    <label class="col-sm-2 control-label">工作行业:</label>
+    <div class="layui-input-block col-md-6 col-sm-10" style="zaaaaa: 16000!important;">
+        <if condition="!empty($industry)">
+            <select class="form-control post-params" lay-search name="industry">
+                <foreach item="vo" key="key" name="industry_list">
+                    <option value="{$vo}"
+                    <if condition="$industry eq $vo ">selected</if>
+                    >{$vo}</option>
+                </foreach>
+            </select>
+            <else/>
+            <select class="form-control post-params" lay-search name="industry">
+                <foreach item="vo" key="key" name="industry_list">
+                    <option value="{$vo}">{$vo}</option>
+                </foreach>
+            </select>
+        </if>
+    </div>
+</div>
+
+<!--下拉框-类型 (type)(type_list) 数组格式转给后台是value  展示的数组的值 -->
+<div class="form-group">
+    <label class="col-sm-2 control-label">民族:</label>
+    <div class="layui-input-block col-md-6 col-sm-10" style="zaaaaa: 60000!important;">
+        <if condition="!empty($nation)">
+            <select class="form-control post-params" lay-search name="nation">
+                <foreach item="vo" key="key" name="nation_list">
+                    <option value="{$vo}"
+                    <if condition="$nation eq $vo ">selected</if>
+                    >{$vo}</option>
+                </foreach>
+            </select>
+            <else/>
+            <select class="form-control post-params" lay-search name="nation">
+                <foreach item="vo" key="key" name="nation_list">
+                    <option value="{$vo}">{$vo}</option>
+                </foreach>
+            </select>
+        </if>
+    </div>
+</div>
+
+
+<!--下拉框-类型 (type)(type_list) 数组格式转给后台是value  展示的数组的值 -->
+<div class="form-group">
+    <label class="col-sm-2 control-label">职业:</label>
+    <div class="layui-input-block col-md-6 col-sm-10" style="zaaaaa: 50000!important;">
+        <if condition="!empty($occupation)">
+            <select class="form-control post-params" lay-search name="occupation">
+                <foreach item="vo" key="key" name="occupation_list">
+                    <option value="{$vo}"
+                    <if condition="$occupation eq $vo ">selected</if>
+                    >{$vo}</option>
+                </foreach>
+            </select>
+            <else/>
+            <select class="form-control post-params" lay-search name="occupation">
+                <foreach item="vo" key="key" name="occupation_list">
+                    <option value="{$vo}">{$vo}</option>
+                </foreach>
+            </select>
+        </if>
+    </div>
+</div>
+
+<!--下拉框-类型 (type)(type_list) 数组格式转给后台是value  展示的数组的值 -->
+<div class="form-group">
+    <label class="col-sm-2 control-label">收入(年):</label>
+    <div class="layui-input-block col-md-6 col-sm-10" style="zaaaaa: 40000!important;">
+        <if condition="!empty($income)">
+            <select class="form-control post-params" lay-search name="income">
+                <foreach item="vo" key="key" name="income_list">
+                    <option value="{$vo}"
+                    <if condition="$income eq $vo ">selected</if>
+                    >{$vo}</option>
+                </foreach>
+            </select>
+            <else/>
+            <select class="form-control post-params" lay-search name="income">
+                <foreach item="vo" key="key" name="income_list">
+                    <option value="{$vo}">{$vo}</option>
+                </foreach>
+            </select>
+        </if>
+    </div>
+</div>
+
+
+<div class="form-group">
+    <div class="layui-form-item">
+        <label class="col-sm-2 control-label">户籍地:</label>
+        <div class="col-md-6 col-sm-10" style="">
+            <div class="layui-inline" style="width: 150px;">
+                <select class="domicile_province_code" lay-filter="domicile_province_code" lay-search
+                        lay-verify="required"
+                        name="domicile_province_code">
+                    <option value="{$domicile_province_code}">{$domicile_province}</option>
+                </select>
+            </div>
+            <div class="layui-inline"  style="width: 150px;">
+                <select class="domicile_city_code" lay-filter="domicile_city_code" lay-search lay-verify="required"
+                        name="domicile_city_code">
+                    <option value="{$domicile_city_code}">{$domicile_city}</option>
+                </select>
+            </div>
+            <div class="layui-inline"  style="width: 150px;">
+                <select class="domicile_county_code" lay-search lay-verify="required" name="domicile_county_code">
+                    <option value="{$domicile_county_code}">{$domicile_county}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <!--地区三级联动 layui-->
+    <script>
+        layui.use(['form', 'element'], function () {
+            var form = layui.form,
+                element = layui.element;
+            var provinceList;
+            $.ajax({
+                url: "{:url('getArea')}",
+                type: "GET",
+                async: false,
+                success: function (res) {
+                    if (res.code == 1) {
+                        provinceList = res.data;
+                    } else {
+                        layer.msg(res.msg, {icon: 7});
+                    }
+                }
+            });
+
+            var province = $(".domicile_province_code");
+
+
+            //初始将省份数据赋予
+            for (var i = 0; i < provinceList.length; i++) {
+                addEle(province, provinceList[i].name, provinceList[i].code);
+            }
+
+            //向select中 追加内容
+            function addEle(ele, value, code) {
+                var optionStr = "";
+                optionStr = "<option value=" + code + " >" + value + "</option>";
+                ele.append(optionStr);
+            }
+
+            //重新渲染select
+            form.render('select');
+
+            //移除select中所有项
+            function removeEle(ele) {
+                ele.find("option").remove();
+                var optionStar = "<option value=''>" + "请选择" + "</option>";
+                ele.append(optionStar);
+            }
+
+            var provinceText,
+                cityText,
+                cityItem;
+            //选定省份后 将该省份的数据读取追加上
+            form.on('select(domicile_province_code)', function (data) {
+
+                var city = $(data.elem).parents(".layui-form-item").find(".domicile_city_code"),
+                    district = $(data.elem).parents(".layui-form-item").find(".domicile_county_code");
+                provinceText = data.value;
+
+
+                $.each(provinceList, function (i, item) {
+                    if (provinceText == item.code) {
+                        cityItem = i;
+                        return cityItem;
+                    }
+                });
+                removeEle(city);
+                removeEle(district);
+                $.each(provinceList[cityItem].cityList, function (i, item) {
+                    addEle(city, item.name, item.code);
+                })
+                form.render('select');
+            })
+
+            //选定后 将对应的数据读取追加上
+            form.on('select(domicile_city_code)', function (data) {
+                var district = $(data.elem).parents(".layui-form-item").find(".domicile_county_code");
+                cityText = data.value;
+                removeEle(district);
+                $.each(provinceList, function (i, item) {
+                    if (provinceText == item.code) {
+                        cityItem = i;
+                        return cityItem;
+                    }
+                });
+                $.each(provinceList[cityItem].cityList, function (i, item) {
+                    if (cityText == item.code) {
+                        for (var n = 0; n < item.areaList.length; n++) {
+                            addEle(district, item.areaList[n]['name'], item.areaList[n]['code']);
+                        }
+                    }
+                })
+                form.render('select');
+            })
+        })
+    </script>
+</div>
+
+
+<div class="form-group">
+    <div class="layui-form-item">
+        <label class="col-sm-2 control-label">工作地:</label>
+        <div class="col-md-6 col-sm-10" style="">
+            <div class="layui-inline"  style="width: 150px;">
+                <select class="work_province_code" lay-filter="work_province_code" lay-search
+                        lay-verify="required"
+                        name="work_province_code">
+                    <option value="{$work_province_code}">{$work_province}</option>
+                </select>
+            </div>
+            <div class="layui-inline"  style="width: 150px;">
+                <select class="work_city_code" lay-filter="work_city_code" lay-search lay-verify="required"
+                        name="work_city_code">
+                    <option value="{$work_city_code}">{$work_city}</option>
+                </select>
+            </div>
+            <div class="layui-inline"  style="width: 150px;">
+                <select class="work_county_code" lay-search lay-verify="required" name="work_county_code">
+                    <option value="{$work_county_code}">{$work_county}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <!--地区三级联动 layui-->
+    <script>
+        layui.use(['form', 'element'], function () {
+            var form = layui.form,
+                element = layui.element;
+            var provinceList;
+            $.ajax({
+                url: "{:url('getArea')}",
+                type: "GET",
+                async: false,
+                success: function (res) {
+
+                    if (res.code == 1) {
+                        provinceList = res.data;
+                    } else {
+                        layer.msg(res.msg, {icon: 7});
+                    }
+                }
+            });
+
+            var province = $(".work_province_code");
+
+
+            //初始将省份数据赋予
+            for (var i = 0; i < provinceList.length; i++) {
+                addEle(province, provinceList[i].name, provinceList[i].code);
+            }
+
+            //向select中 追加内容
+            function addEle(ele, value, code) {
+                var optionStr = "";
+                optionStr = "<option value=" + code + " >" + value + "</option>";
+                ele.append(optionStr);
+            }
+
+            //重新渲染select
+            form.render('select');
+
+            //移除select中所有项
+            function removeEle(ele) {
+                ele.find("option").remove();
+                var optionStar = "<option value=''>" + "请选择" + "</option>";
+                ele.append(optionStar);
+            }
+
+            var provinceText,
+                cityText,
+                cityItem;
+            //选定省份后 将该省份的数据读取追加上
+            form.on('select(work_province_code)', function (data) {
+
+                var city = $(data.elem).parents(".layui-form-item").find(".work_city_code"),
+                    district = $(data.elem).parents(".layui-form-item").find(".work_county_code");
+                provinceText = data.value;
+
+
+                $.each(provinceList, function (i, item) {
+                    if (provinceText == item.code) {
+                        cityItem = i;
+                        return cityItem;
+                    }
+                });
+                removeEle(city);
+                removeEle(district);
+                $.each(provinceList[cityItem].cityList, function (i, item) {
+                    addEle(city, item.name, item.code);
+                })
+                form.render('select');
+            })
+
+            //选定后 将对应的数据读取追加上
+            form.on('select(work_city_code)', function (data) {
+                var district = $(data.elem).parents(".layui-form-item").find(".work_county_code");
+                cityText = data.value;
+                removeEle(district);
+                $.each(provinceList, function (i, item) {
+                    if (provinceText == item.code) {
+                        cityItem = i;
+                        return cityItem;
+                    }
+                });
+                $.each(provinceList[cityItem].cityList, function (i, item) {
+                    if (cityText == item.code) {
+                        for (var n = 0; n < item.areaList.length; n++) {
+                            addEle(district, item.areaList[n]['name'], item.areaList[n]['code']);
+                        }
+                    }
+                })
+                form.render('select');
+            })
+        })
+    </script>
+</div>
+
+
+
+<!--下拉框-类型 (type)(type_list) 数组格式转给后台是value  展示的数组的值 -->
+<div class="form-group">
+    <label class="col-sm-2 control-label">期望结婚时间:</label>
+    <div class="layui-input-block col-md-6 col-sm-10" style="zaaaaa: 30000!important;">
+        <if condition="!empty($marry_date)">
+            <select class="form-control post-params" lay-search name="marry_date">
+                <foreach item="vo" key="key" name="marry_date_list">
+                    <option value="{$vo}"
+                    <if condition="$marry_date eq $vo ">selected</if>
+                    >{$vo}</option>
+                </foreach>
+            </select>
+            <else/>
+            <select class="form-control post-params" lay-search name="marry_date">
+                <foreach item="vo" key="key" name="marry_date_list">
+                    <option value="{$vo}">{$vo}</option>
+                </foreach>
+            </select>
+        </if>
+    </div>
+</div>
+
+
+<!--下拉框-类型 (type)(type_list) 数组格式转给后台是value  展示的数组的值 -->
+<div class="form-group">
+    <label class="col-sm-2 control-label">婚姻情况:</label>
+    <div class="layui-input-block col-md-6 col-sm-10" style="zaaaaa: 20000!important;">
+        <if condition="!empty($marriage_status)">
+            <select class="form-control post-params" lay-search name="marriage_status">
+                <foreach item="vo" key="key" name="marriage_status_list">
+                    <option value="{$vo}"
+                    <if condition="$marriage_status eq $vo ">selected</if>
+                    >{$vo}</option>
+                </foreach>
+            </select>
+            <else/>
+            <select class="form-control post-params" lay-search name="marriage_status">
+                <foreach item="vo" key="key" name="marriage_status_list">
+                    <option value="{$vo}">{$vo}</option>
+                </foreach>
+            </select>
+        </if>
+    </div>
+</div>
+
+
+<!--下拉框-类型 (gender)(固定值) 男/女 -->
+<div class="form-group">
+    <label class="col-sm-2 control-label">有无孩子:</label>
+    <div class="layui-input-block col-md-6 col-sm-10" style="zaaaaa: 10000!important;">
+        <select class="post-params" lay-search name="is_child">
+            <option value="无"
+            <if condition="$is_child eq '无' ">selected</if>
+            >无</option>
+
+            <option value="有"
+            <if condition="$is_child eq '有' ">selected</if>
+            >有</option>
+        </select>
+    </div>
+</div>
+
+
+<!--下拉框-类型 (type)(type_list) 数组格式转给后台是value  展示的数组的值 -->
+<div class="form-group">
+    <label class="col-sm-2 control-label">子女性别:</label>
+    <div class="layui-input-block col-md-6 col-sm-10" style="zaaaaa: 19000!important;">
+        <if condition="!empty($child_gender)">
+            <select class="form-control post-params" lay-search name="child_gender">
+                <foreach item="vo" key="key" name="child_gender_list">
+                    <option value="{$vo}"
+                    <if condition="$child_gender eq $vo ">selected</if>
+                    >{$vo}</option>
+                </foreach>
+            </select>
+            <else/>
+            <select class="form-control post-params" lay-search name="child_gender">
+                <foreach item="vo" key="key" name="child_gender_list">
+                    <option value="{$vo}">{$vo}</option>
+                </foreach>
+            </select>
+        </if>
+    </div>
+</div>
+
+
+<!--下拉框-类型 (type)(type_list) 数组格式转给后台是value  展示的数组的值 -->
+<div class="form-group">
+    <label class="col-sm-2 control-label">子女归属:</label>
+    <div class="layui-input-block col-md-6 col-sm-10" style="zaaaaa: 19000!important;">
+        <if condition="!empty($child_belong)">
+            <select class="form-control post-params" lay-search name="child_belong">
+                <foreach item="vo" key="key" name="child_belong_list">
+                    <option value="{$vo}"
+                    <if condition="$child_belong eq $vo ">selected</if>
+                    >{$vo}</option>
+                </foreach>
+            </select>
+            <else/>
+            <select class="form-control post-params" lay-search name="child_belong">
+                <foreach item="vo" key="key" name="child_belong_list">
+                    <option value="{$vo}">{$vo}</option>
+                </foreach>
+            </select>
+        </if>
+    </div>
+</div>
+
+
+<!--下拉框-类型 (type)(type_list) 数组格式转给后台是value  展示的数组的值 -->
+<div class="form-group">
+    <label class="col-sm-2 control-label">子女年龄:</label>
+    <div class="layui-input-block col-md-6 col-sm-10" style="zaaaaa: 19000!important;">
+        <if condition="!empty($child_age)">
+            <select class="form-control post-params" lay-search name="child_age">
+                <foreach item="vo" key="key" name="child_age_list">
+                    <option value="{$vo}"
+                    <if condition="$child_age eq $vo ">selected</if>
+                    >{$vo}</option>
+                </foreach>
+            </select>
+            <else/>
+            <select class="form-control post-params" lay-search name="child_age">
+                <foreach item="vo" key="key" name="child_age_list">
+                    <option value="{$vo}">{$vo}</option>
+                </foreach>
+            </select>
+        </if>
+    </div>
+</div>
+
+
+<!--下拉框-类型 (type)(type_list) 数组格式转给后台是value  展示的数组的值 -->
+<div class="form-group">
+    <label class="col-sm-2 control-label">父母情况:</label>
+    <div class="layui-input-block col-md-6 col-sm-10" style="zaaaaa: 19000!important;">
+        <if condition="!empty($parents_status)">
+            <select class="form-control post-params" lay-search name="parents_status">
+                <foreach item="vo" key="key" name="parents_status_list">
+                    <option value="{$vo}"
+                    <if condition="$parents_status eq $vo ">selected</if>
+                    >{$vo}</option>
+                </foreach>
+            </select>
+            <else/>
+            <select class="form-control post-params" lay-search name="parents_status">
+                <foreach item="vo" key="key" name="parents_status_list">
+                    <option value="{$vo}">{$vo}</option>
+                </foreach>
+            </select>
+        </if>
+    </div>
+</div>
+
+
+<!--下拉框-类型 (type)(type_list) 数组格式转给后台是value  展示的数组的值 -->
+<div class="form-group">
+    <label class="col-sm-2 control-label">兄弟姐妹:</label>
+    <div class="layui-input-block col-md-6 col-sm-10" style="zaaaaa: 18000!important;">
+        <if condition="!empty($sibling)">
+            <select class="form-control post-params" lay-search name="sibling">
+                <foreach item="vo" key="key" name="sibling_list">
+                    <option value="{$vo}"
+                    <if condition="$sibling eq $vo ">selected</if>
+                    >{$vo}</option>
+                </foreach>
+            </select>
+            <else/>
+            <select class="form-control post-params" lay-search name="sibling">
+                <foreach item="vo" key="key" name="sibling_list">
+                    <option value="{$vo}">{$vo}</option>
+                </foreach>
+            </select>
+        </if>
+    </div>
+</div>
+
+
+<!--下拉框-类型 (gender)(固定值) 男/女 -->
+<div class="form-group">
+    <label class="col-sm-2 control-label">是否饮酒:</label>
+    <div class="layui-input-block col-md-6 col-sm-10" style="zaaaaa: 17000!important;">
+        <select class="post-params" lay-search name="is_drink">
+            <option value="否"
+            <if condition="$is_drink eq '否' ">selected</if>
+            >否</option>
+
+            <option value="是"
+            <if condition="$is_drink eq '是' ">selected</if>
+            >是</option>
+        </select>
+    </div>
+</div>
+
+
+<!--下拉框-类型 (type)(type_list) 数组格式转给后台是value  展示的数组的值 -->
+<div class="form-group">
+    <label class="col-sm-2 control-label">婚姻情况:</label>
+    <div class="layui-input-block col-md-6 col-sm-10" style="zaaaaa: 16000!important;">
+        <if condition="!empty($marriage_status)">
+            <select class="form-control post-params" lay-search name="marriage_status">
+                <foreach item="vo" key="key" name="marriage_status_list">
+                    <option value="{$vo}"
+                    <if condition="$marriage_status eq $vo ">selected</if>
+                    >{$vo}</option>
+                </foreach>
+            </select>
+            <else/>
+            <select class="form-control post-params" lay-search name="marriage_status">
+                <foreach item="vo" key="key" name="marriage_status_list">
+                    <option value="{$vo}">{$vo}</option>
+                </foreach>
+            </select>
+        </if>
+    </div>
+</div>
+
+
+<!--layui多选框,分类列表 (checkbox)  -->
+<!--
+edit编辑
+
+      //处理分类结果值
+        if ($params['class_ids']) {
+            $class_ids           = array_keys($params['class_ids']);//提取key
+            $params['class_ids'] = $this->setParams($class_ids);
+        }
+-->
+<div class="form-group">
+    <label class="col-sm-2 control-label">养宠物吗:</label>
+    <div class="layui-input-block col-md-6 col-sm-10">
+        <foreach item="value" name="pet_list">
+            <div class="layui-col-xs3">
+                <input class="form-control post-params" name="pet[{$value}]"
+                       title="{$value}"
+                       type="checkbox"
+                <if condition="in_array($value,$pet)">
+                    checked
+                </if>
+                >
+            </div>
+        </foreach>
+    </div>
+</div>
+
+
+<!--下拉框-类型 (type)(type_list) 数组格式转给后台是value  展示的数组的值 -->
+<div class="form-group">
+    <label class="col-sm-2 control-label">休息习惯:</label>
+    <div class="layui-input-block col-md-6 col-sm-10" style="zaaaaa: 15000!important;">
+        <if condition="!empty($rest_habits)">
+            <select class="form-control post-params" lay-search name="rest_habits">
+                <foreach item="vo" key="key" name="rest_habits_list">
+                    <option value="{$vo}"
+                    <if condition="$rest_habits eq $vo ">selected</if>
+                    >{$vo}</option>
+                </foreach>
+            </select>
+            <else/>
+            <select class="form-control post-params" lay-search name="rest_habits">
+                <foreach item="vo" key="key" name="rest_habits_list">
+                    <option value="{$vo}">{$vo}</option>
+                </foreach>
+            </select>
+        </if>
+    </div>
+</div>
+
+
+<!--下拉框-类型 (type)(type_list) 数组格式转给后台是value  展示的数组的值 -->
+<div class="form-group">
+    <label class="col-sm-2 control-label">锻炼习惯:</label>
+    <div class="layui-input-block col-md-6 col-sm-10" style="zaaaaa: 14000!important;">
+        <if condition="!empty($exercise_habits)">
+            <select class="form-control post-params" lay-search name="exercise_habits">
+                <foreach item="vo" key="key" name="exercise_habits_list">
+                    <option value="{$vo}"
+                    <if condition="$exercise_habits eq $vo ">selected</if>
+                    >{$vo}</option>
+                </foreach>
+            </select>
+            <else/>
+            <select class="form-control post-params" lay-search name="exercise_habits">
+                <foreach item="vo" key="key" name="exercise_habits_list">
+                    <option value="{$vo}">{$vo}</option>
+                </foreach>
+            </select>
+        </if>
+    </div>
+</div>
+
+<div class="form-group">
+    <label class="col-sm-2 control-label">是否有房:</label>
+    <div class="layui-input-block col-md-6 col-sm-10">
+        <input type="text" name="is_room" class="form-control post-params item-left" value="{$is_room|default=''}">
+    </div>
+</div>
+<div class="form-group">
+    <label class="col-sm-2 control-label">是否有车:</label>
+    <div class="layui-input-block col-md-6 col-sm-10">
+        <input type="text" name="is_car" class="form-control post-params item-left" value="{$is_car|default=''}">
+    </div>
+</div>
+
+
+
+
+<div class="form-group">
+    <label class="col-sm-2 control-label">兴趣爱好</label>
+    <div class="layui-input-block col-md-6 col-sm-10">
+        <foreach item="value" name="hobby_list">
+            <div class="layui-col-xs3">
+                <input class="form-control post-params" name="hobby[{$value}]"
+                       title="{$value}"
+                       type="checkbox"
+                <if condition="in_array($value,$hobby)">
+                    checked
+                </if>
+                >
+            </div>
+        </foreach>
+    </div>
+</div>
+
+
+<h3 style="margin-top: 2%;margin-left: 5%;margin-bottom: 2%;color: red;">联系方式:</h3>
+
+<div class="form-group">
+    <label class="col-sm-2 control-label">父母联系方式:</label>
+    <div class="layui-input-block col-md-6 col-sm-10">
+        <input type="text" name="parents_phone" class="form-control post-params item-left"
+               value="{$parents_phone|default=''}">
+    </div>
+</div>
+<div class="form-group">
+    <label class="col-sm-2 control-label">qq:</label>
+    <div class="layui-input-block col-md-6 col-sm-10">
+        <input type="text" name="qq" class="form-control post-params item-left" value="{$qq|default=''}">
+    </div>
+</div>
+<div class="form-group">
+    <label class="col-sm-2 control-label">微信:</label>
+    <div class="layui-input-block col-md-6 col-sm-10">
+        <input type="text" name="wx" class="form-control post-params item-left" value="{$wx|default=''}">
+    </div>
+</div>
+<div class="form-group">
+    <label class="col-sm-2 control-label">微信二维码:</label>
+    <div class="layui-input-block col-md-6 col-sm-10">
+        <input type="hidden" class="form-control post-params item-left" name="wx_image" id="photo-00000039"
+               value="{$wx_image}">
+        <if condition='!empty($wx_image)'>
+            <a href="javascript:imagePreviewDialog('{:cmf_get_asset_url($wx_image)}');">
+                <img src='{:cmf_get_image_preview_url($wx_image)}' id='photo-00000039-preview'
+                     style='width: 85px;height: 80px'>
+            </a>
+            <else/>
+            <img src='/static/images/default.png' id='photo-00000039-preview' style='width: 85px;height: 80px'>
+        </if>
+        <a href="javascript:uploadOneImage('图片上传','#photo-00000039','image');">上传</a>
+        <a onclick="$('#photo-00000039-preview').attr('src','__TMPL__/public/assets/images/default-thumbnail.png');$('#photo-00000039').val('');return false;">取消图片</a>
+    </div>
+</div>
+
+<h3 style="margin-top: 2%;margin-left: 5%;margin-bottom: 2%;color: red;">家庭情况:</h3>
+
+<div class="form-group">
+    <label class="col-sm-2 control-label">家庭情况:</label>
+    <div class="layui-input-block col-md-6 col-sm-10">
+        <textarea rows="4" class="form-control post-params item-left" cols="60"
+                  name="family_status">{$family_status|default=''}</textarea>
+    </div>
+</div>
+
+<h3 style="margin-top: 2%;margin-left: 5%;margin-bottom: 2%;color: red;">自我介绍:</h3>
+
+<div class="form-group">
+    <label class="col-sm-2 control-label">自我介绍:</label>
+    <div class="layui-input-block col-md-6 col-sm-10">
+      <textarea rows="4" class="form-control post-params item-left" cols="60"
+                name="introduce">{$introduce|default=''}</textarea>
+    </div>
+</div>
+
+<if condition="$gender eq '男' ">
+    <div class="form-group">
+        <label class="col-sm-2 control-label">我的标签</label>
+        <div class="layui-input-block col-md-6 col-sm-10">
+            <foreach item="value" name="tag_male_list">
+                <div class="layui-col-xs3">
+                    <input class="form-control post-params" name="tag[{$value}]"
+                           title="{$value}"
+                           type="checkbox"
+                    <if condition="in_array($value,$tag)">
+                        checked
+                    </if>
+                    >
+                </div>
+            </foreach>
+        </div>
+    </div>
+</if>
+
+<if condition="$gender eq '女' ">
+    <div class="form-group">
+        <label class="col-sm-2 control-label">我的标签</label>
+        <div class="layui-input-block col-md-6 col-sm-10">
+            <foreach item="value" name="tag_female_list">
+                <div class="layui-col-xs3">
+                    <input class="form-control post-params" name="tag[{$value}]"
+                           title="{$value}"
+                           type="checkbox"
+                    <if condition="in_array($value,$tag)">
+                        checked
+                    </if>
+                    >
+                </div>
+            </foreach>
+        </div>
+    </div>
+</if>
+
+
+<h3 style="margin-top: 2%;margin-left: 5%;margin-bottom: 2%;color: red;">择偶要求:</h3>
+
+
+<!--下拉框-类型 (type)(type_list) 数组格式转给后台是value  展示的数组的值 -->
+<div class="form-group">
+    <label class="col-sm-2 control-label">年龄范围:</label>
+    <div class="layui-input-block col-md-6 col-sm-10" style="zaaaaa: 12000!important;">
+        <if condition="!empty($select_age)">
+            <select class="form-control post-params" lay-search name="select_age">
+                <foreach item="vo" key="key" name="select_age_list">
+                    <option value="{$vo}"
+                    <if condition="$select_age eq $vo ">selected</if>
+                    >{$vo}</option>
+                </foreach>
+            </select>
+            <else/>
+            <select class="form-control post-params" lay-search name="select_age">
+                <foreach item="vo" key="key" name="select_age_list">
+                    <option value="{$vo}">{$vo}</option>
+                </foreach>
+            </select>
+        </if>
+    </div>
+</div>
+
+
+<!--下拉框-类型 (type)(type_list) 数组格式转给后台是value  展示的数组的值 -->
+<div class="form-group">
+    <label class="col-sm-2 control-label">最低学历:</label>
+    <div class="layui-input-block col-md-6 col-sm-10" style="zaaaaa: 11000!important;">
+        <if condition="!empty($select_education)">
+            <select class="form-control post-params" lay-search name="select_education">
+                <foreach item="vo" key="key" name="select_education_list">
+                    <option value="{$vo}"
+                    <if condition="$select_education eq $vo ">selected</if>
+                    >{$vo}</option>
+                </foreach>
+            </select>
+            <else/>
+            <select class="form-control post-params" lay-search name="select_education">
+                <foreach item="vo" key="key" name="select_education_list">
+                    <option value="{$vo}">{$vo}</option>
+                </foreach>
+            </select>
+        </if>
+    </div>
+</div>
+
+<!--下拉框-类型 (type)(type_list) 数组格式转给后台是value  展示的数组的值 -->
+<div class="form-group">
+    <label class="col-sm-2 control-label">最低学历:</label>
+    <div class="layui-input-block col-md-6 col-sm-10" style="zaaaaa: 10000!important;">
+        <if condition="!empty($select_weight)">
+            <select class="form-control post-params" lay-search name="select_weight">
+                <foreach item="vo" key="key" name="select_weight_list">
+                    <option value="{$vo}"
+                    <if condition="$select_weight eq $vo ">selected</if>
+                    >{$vo}</option>
+                </foreach>
+            </select>
+            <else/>
+            <select class="form-control post-params" lay-search name="select_weight">
+                <foreach item="vo" key="key" name="select_weight_list">
+                    <option value="{$vo}">{$vo}</option>
+                </foreach>
+            </select>
+        </if>
+    </div>
+</div>
+
+<!--下拉框-类型 (type)(type_list) 数组格式转给后台是value  展示的数组的值 -->
+<div class="form-group">
+    <label class="col-sm-2 control-label">最低年收入:</label>
+    <div class="layui-input-block col-md-6 col-sm-10" style="zaaaaa: 9000!important;">
+        <if condition="!empty($select_income)">
+            <select class="form-control post-params" lay-search name="select_income">
+                <foreach item="vo" key="key" name="select_income_list">
+                    <option value="{$vo}"
+                    <if condition="$select_income eq $vo ">selected</if>
+                    >{$vo}</option>
+                </foreach>
+            </select>
+            <else/>
+            <select class="form-control post-params" lay-search name="select_income">
+                <foreach item="vo" key="key" name="select_income_list">
+                    <option value="{$vo}">{$vo}</option>
+                </foreach>
+            </select>
+        </if>
+    </div>
+</div>
+
+
+<div class="form-group">
+    <label class="col-sm-2 control-label">居住地:</label>
+    <div class="layui-input-block col-md-6 col-sm-10">
+        <input type="text" name="select_address" class="form-control post-params item-left"
+               value="{$select_address|default=''}">
+    </div>
+</div>
+
+
+<!--下拉框-类型 (type)(type_list) 数组格式转给后台是value  展示的数组的值 -->
+<div class="form-group">
+    <label class="col-sm-2 control-label">婚姻情况:</label>
+    <div class="layui-input-block col-md-6 col-sm-10" style="zaaaaa: 8000!important;">
+        <if condition="!empty($select_marriage_status)">
+            <select class="form-control post-params" lay-search name="select_marriage_status">
+                <foreach item="vo" key="key" name="select_marriage_status_list">
+                    <option value="{$vo}"
+                    <if condition="$select_marriage_status eq $vo ">selected</if>
+                    >{$vo}</option>
+                </foreach>
+            </select>
+            <else/>
+            <select class="form-control post-params" lay-search name="select_marriage_status">
+                <foreach item="vo" key="key" name="select_marriage_status_list">
+                    <option value="{$vo}">{$vo}</option>
+                </foreach>
+            </select>
+        </if>
+    </div>
+</div>
+
+
+<!--下拉框-类型 (gender)(固定值) 男/女 -->
+<div class="form-group">
+    <label class="col-sm-2 control-label">是否有车:</label>
+    <div class="layui-input-block col-md-6 col-sm-10" style="zaaaaa: 7000!important;">
+        <select class="post-params" lay-search name="select_is_car">
+            <option value="否"
+            <if condition="$select_is_car eq '否' ">selected</if>
+            >否</option>
+
+            <option value="是"
+            <if condition="$select_is_car eq '是' ">selected</if>
+            >是</option>
+        </select>
+    </div>
+</div>
+
+<!--下拉框-类型 (gender)(固定值) 男/女 -->
+<div class="form-group">
+    <label class="col-sm-2 control-label">是否有房:</label>
+    <div class="layui-input-block col-md-6 col-sm-10" style="zaaaaa: 6000!important;">
+        <select class="post-params" lay-search name="select_is_room">
+            <option value="否"
+            <if condition="$select_is_room eq '否' ">selected</if>
+            >否</option>
+
+            <option value="是"
+            <if condition="$select_is_room eq '是' ">selected</if>
+            >是</option>
+        </select>
+    </div>
+</div>
+
+
+<!--下拉框-类型 (gender)(固定值) 男/女 -->
+<div class="form-group">
+    <label class="col-sm-2 control-label">是否有房:</label>
+    <div class="layui-input-block col-md-6 col-sm-10" style="zaaaaa: 5000!important;">
+        <select class="post-params" lay-search name="select_is_child">
+            <option value="否"
+            <if condition="$select_is_child eq '否' ">selected</if>
+            >否</option>
+
+            <option value="是"
+            <if condition="$select_is_child eq '是' ">selected</if>
+            >是</option>
+        </select>
+    </div>
+</div>
+
+
+<div class="form-group">
+    <label class="col-sm-2 control-label">择偶简介:</label>
+    <div class="layui-input-block col-md-6 col-sm-10">
+          <textarea rows="4" class="form-control post-params item-left" cols="60"
+                    name="select_introduce">{$select_introduce|default=''}</textarea>
+    </div>
+</div>
+
+
+
+<div class="form-group">
+    <label class="col-sm-2 control-label">相册:</label>
+    <div class="layui-input-block col-md-6 col-sm-10">
+        <if condition="!empty($images)">
+            <ul class="pic-list list-unstyled form-inline" id="photos-goods-0000001">
+                <foreach item="vo" name="images">
+                    <li id="saved-goods-image-0000001-{$key}" style="margin-bottom: 5px;">
+                        <input id="photo-goods-0000001-{$key}" name="images[]" type="hidden" value="{$vo}">
+                        <img id="photo-goods-0000001-{$key}-preview" onclick="parent.imagePreviewDialog(this.src);"
+                             src="{:cmf_get_image_preview_url($vo)}" width="35">
+                        <a href="javascript:uploadOneImage('图片上传','#photo-goods-0000001-{$key}');">替换</a>
+                        <a href="javascript:(function(){$('#saved-goods-image-0000001-{$key}').remove();})();">移除</a>
+                    </li>
+                </foreach>
+            </ul>
+            <else/>
+            <ul class="pic-list list-unstyled form-inline" id="photos-goods-0000001">
+                <li id="saved-goods-image-0000001" style="margin-bottom: 5px;">
+                </li>
+            </ul>
+        </if>
+        <a class="btn btn-sm btn-default"
+           href="javascript:uploadMultiImage('图片上传','#photos-goods-0000001','photos-goods-item-tpl-0000001');">选择图片</a>
+        <script id="photos-goods-item-tpl-0000001" type="text/html">
+            <li id="saved-goods-image-0000001-{id}" style="margin-bottom: 5px;">
+                <input id="photo-goods-0000001-{id}" type="hidden" name="images[]" value="{filepath}">
+                <img id="photo-goods-0000001-{id}-preview" src="{url}" width="35"
+                     onclick="imagePreviewDialog(this.src);">
+                <a href="javascript:uploadOneImage('图片上传','#photo-goods-0000001-{id}');">替换</a>
+                <a href="javascript:(function(){$('#saved-goods-image-0000001-{id}').remove();})();">移除</a>
+            </li>
+        </script>
+    </div>
+</div>

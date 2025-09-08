@@ -1,0 +1,94 @@
+<div class="form-group">
+    <label class="col-sm-2 control-label">昵称:</label>
+    <div class="layui-input-block col-md-6 col-sm-10">
+        <input type="text" name="nickname" class="form-control post-params item-left" value="{$nickname|default=''}">
+    </div>
+</div>
+
+<div class="form-group">
+    <label class="col-sm-2 control-label">手机号:</label>
+    <div class="layui-input-block col-md-6 col-sm-10">
+        <input type="text" name="phone" class="form-control post-params item-left" value="{$phone|default=''}">
+    </div>
+</div>
+
+<div class="form-group">
+    <label class="col-sm-2 control-label">头像</label>
+    <div class="layui-input-block col-md-6 col-sm-10">
+        <input id="photo-1000000" type="hidden" class="form-control post-params item-left" name="avatar"
+               value="{$avatar|default=''}">
+        <if condition="!empty($avatar)">
+            <a href="javascript:imagePreviewDialog('{:cmf_get_image_preview_url($avatar)}');">
+                <img src="{:cmf_get_image_preview_url($avatar)}"
+                     id="photo-1000000-preview" style="width: 80px;height: 80px">
+            </a>
+            <else/>
+            <img src="/static/images/default.png"
+                 id="photo-1000000-preview" style="width: 80px;height: 80px">
+        </if>
+        <a href="javascript:uploadOneImage('图片上传','#photo-1000000');">上传</a>
+        <a onclick="$('#photo-1000000-preview').attr('src','__TMPL__/public/assets/images/default-thumbnail.png');$('#photo-1000000').val('');return false;">取消图片</a>
+    </div>
+</div>
+
+<div class="form-group">
+    <label class="col-sm-2 control-label">微信二维码:</label>
+    <div class="layui-input-block col-md-6 col-sm-10">
+        <input type="hidden" class="form-control post-params item-left" name="wx_image" id="photo-0000006"
+               value="{$wx_image}">
+        <if condition='!empty($wx_image)'>
+            <a href="javascript:imagePreviewDialog('{:cmf_get_asset_url($wx_image)}');">
+                <img src='{:cmf_get_image_preview_url($wx_image)}' id='photo-0000006-preview'
+                     style='width: 85px;height: 80px'>
+            </a>
+            <else/>
+            <img src='/static/images/default.png' id='photo-0000006-preview' style='width: 85px;height: 80px'>
+        </if>
+        <a href="javascript:uploadOneImage('图片上传','#photo-0000006','image');">上传</a>
+        <a onclick="$('#photo-0000006-preview').attr('src','__TMPL__/public/assets/images/default-thumbnail.png');$('#photo-0000006').val('');return false;">取消图片</a>
+    </div>
+</div>
+
+<div class="form-group">
+    <label class="col-sm-2 control-label">年数:</label>
+    <div class="layui-input-block col-md-6 col-sm-10">
+        <input type="text" name="year" class="form-control post-params item-left" value="{$year|default=''}">
+    </div>
+</div>
+<div class="form-group">
+    <label class="col-sm-2 control-label">服务人数:</label>
+    <div class="layui-input-block col-md-6 col-sm-10">
+        <input type="text" name="number" class="form-control post-params item-left" value="{$number|default=''}">
+    </div>
+</div>
+
+
+<div class="form-group">
+    <label class="col-sm-2 control-label">到期时间:</label>
+    <div class="layui-input-block col-md-6 col-sm-10">
+        <if condition='$end_time'>
+            <input class="form-control post-params item-left js-date" name="end_time" required type="text"
+                   value="{$end_time|date='Y-m-d'}">
+            <else/>
+            <input class="form-control post-params item-left js-date" name="end_time" required type="text">
+        </if>
+    </div>
+</div>
+
+
+<if condition='empty($id)'>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">账号:</label>
+        <div class="layui-input-block col-md-6 col-sm-10">
+            <input type="text" name="account_name" class="form-control post-params item-left"
+                   value="{$account_name|default=''}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">密码:</label>
+        <div class="layui-input-block col-md-6 col-sm-10">
+            <input type="text" name="pass" class="form-control post-params item-left" value="{$pass|default=''}">
+        </div>
+    </div>
+</if>
+

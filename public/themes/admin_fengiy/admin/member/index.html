@@ -1,0 +1,386 @@
+<include file="public@header"/></head>
+<body>
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="{:url('index',array('params'=>$params))}">用户管理</a></li>
+        <li><a href="{:url('add',array('params'=>$params))}">添加</a></li>
+    </ul>
+
+    <form class="well form-inline margin-top-20 layui-form ajax-form w-form-search" method="post" autocomplete="off"
+          action="{:url('index')}">
+        关键字：
+        <div class="form-group layui-form">
+            <div class="layui-form-item" style="margin-bottom: 0 !important;">
+                <div class="col-md-12">
+                    <div class="layui-inline">
+                        <input type="text" class="form-control" name="keyword" style="width: 180px;"
+                               value="{:input('request.keyword/s','')}" placeholder="请输关键字搜索">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <if condition="empty($admin_recommend_id) ">
+            引荐人:
+            <div class="form-group">
+                <div class="layui-form-item">
+                    <div class="col-md-6 col-sm-10" style="z-index: 2000;display: flex;margin-top: 10px;width: 180px;">
+                        <select name="recommend_id" lay-search>
+                            <option value=""
+                            <if condition="$recommend_id eq '' ">selected</if>
+                            >暂不选择</option>
+
+                            <foreach name="recommend_list" key="key" item="vo">
+                                <option value="{$vo.id}"
+                                <if condition="$recommend_id eq $vo.id ">selected</if>
+                                > {$vo.invite_code}</option>
+                            </foreach>
+
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </if>
+
+
+        会员等级:
+        <div class="form-group">
+            <div class="layui-form-item">
+                <div class="col-md-6 col-sm-10" style="z-index: 2000;display: flex;margin-top: 10px;width: 180px;">
+                    <select name="vip_id" lay-search>
+                        <option value=""
+                        <if condition="$vip_id eq '' ">selected</if>
+                        >暂不选择</option>
+
+                        <foreach name="vip_list" key="key" item="vo">
+                            <option value="{$vo.id}"
+                            <if condition="$vip_id eq $vo.id ">selected</if>
+                            > {$vo.name}</option>
+                        </foreach>
+
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        工作地：
+        <div class="form-group layui-form">
+            <div class="layui-form-item" style="margin-bottom: 0 !important;">
+                <div class="col-md-12">
+                    <div class="layui-inline">
+                        <input type="text" class="form-control" name="work_address" style="width: 180px;"
+                               value="{:input('request.work_address/s','')}" placeholder="请输工作地">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        性别：
+        <div class="form-group">
+            <div class="layui-form-item">
+                <div class="col-md-6 col-sm-10" style="z-index: 2000;display: flex;margin-top: 10px;width: 180px;">
+                    <select name="gender" lay-search>
+                        <option value=""
+                        <if condition="$gender eq '' ">selected</if>
+                        >暂不选择</option>
+
+
+                        <option value="男"
+                        <if condition="$gender eq '男' ">selected</if>
+                        >男</option>
+
+                        <option value="女"
+                        <if condition="$gender eq '女' ">selected</if>
+                        >女</option>
+
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" class="layui-btn" style="margin-left: 10px">搜索</button>
+        <!--<a type="button" class="layui-btn layui-bg-blue ajax-export" href="javascript:;">导出</a>-->
+        <a class="layui-btn layui-bg-red" href="{:url('index',array('params'=>$params))}">清空</a>
+        <input type="hidden" name="is_export" class="is_export" value="0">
+
+
+    </form>
+
+
+    <form class="js-ajax-form" method="post" autocomplete="off">
+
+
+        <table class="table table-hover table-bordered">
+            <thead>
+            <tr>
+                <th style="width: 60px">ID</th>
+                <th style="width: 60px">用户信息</th>
+                <th style="width: 60px">手机号</th>
+                <th style="width: 60px">爱心</th>
+                <th style="width: 60px">性别</th>
+                <th style="width: 60px">出生日期</th>
+                <if condition="empty($admin_recommend_id) && empty($admin_matchmaker_id)">
+                    <th style="width: 120px">平台认证/交往中/平台推荐</th>
+                </if>
+                <th style="width: 60px">引荐人</th>
+                <th style="width: 60px">状态</th>
+                <th style="width: 60px">会员等级</th>
+                <th style="width: 60px">到期时间</th>
+                <th style="width: 60px">创建时间</th>
+
+                <th style="width: 160px">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <foreach name="list" item="vo">
+                <tr>
+                    <td>{$vo.id}</td>
+                    <td>
+                        <div>
+                            <if condition="!empty($vo['avatar'])">
+                                <a href="javascript:imagePreviewDialog('{:cmf_get_image_preview_url($vo.avatar)}');">
+                                    <img src="{:cmf_get_image_preview_url($vo.avatar)}"
+                                         style="width:30px;height:30px;border-radius:30px;">
+                                </a>
+                            </if>
+                            <span ondblclick="copyContent('{$vo.openid}')">{$vo.nickname}</span>
+                        </div>
+                    </td>
+                    <td>
+                        <if condition="!empty($admin_matchmaker_id)">
+                            <php>$encryptedPhone =!empty($vo['phone'])? (strlen($vo['phone']) > 7? substr($vo['phone'],
+                                0, 3).'****'.substr($vo['phone'], -4) : $vo['phone']) : '';
+                            </php>
+                            {$encryptedPhone}
+                            <else/>
+                            {$vo.phone}
+                        </if>
+                    </td>
+                    <td>{$vo.balance}</td>
+                    <td>{$vo.gender}</td>
+                    <td>{$vo.birth}</td>
+                    <if condition="empty($admin_recommend_id) && empty($admin_matchmaker_id)">
+                        <td>
+                            <div class="layui-form">
+                                <input type="checkbox" lay-skin="switch" lay-text="已认证|未认证" lay-filter="is_platform"
+                                       name="is_platform"
+                                       value="{$vo.id}"
+                                <if condition="$vo.is_platform == 1">checked</if>
+                                >
+                                <input type="checkbox" lay-skin="switch" lay-text="交往中|未交往" lay-filter="is_contact"
+                                       name="is_contact"
+                                       value="{$vo.id}"
+                                <if condition="$vo.is_contact == 1">checked</if>
+                                >
+                                <input type="checkbox" lay-skin="switch" lay-text="已推荐|未推荐" lay-filter="is_index"
+                                       name="is_index"
+                                       value="{$vo.id}"
+                                <if condition="$vo.is_index == 1">checked</if>
+                                >
+                            </div>
+                        </td>
+                    </if>
+                    <td>{$vo.p_invite_code}</td>
+                    <td>{$vo.status_name}</td>
+                    <td>
+                        <if condition="empty($admin_recommend_id) && empty($admin_matchmaker_id)">
+                            <a class="layui-btn layui-btn-primary layui-border-green layui-btn-xs"
+                               href="javascript:parent.openIframeLayer('{:url('update_vip',array('id'=>$vo.id))}','',{ area: ['75%', '90%'],move:'.layui-layer-title'});"
+                            >{$vo.vip_name}</a>
+                            <else/>
+                            {$vo.vip_name}
+                        </if>
+                    </td>
+                    <td>
+                        <if condition="$vo.end_time">
+                            {$vo.end_time|date='Y-m-d'}
+                        </if>
+                    </td>
+                    <td>{$vo.create_time|date='Y-m-d H:i:s'}</td>
+
+                    <td>
+                        <!--                        <if condition="empty($admin_recommend_id) && empty($admin_matchmaker_id) && $vo.is_platform != 1">-->
+                        <!--                            <a class="layui-btn layui-btn-primary layui-border-green layui-btn-xs"-->
+                        <!--                               href="javascript:parent.openIframeLayer('{:url('edit',array('id'=>$vo.id))}','',{ area: ['75%', '90%'],move:'.layui-layer-title'});"-->
+                        <!--                            >编辑</a>-->
+                        <!--                        </if>-->
+
+
+                        <!--引荐人可以编辑-->
+                        <if condition="empty($admin_matchmaker_id) && $vo.is_platform != 1">
+                            <a class="layui-btn layui-btn-primary layui-border-green layui-btn-xs"
+                               href="javascript:parent.openIframeLayer('{:url('edit',array('id'=>$vo.id))}','',{ area: ['75%', '90%'],move:'.layui-layer-title'});"
+                            >编辑</a>
+                        </if>
+
+
+                        <if condition="$admin_matchmaker_id || $admin_recommend_id">
+                            <a class="layui-btn layui-btn-primary layui-border-blue layui-btn-xs"
+                               href="javascript:parent.openIframeLayer('{:url('find',array('id'=>$vo.id))}','查看',{ area: ['65%', '85%'],move:'.layui-layer-title'});"
+                            >查看</a>
+                        </if>
+
+
+                        <if condition="empty($admin_recommend_id) && empty($admin_matchmaker_id)">
+                            <a class="layui-btn layui-btn-primary layui-border-red layui-btn-xs js-ajax-delete"
+                               href="{:url('delete',array('id'=>$vo.id,'params'=>$params))}">删除</a>
+                        </if>
+
+                        <if condition="empty($admin_recommend_id) && empty($admin_matchmaker_id)">
+                            <a class="layui-btn layui-btn-primary layui-border-blue layui-btn-xs"
+                               href="javascript:parent.openIframeLayer('{:url('operate',array('id'=>$vo.id))}','操作',{ area: ['45%', '65%'],move:'.layui-layer-title'});"
+                            >操作</a>
+                        </if>
+
+
+                        <if condition="empty($admin_matchmaker_id)">
+                            <a class="layui-btn layui-btn-primary layui-border-orange layui-btn-xs"
+                               href="javascript:parent.openIframeLayer('{:url('log',array('user_id'=>$vo.id))}','记录',{ area: ['65%', '85%'],move:'.layui-layer-title'});"
+                            >记录</a>
+                        </if>
+
+
+                        <!--                        <a class="layui-btn layui-btn-primary layui-border-purple layui-btn-xs"-->
+                        <!--                           href="javascript:parent.openIframeLayer('{:url('children',array('pid'=>$vo.id))}','关系',{ area: ['65%', '85%'],move:'.layui-layer-title'});"-->
+                        <!--                        >关系</a>-->
+                        <if condition="empty($admin_matchmaker_id)">
+                            <a class="layui-btn layui-btn-primary layui-border-purple layui-btn-xs"
+                               href="javascript:parent.openIframeLayer('{:url('member_authentication/index',array('user_id'=>$vo.id))}','认证管理',{ area: ['65%', '85%'],move:'.layui-layer-title'});"
+                            >认证管理</a>
+                        </if>
+
+                        <if condition="empty($admin_matchmaker_id)">
+                            <!--通过无页面+拒绝窗口-->
+                            <if condition="$vo.status == 1">
+                                <a class="layui-btn layui-btn-primary layui-border-green layui-btn-xs js-ajax-dialog-btn"
+                                   data-msg="确认同意？"
+                                   href="{:url('audit_post',['id'=>$vo.id,'status'=>2])}">同意</a>
+                                <a class="layui-btn layui-btn-primary layui-border-red layui-btn-xs"
+                                   href="javascript:parent.openIframeLayer('{:url('refuse',['id'=>$vo.id,'status'=>3])}','[{$vo.name}]拒绝',{ area: ['65%', '85%'],move:'.layui-layer-title'});"
+                                >拒绝</a>
+                            </if>
+                        </if>
+
+                    </td>
+                </tr>
+            </foreach>
+            </tbody>
+        </table>
+    </form>
+
+    <div class="pagination">{$page|default=''}</div>
+</div>
+<script src="__STATIC__/js/admin.js"></script>
+</body>
+</html>
+
+<script>
+    layui.use(['layer', 'form', 'slider'], function () {
+        var layer = layui.layer, form = layui.form;
+
+        form.on('switch(is_index)', function (data) {
+            var id = data.value;
+            var is_index = 2;//未选中状态值
+            if (this.checked) {
+                is_index = 1;//选中状态值
+            }
+            $.ajax({
+                url: "{:url('batch_post')}",
+                type: "POST",
+                data: {id: id, is_index: is_index},
+                success: function (res) {
+                    //console.log(res);
+                    if (res.code == 1) {
+                        layer.msg(res.msg, {icon: 1});
+                    } else {
+                        layer.msg(res.msg, {icon: 7});
+                    }
+                }
+            });
+        });
+
+
+        form.on('switch(is_contact)', function (data) {
+            var id = data.value;
+            var is_contact = 2;//未选中状态值
+            if (this.checked) {
+                is_contact = 1;//选中状态值
+            }
+            $.ajax({
+                url: "{:url('batch_post')}",
+                type: "POST",
+                data: {id: id, is_contact: is_contact},
+                success: function (res) {
+                    //console.log(res);
+                    if (res.code == 1) {
+                        layer.msg(res.msg, {icon: 1});
+                    } else {
+                        layer.msg(res.msg, {icon: 7});
+                    }
+                }
+            });
+        });
+
+
+        form.on('switch(is_platform)', function (data) {
+            var id = data.value;
+            var is_platform = 2;//未选中状态值
+            if (this.checked) {
+                is_platform = 1;//选中状态值
+            }
+            $.ajax({
+                url: "{:url('batch_post')}",
+                type: "POST",
+                data: {id: id, is_platform: is_platform},
+                success: function (res) {
+                    //console.log(res);
+                    if (res.code == 1) {
+                        layer.msg(res.msg, {icon: 1});
+                    } else {
+                        layer.msg(res.msg, {icon: 7});
+                    }
+                }
+            });
+        });
+
+
+    });
+</script>
+
+
+<script>
+    //复制变量
+    function copyContent(clickContent) {
+        //获取要赋值的input的元素
+        var inputElement = document.getElementById("copy_content");
+        //给input框赋值
+        // clickContent = clickContent.replace(/\s+/g, '');
+        inputElement.value = clickContent;
+        //选中input框的内容
+        inputElement.select();
+        // 执行浏览器复制命令
+        document.execCommand("Copy");
+        //提示已复制
+        layer.msg(clickContent + '已复制', {icon: 6, time: 700});
+    }
+</script>
+
+
+<script>
+    //导出
+    $(".ajax-export").click(function () {
+        //alert("正在开发中...");
+        $(".is_export").val(1);
+        $(".ajax-form").submit();
+        $(".is_export").val(0);
+        return false;
+    });
+
+    //搜索
+    $(".bt_search").click(function () {
+        $(".w-form-search").removeAttr('action');
+        $(".w-form-search").attr('action', "/index.html");
+        $(".w-form-search").submit();
+    });
+</script>

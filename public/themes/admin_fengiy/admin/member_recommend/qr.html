@@ -1,0 +1,21 @@
+<include file="public@header"/>
+
+
+</head>
+<body>
+<div class="wrap js-check-wrap">
+
+    <if condition="!empty($qr_image)">
+        <div style="text-align: center;">
+            <img src="{:cmf_get_image_preview_url($qr_image)}" style="width: 300px;height: 300px;">
+            <p style="font-size: 20px;">{$invite_code}</p>
+        </div>
+    </if>
+
+</div>
+<script src="__STATIC__/js/admin.js"></script>
+</body>
+</html>
+
+
+

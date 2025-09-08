@@ -1,0 +1,736 @@
+ <include file="public@header"/>
+<style>
+    textarea {
+        border: 0;
+        outline: none;
+        background-color: rgba(0, 0, 0, 0);
+    }
+
+    input {
+        border: 0;
+        outline: none;
+        background-color: rgba(0, 0, 0, 0);
+    }
+
+    .col-md-6 {
+        margin-top: 7px;
+    }
+</style>
+
+</head>
+<body>
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="{:url('find',['id'=>$id,'params'=>$params])}">查看</a></li>
+    </ul>
+    <form method="post" class="form-horizontal js-ajax-form margin-top-20 layui-form" autocomplete="off"
+          action="{:url('edit_post',['id'=>$id,'params'=>$params])}">
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">状态:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$status_name|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">手机号:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$phone|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">openid:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$openid|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">上级码:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$p_invite_code|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">昵称:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$nickname|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">头像:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$avatar|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">出生日期:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$birth|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">属相:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$genus|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">学历:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$education|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">性别:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$gender|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">身高:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$height|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">体重:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$weight|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">民族:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$nation|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">工作行业:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$industry|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">职业:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$occupation|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">收入(年):</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$income|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">户籍地-省:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$domicile_province|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">户籍地-市:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$domicile_city|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">工作地-省:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$work_province|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">工作地-市:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$work_city|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">期望结婚时间:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$marry_date|default=''}
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">婚姻情况:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$marriage_status|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">有无孩子:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$is_child|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">子女性别:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$child_gender|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">子女归属:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$child_belong|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">子女年龄:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$child_age|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">父母情况:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$parents_status|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">兄弟姐妹:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$sibling|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">是否饮酒:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$is_drink|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">养宠物吗:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$pet|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">休息习惯:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$rest_habits|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">锻炼习惯:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$exercise_habits|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">是否有房:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$is_room|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">是否有车:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$is_car|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">兴趣爱好:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$hobby|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">父母联系方式:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$parents_phone|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">qq:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$qq|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">微信:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$wx|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">微信二维码:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                <if condition='!empty($wx_image)'>
+<a href="javascript:imagePreviewDialog('{:cmf_get_asset_url($wx_image)}');">
+<img src='{:cmf_get_asset_url($wx_image)}' style='width: 35px;height: 35px'>
+</a>
+<else/>
+暂无上传
+</if>
+
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">家庭情况:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$family_status|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">自我介绍:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                            <textarea rows="4" class="form-control post-paramsitem-left" cols="60"
+                                  name="introduce">{$introduce|default=''}</textarea>
+                        
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">年龄范围:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$select_age|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">最低学历:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$select_education|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">身高范围:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$select_height|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">体重范围:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$select_weight|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">最低年收入:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$select_income|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">居住地:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$select_address|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">婚姻情况:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$select_marriage_status|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">是否有车:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$select_is_car|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">是否有房:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$select_is_room|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">是否接收带娃:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$select_is_child|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">择偶简介:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$select_introduce|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">我的相册:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$images|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">我的视频:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                <if condition='!empty($video)'>
+<a href="{:cmf_get_file_download_url($video)}"
+										target="_blank">下载</a>
+</a>
+<else/>
+暂无上传
+</if>
+
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">是否离异:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$is_divorce_name|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">密码:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$pass|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">余额:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$balance|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">积分:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$point|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">登录ip地址:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$ip|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">登录城市:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$login_city|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">上级:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$pid|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">拒绝理由:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$refuse|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">会员:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$is_vip_name|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">会员等级:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$vip_id|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">会员到期时间:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$end_time|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">最后登录时间:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$login_time|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">通过时间:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$pass_time|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+            <div class="form-group">
+                <label class="col-sm-2 control-label">拒绝时间:</label>
+                <div class="layui-input-block col-md-6 col-sm-10">
+                                                {$refuse_time|default=''}
+                    
+                </div>
+            </div>
+
+
+        
+
+        <!-- 主键id -->
+        <input type="text" name="id" value="{$id}" class="form-control post-params item-left" style="display: none">
+
+
+    </form>
+
+</div>
+<script src="__STATIC__/js/admin.js"></script>
+</body>
+</html>
+
+
+

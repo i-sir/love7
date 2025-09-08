@@ -1,0 +1,284 @@
+<include file="public@header"/>
+
+</head>
+<body>
+<div class="wrap js-check-wrap">
+
+
+    <!--总统计-->
+    <div class="layui-row layui-col-space20">
+        <div class="layui-col-xs3">
+            <div class="panel panel-default" style="margin-bottom: 0;">
+                <div class="panel-body text-center">
+                    <i style="font-size: 24px; color: #69C0FF;">{$member_total|default='0'}</i>
+                    <div class="margin-top-10">平台用户</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-col-xs3">
+            <div class="panel panel-default" style="margin-bottom: 0;">
+                <div class="panel-body text-center">
+                    <i style="font-size: 24px; color: #69C0FF;">{$recommend_total|default='0'}</i>
+                    <div class="margin-top-10">引荐人</div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="layui-col-xs3">
+            <div class="panel panel-default" style="margin-bottom: 0;">
+                <div class="panel-body text-center" style="margin-bottom: 0;">
+                    <i style="font-size: 24px; color: #5CDBD3;">{$shop_total|default='0'}</i>
+                    <div class="margin-top-10">店铺</div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="layui-col-xs3">
+            <div class="panel panel-default" style="margin-bottom: 0;">
+                <div class="panel-body text-center" style="margin-bottom: 0;">
+                    <i style="font-size: 24px; color: #507400;">{$matchmaker_total|default='0'}</i>
+                    <div class="margin-top-10">红娘</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="layui-row">
+        <div class="layui-col-xs3" id="proportion_data" style="height: 350px;width: 33%;margin-top: 2%;"></div>
+        <div class="layui-col-xs3" id="vip_data" style="height: 350px;width: 33%;margin-top: 2%;"></div>
+        <div class="layui-col-xs3" id="shop_data" style="height: 350px;width: 33%;margin-top: 2%;"></div>
+    </div>
+
+
+    <div style="text-align: center;margin-top: 4%;font-size: 25px;">
+        用户注册增长
+        <!--        <a href="{:url('excel/technician_frequency_export')}" Target="_blank"-->
+        <!--           style="color: red; text-decoration: none;cursor: pointer;">用户</a>-->
+    </div>
+    <div id="user" style="height: 450px;"></div>
+
+
+
+    <!--    <div style="text-align: center;margin-top: 4%;color: red;font-size: 25px;">-->
+    <!--        <a href="{:url('excel/repurchase_rate_export')}" Target="_blank"-->
+    <!--           style="color: red; text-decoration: none;cursor: pointer;">技师复购排行</a>-->
+    <!--    </div>-->
+    <!--    <div id="add_order_repurchase_technician" style="height: 500px;"></div>-->
+
+
+
+    <!--    <div style="text-align: center;margin-top: 4%;color: red;font-size: 25px;">-->
+    <!--        <a href="{:url('excel/project_export')}" Target="_blank"-->
+    <!--           style="color: red; text-decoration: none;cursor: pointer;">项目下单排行</a>-->
+    <!--    </div>-->
+    <!--    <div id="project" style="height: 500px;"></div>-->
+
+
+
+</div>
+<script src="__STATIC__/js/admin.js"></script>
+<script src="__TMPL__/public/assets/simpleboot3/js/adminindex.js"></script>
+<script src="__TMPL__/public/assets/js/echarts.js"></script>
+<script src="__TMPL__/public/assets/simpleboot3/js/indexnum.js"></script>
+<script type="text/javascript" src="https://registry.npmmirror.com/echarts/5.5.1/files/dist/echarts.min.js"></script>
+<hook name="admin_before_body_end"/>
+<script type="text/javascript">
+    //图表
+    $(function () {
+        //订单数据量趋势
+        orderChart([10, 11, 13, 11, 12, 12, 9], [1, 2, 2, 5, 3, 2, 0]);
+        //用户数据量趋势
+        userChart([820, 932, 901, 934, 1290, 1330, 1320]);
+    })
+</script>
+</body>
+</html>
+
+
+<!--饼图,男女比例-->
+<script type="text/javascript">
+    var dom = document.getElementById('proportion_data');
+    var myChart = echarts.init(dom, null, {
+        renderer: 'canvas',
+        useDirtyRect: false
+    });
+    var app = {};
+    var option;
+
+    var proportion_data = {$proportion_data};
+
+    option = {
+        title: {
+            text: '男女比例',
+            left: 'center'
+        },
+        tooltip: {
+            trigger: 'item'
+        },
+        // legend: {
+        //     orient: 'vertical',
+        //     left: 'left'
+        // },
+        series: [
+            {
+                type: 'pie',
+                radius: '50%',
+                data: proportion_data,
+                emphasis: {
+                    itemStyle: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    }
+                }
+            }
+        ]
+    };
+
+    if (option && typeof option === 'object') {
+        myChart.setOption(option);
+    }
+
+    window.addEventListener('resize', myChart.resize);
+</script>
+
+<!--饼图,会员比例-->
+<script type="text/javascript">
+    var dom = document.getElementById('vip_data');
+    var myChart = echarts.init(dom, null, {
+        renderer: 'canvas',
+        useDirtyRect: false
+    });
+    var app = {};
+    var option;
+
+    var vip_data = {$vip_data};
+
+    option = {
+        title: {
+            text: '会员比例',
+            left: 'center'
+        },
+        tooltip: {
+            trigger: 'item'
+        },
+        // legend: {
+        //     orient: 'vertical',
+        //     left: 'left'
+        // },
+        series: [
+            {
+                type: 'pie',
+                radius: '50%',
+                data: vip_data,
+                emphasis: {
+                    itemStyle: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    }
+                }
+            }
+        ]
+    };
+
+    if (option && typeof option === 'object') {
+        myChart.setOption(option);
+    }
+
+    window.addEventListener('resize', myChart.resize);
+</script>
+
+<!--饼图,店铺充值管理费-->
+<script type="text/javascript">
+    var dom = document.getElementById('shop_data');
+    var myChart = echarts.init(dom, null, {
+        renderer: 'canvas',
+        useDirtyRect: false
+    });
+    var app = {};
+    var option;
+
+    var shop_data = {$shop_data};
+
+    option = {
+        title: {
+            text: '店铺比例',
+            left: 'center'
+        },
+        tooltip: {
+            trigger: 'item'
+        },
+        // legend: {
+        //     orient: 'vertical',
+        //     left: 'left'
+        // },
+        series: [
+            {
+                type: 'pie',
+                radius: '50%',
+                data: shop_data,
+                emphasis: {
+                    itemStyle: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    }
+                }
+            }
+        ]
+    };
+
+    if (option && typeof option === 'object') {
+        myChart.setOption(option);
+    }
+
+    window.addEventListener('resize', myChart.resize);
+</script>
+
+<!--柱状图,注册用户-->
+<script type="text/javascript">
+    var dom = document.getElementById('user');
+    var myChart = echarts.init(dom, null, {
+        renderer: 'canvas',
+        useDirtyRect: false
+    });
+    var app = {};
+
+    var xAxis_data = {$xAxis_data};
+    var series_data = {$series_data};
+
+    var option;
+
+    option = {
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: 'shadow'
+            }
+        },
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+        xAxis: xAxis_data,
+        yAxis: [
+            {
+                type: 'value'
+            }
+        ],
+        series: series_data
+    };
+
+    if (option && typeof option === 'object') {
+        myChart.setOption(option);
+    }
+
+    window.addEventListener('resize', myChart.resize);
+</script>
