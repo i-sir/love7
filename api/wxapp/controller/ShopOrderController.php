@@ -936,7 +936,7 @@ class ShopOrderController extends AuthController
         if ($params['id']) $where[] = ['id', '=', $params['id']];
         if ($params['order_num']) $where[] = ['order_num', '=', $params['order_num']];
 
-        //取消订单
+        //取消订单.
         $order_info = $ShopOrderModel->where($where)->find();
         if (empty($order_info)) $this->error('暂无数据!');
         if (!in_array($order_info['status'], [1, 2])) $this->error('非法操作!!');

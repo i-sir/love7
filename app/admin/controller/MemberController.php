@@ -573,7 +573,7 @@ class MemberController extends AdminBaseController
     }
 
 
-    public function children()
+    public function children00()
     {
         $params     = $this->request->param();
         $MemberInit = new \init\MemberInit();//会员管理
@@ -700,6 +700,71 @@ class MemberController extends AdminBaseController
 
         $Excel = new ExcelController();
         $Excel->excelExports($result, $headArrValue, ["fileName" => "用户管理"]);
+    }
+
+
+
+    //查询下级列表
+    public function children()
+    {
+        $params     = $this->request->param();
+        $MemberInit = new \init\MemberInit();//会员管理
+
+        $where = [];
+        if ($params['pid']) {
+            $where[] = ['pid', '=', $params['pid']];
+            $this->assign("pid", $params['pid']);
+        }
+
+        $params['InterfaceType'] = 'admin';//身份类型,后台
+        $result                  = $MemberInit->get_list_paginate($where, $params);
+
+
+        $this->assign("list", $result);
+        $this->assign('page', $result->render());//单独提取分页出来
+
+
+        return $this->fetch();
+    }
+
+
+
+
+    //会员关系图
+    public function children_tree()
+    {
+        return $this->fetch();
+    }
+
+
+    //会员关系图 用户数据
+    public function get_user_list()
+    {
+        $MemberModel = new \initmodel\MemberModel();//用户管理
+        $params      = $this->request->param();
+
+        //条件
+        $map = [];
+        if (empty($params['nickname']) && empty($params['phone'])) $map[] = ['pid', '=', $params['pid'] ?? 0];
+        if (isset($params['nickname']) && $params['nickname']) $map[] = ['nickname', 'like', "%{$params['nickname']}%"];
+        if (isset($params['phone']) && $params['phone']) $map[] = ['phone', '=', $params['phone']];
+
+        $result = $MemberModel->where($map)
+            ->field('id,nickname,avatar,phone,create_time')
+            ->order('id')
+            ->select()
+            ->each(function ($item, $key) use ($MemberModel) {
+
+
+                //判断是否有子级
+                $item['isLeaf'] = true;
+                if ($MemberModel->where('pid', $item['id'])->count()) $item['isLeaf'] = false;
+
+                return $item;
+            });
+
+
+        $this->success("请求成功", '', $result);
     }
 
 

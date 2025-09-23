@@ -28,6 +28,12 @@
     <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     <style>
+        /* 针对 Layui 或原生 tooltip 的提示框内容容器 */
+        .tooltip-inner {
+            max-width: 350px !important; /* 最大宽度，超出换行 */
+            width: auto; /* 自适应内容宽度（不超过 max-width） */
+            white-space: normal; /* 允许换行（默认是 nowrap，不换行） */
+        }
         form .input-order {
             margin-bottom: 0px;
             padding: 0 2px;
@@ -68,6 +74,10 @@
         }
         .layui-btn + .layui-btn {
             margin-left: 1px;
+        }
+        .img-rounded {
+            border-radius: 4px;
+            overflow: hidden;
         }
     </style>
 

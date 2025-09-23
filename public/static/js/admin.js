@@ -904,8 +904,9 @@ function openMapDialog(url, title, options, callback) {
 function selectOneLnk(dialog_title, input_selector, app) {
     openLinkDialog(dialog_title, function (dialog, params) {
         $(input_selector).val(params);
-    },  app);
+    }, app);
 }
+
 /**
  * 链接选择器弹窗调用
  * @param dialog_title
@@ -913,8 +914,7 @@ function selectOneLnk(dialog_title, input_selector, app) {
  * @param extra_params
  * @param app
  */
-function openLinkDialog(dialog_title, callback,app)
-{
+function openLinkDialog(dialog_title, callback, app) {
     Wind.css('artDialog');
     app = app ? app : GV.APP;
     debugger;
@@ -927,10 +927,10 @@ function openLinkDialog(dialog_title, callback,app)
                 //得到iframe页的窗口对象，执行iframe页的方法：iframeWin.method();
                 var iframeWin = window[layero.find('iframe')[0]['name']];
                 var selectValue = iframeWin.get_selected_link();
-                if(selectValue){
+                if (selectValue) {
                     layer.close(index);
                     callback.apply(this, [this, selectValue]);
-                }else{
+                } else {
                     return false;
                 }
 
@@ -980,7 +980,6 @@ function openUploadDialog(dialog_title, callback, extra_params, multi, filetype,
                 } else {
                     // return false;
                 }
-
 
 
             }
@@ -1157,7 +1156,7 @@ function artdialogAlert(msg) {
 
 }
 
-function openIframeLayer(url, title, options) {
+function openIframeLayer(url, title, options, autoRefresh) {
 
     var params = {
         type: 2,
@@ -1173,6 +1172,13 @@ function openIframeLayer(url, title, options) {
         yes: function (index, layero) {
             //do something
             layer.close(index); //如果设定了yes回调，需进行手工关闭
+        },
+        cancel: function (index, layero) {
+            if (autoRefresh) $('#refresh-wrapper').trigger("click");
+        },
+        end: function (index, layero) {
+            // 点击空白处关闭弹层时执行的操作
+            if (autoRefresh) $('#refresh-wrapper').trigger("click"); // 例如刷新页面或执行其他操作
         }
     };
     params = options ? $.extend(params, options) : params;
