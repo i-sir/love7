@@ -1,7 +1,8 @@
 <include file="public@header"/></head>
 <body>
 <div class="wrap js-check-wrap">
-    <form method="post" class="form-horizontal js-ajax-form" autocomplete="off" action="{:url('send_post')}">
+    <form method="post" id="moods_form" class="form-horizontal js-ajax-form margin-top-20" autocomplete="off"
+          action="{:url('send_post',['id'=>$id,'params'=>$params])}" onsubmit="return false">
 
         <div class="form-group">
             <label class="col-sm-2 control-label">联系人:</label>
@@ -54,8 +55,24 @@
 </div>
 </body>
 </html>
-
 <script src="__STATIC__/js/admin.js"></script>
+
+
+<script>
+    function preventEnterSubmit(event) {
+        // 检查是否按下了回车键
+        if (event.key === 'Enter') {
+            event.preventDefault(); // 阻止默认行为
+        }
+    }
+
+    // 当文档加载完成后，设置事件监听
+    document.addEventListener('DOMContentLoaded', function() {
+        var form = document.getElementById('moods_form');
+        form.addEventListener('keypress', preventEnterSubmit);
+    });
+</script>
+
 
 <!--弹框体积,父页面自动刷新-->
 <script>
@@ -114,8 +131,7 @@
                     let time1 = setInterval(function () {
                         //父级弹框关闭
                         parent.layer.closeAll();
-                        //父级页面刷新
-                        parent.location.reload();
+                        //父页面自动刷新
                     }, 500);
                 }
 

@@ -1,160 +1,58 @@
- <include file="public@header"/>
-<style>
-    textarea {
-        border: 0;
-        outline: none;
-        background-color: rgba(0, 0, 0, 0);
-    }
+<div class="form-group">
+    <div class="layui-form-item">
+        <label class="col-sm-2 control-label">其他信息:</label>
+        <div class="col-md-6 col-sm-10" id="other_value00002" style="">
+            <if condition="!empty($other)">
+                <foreach item="val" key="key" name="$other">
+                    <div>
+                        <div class="layui-inline">
+                            <input class="form-control post-params" name="other_key[{$key}]" placeholder="属性名称"
+                                   type="text"
+                                   value="{$val.key}"
+                            <if condition="$val.is_readonly">readonly</if>
+                            >
+                        </div>
+                        <div class="layui-inline">
+                            <input class="form-control post-params" name="other_value[{$key}]" placeholder="属性值"
+                                   type="text"
+                                   value="{$val.value}"
+                            <if condition="$val.is_required">required</if>
+                            >
+                        </div>
 
-    input {
-        border: 0;
-        outline: none;
-        background-color: rgba(0, 0, 0, 0);
-    }
+                        <input name="other_is_delete[]" type="hidden" value="{$val.is_delete}">
+                        <input name="other_is_readonly[]" type="hidden" value="{$val.is_readonly}">
+                        <input name="other_is_required[]" type="hidden" value="{$val.is_required}">
 
-    .col-md-6 {
-        margin-top: 7px;
-    }
-</style>
+                        <if condition="$val.is_delete">
+                            <div class="layui-inline">
+                                <button class="layui-btn layui-btn-danger layui-btn-sm removeclass"
+                                        type="button">
+                                    <i class="layui-icon">&#xe67e;</i></button>
+                            </div>
+                        </if>
+                    </div>
+                </foreach>
+            </if>
 
-</head>
-<body>
-<div class="wrap js-check-wrap">
-    <ul class="nav nav-tabs">
-        <li class="active"><a href="{:url('find',['id'=>$id,'params'=>$params])}">查看</a></li>
-    </ul>
-    <form method="post" class="form-horizontal js-ajax-form margin-top-20 layui-form" autocomplete="off"
-          action="{:url('edit_post',['id'=>$id,'params'=>$params])}">
+            <div>
+                <div class="layui-inline">
+                    <input class="form-control post-params" name="other_key[]" placeholder="属性名称" type="text">
+                </div>
+                <div class="layui-inline">
+                    <input class="form-control post-params" name="other_value[]" placeholder="属性值" type="text">
+                </div>
+                <input name="other_is_delete[]" type="hidden" value="1">
+                <input name="other_is_readonly[]" type="hidden" value="0">
+                <input name="other_is_required[]" type="hidden" value="0">
 
-
-        
-            <div class="form-group">
-                <label class="col-sm-2 control-label">门店id:</label>
-                <div class="layui-input-block col-md-6 col-sm-10">
-                                                {$shop_id|default=''}
-                    
+                <div class="layui-inline">
+                    <button class="layui-btn layui-btn-warm layui-btn-sm" id="button_other_value00002"
+                            type="button">
+                        <i class="layui-icon">&#xe654; </i>
+                    </button>
                 </div>
             </div>
-
-
-        
-            <div class="form-group">
-                <label class="col-sm-2 control-label">商品名称:</label>
-                <div class="layui-input-block col-md-6 col-sm-10">
-                                                {$goods_name|default=''}
-                    
-                </div>
-            </div>
-
-
-        
-            <div class="form-group">
-                <label class="col-sm-2 control-label">封面:</label>
-                <div class="layui-input-block col-md-6 col-sm-10">
-                                                <if condition='!empty($image)'>
-<a href="javascript:imagePreviewDialog('{:cmf_get_asset_url($image)}');">
-<img src='{:cmf_get_asset_url($image)}' style='width: 35px;height: 35px'>
-</a>
-<else/>
-暂无上传
-</if>
-
-                </div>
-            </div>
-
-
-        
-            <div class="form-group">
-                <label class="col-sm-2 control-label">图集:</label>
-                <div class="layui-input-block col-md-6 col-sm-10">
-                                                {$images|default=''}
-                    
-                </div>
-            </div>
-
-
-        
-            <div class="form-group">
-                <label class="col-sm-2 control-label">价格:</label>
-                <div class="layui-input-block col-md-6 col-sm-10">
-                                                {$price|default=''}
-                    
-                </div>
-            </div>
-
-
-        
-            <div class="form-group">
-                <label class="col-sm-2 control-label">售出数量:</label>
-                <div class="layui-input-block col-md-6 col-sm-10">
-                                                {$sell_count|default=''}
-                    
-                </div>
-            </div>
-
-
-        
-            <div class="form-group">
-                <label class="col-sm-2 control-label">是否置顶:</label>
-                <div class="layui-input-block col-md-6 col-sm-10">
-                                                {$is_top_name|default=''}
-                    
-                </div>
-            </div>
-
-
-        
-            <div class="form-group">
-                <label class="col-sm-2 control-label">状态:</label>
-                <div class="layui-input-block col-md-6 col-sm-10">
-                                                {$status_name|default=''}
-                    
-                </div>
-            </div>
-
-
-        
-            <div class="form-group">
-                <label class="col-sm-2 control-label">拒绝理由:</label>
-                <div class="layui-input-block col-md-6 col-sm-10">
-                                                {$refuse|default=''}
-                    
-                </div>
-            </div>
-
-
-        
-            <div class="form-group">
-                <label class="col-sm-2 control-label">通过时间:</label>
-                <div class="layui-input-block col-md-6 col-sm-10">
-                                                {$pass_time|default=''}
-                    
-                </div>
-            </div>
-
-
-        
-            <div class="form-group">
-                <label class="col-sm-2 control-label">拒绝时间:</label>
-                <div class="layui-input-block col-md-6 col-sm-10">
-                                                {$refuse_time|default=''}
-                    
-                </div>
-            </div>
-
-
-        
-
-        <!-- 主键id -->
-        <input type="text" name="id" value="{$id}" class="form-control post-params item-left" style="display: none">
-
-
-    </form>
-
+        </div>
+    </div>
 </div>
-<script src="__STATIC__/js/admin.js"></script>
-</body>
-</html>
-
-
-

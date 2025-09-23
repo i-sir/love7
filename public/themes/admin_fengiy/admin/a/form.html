@@ -3,7 +3,7 @@
 
 <!--富文本-->
 <div class="form-group">
-    <label class="col-sm-2 control-label">内容</label>
+    <label class="col-sm-2 control-label">内容:</label>
     <div class="col-md-6 col-sm-10">
         <script id="content" name="content" type="text/plain">
           {:cmf_replace_content_file_url(htmlspecialchars_decode($content))}
@@ -29,6 +29,63 @@
         </script>
     </div>
 </div>
+
+
+<!--number数字框(两个框,一个框最大值,一个框最小值) -->
+<div class="form-group layui-form-item">
+    <label class="col-sm-2 control-label">人数:</label>
+    <div class="layui-input-block col-sm-6 layui-inline">
+        <div class="layui-input-inline" style="width: 100px;">
+            <input autocomplete="off" class="layui-input" lay-affix="number" max="3" min="1" name="number"
+                   placeholder=""
+                   step="1" type="number" value="{$number|default='1'}">
+        </div>
+        <div class="layui-form-mid">-</div>
+        <div class="layui-input-inline" style="width: 100px;">
+            <input autocomplete="off" class="layui-input" lay-affix="number" max="3" min="1" name="number_max"
+                   placeholder="" step="1" type="number" value="{$number_max|default='1'}">
+        </div>
+    </div>
+</div>
+
+
+<!--input带注释-->
+<div class="form-group">
+    <label class="col-sm-2 control-label">有效期天数(天):</label>
+    <div class="layui-input-block col-sm-6">
+        <input type="text" name="indate" class="form-control post-params item-left" value="{$indate|default=''}">
+        <p class="help-block text-danger">若配置此参数，则无需配置开始时间和结束时间，有效期根据领取时间开始，到配置的天数后截止</p>
+    </div>
+</div>
+
+
+<!--文本域textarea-->
+<div class="form-group">
+    <label class="col-sm-2 control-label">备注:</label>
+    <div class="layui-input-block col-sm-6">
+        <textarea class="form-control post-params item-left" name="remark">{$remark|default=''}</textarea>
+    </div>
+</div>
+
+<!--input框-->
+<div class="form-group">
+    <label class="col-sm-2 control-label">礼物名字:</label>
+    <div class="layui-input-block col-sm-6">
+        <input class="form-control post-params item-left" name="name" type="text" value="{$name|default=''}">
+    </div>
+</div>
+
+
+<!--number数字框-->
+<div class="form-group">
+    <label class="col-sm-2 control-label">礼物价格:</label>
+    <div class="layui-input-block col-sm-6">
+        <input class="form-control post-params item-left" min="0.01" name="price" type="number"
+               value="{$price|default=''}">
+    </div>
+</div>
+
+
 
 
 <!--layui 点击事件,给select赋值-->
@@ -59,66 +116,10 @@
     }
 </script>
 
-
-<!--文本域textarea-->
-<div class="form-group">
-    <label class="col-sm-2 control-label">备注:</label>
-    <div class="layui-input-block col-md-6 col-sm-10">
-        <textarea class="form-control post-params item-left" name="remark">{$remark|default=''}</textarea>
-    </div>
-</div>
-
-<!--input框-->
-<div class="form-group">
-    <label class="col-sm-2 control-label">礼物名字:</label>
-    <div class="layui-input-block col-md-6 col-sm-10">
-        <input class="form-control post-params item-left" name="name" type="text" value="{$name|default=''}">
-    </div>
-</div>
-
-
-<!--number数字框-->
-<div class="form-group">
-    <label class="col-sm-2 control-label">礼物价格:</label>
-    <div class="layui-input-block col-md-6 col-sm-10">
-        <input class="form-control post-params item-left" min="0.01" name="price" type="number"
-               value="{$price|default=''}">
-    </div>
-</div>
-
-
-<!--number数字框(两个框,一个框最大值,一个框最小值) -->
-<div class="form-group layui-form-item">
-    <label class="col-sm-2 control-label">人数:</label>
-    <div class="layui-input-block col-md-6 col-sm-10 layui-inline">
-        <div class="layui-input-inline" style="width: 100px;">
-            <input autocomplete="off" class="layui-input" lay-affix="number" max="3" min="1" name="number"
-                   placeholder=""
-                   step="1" type="number" value="{$number|default='1'}">
-        </div>
-        <div class="layui-form-mid">-</div>
-        <div class="layui-input-inline" style="width: 100px;">
-            <input autocomplete="off" class="layui-input" lay-affix="number" max="3" min="1" name="number_max"
-                   placeholder="" step="1" type="number" value="{$number_max|default='1'}">
-        </div>
-    </div>
-</div>
-
-
-<!--input带注释-->
-<div class="form-group">
-    <label class="col-sm-2 control-label">有效期天数(天):</label>
-    <div class="layui-input-block col-md-6 col-sm-10">
-        <input type="text" name="indate" class="form-control post-params item-left" value="{$indate|default=''}">
-        <p class="help-block text-danger">若配置此参数，则无需配置开始时间和结束时间，有效期根据领取时间开始，到配置的天数后截止</p>
-    </div>
-</div>
-
-
 <!--layui 复选框 (checkbox)  -->
 <div class="form-group">
     <label class="col-sm-2 control-label">复选框:</label>
-    <div class="layui-input-block col-md-6 col-sm-10">
+    <div class="layui-input-block col-sm-6">
         <input class="form-control post-params" lay-skin="tag" name="api_controller" title="api控制器" type="checkbox"
         <if condition="$is_true == 1">
             checked
@@ -135,45 +136,35 @@
 
 <!--layui多选框,分类列表 (checkbox)  -->
 <!--
-分类列表 edit
 
-        //处理分类多选
-        $class_ids = $this->getParams($result['class_ids']);
-        //分类列表
-        $class_list = $ProjectClassModel->select();
-        foreach ($class_list as $k => $v) {
-            //是否选中问题
-            $v['checked'] = false;
-            if (in_array($v['id'], $class_ids)) $v['checked'] = true;
+index列表
+        if ($item['class_ids']) {
+            $class_ids               = $this->getParams($item['class_ids']);
+            $class_names             = $ShopClassModel->where('id', 'in', $class_ids)->column('name');
+            $item['class_names']     = $this->setParams($class_names);
+            $item['class_name_list'] = $class_names;
+            $item['class_ids']       = $class_ids;
         }
-       $this->assign("class_list", $class_list);
 
 
-分类列表 add
-        //分类列表
-        $class_list = $ProjectClassModel->select();
-        foreach ($class_list as $k => $v) {
-            $v['checked'] = false;
-        }
-       $this->assign("class_list", $class_list);
--->
-<!--
+
 edit编辑
-
       //处理分类结果值
         if ($params['class_ids']) {
             $class_ids           = array_keys($params['class_ids']);//提取key
             $params['class_ids'] = $this->setParams($class_ids);
+        }else{
+          $params['class_ids'] = '';
         }
 -->
 <div class="form-group">
     <label class="col-sm-2 control-label">分类:</label>
-    <div class="layui-input-block col-md-6 col-sm-10">
+    <div class="layui-input-block col-sm-6">
         <foreach item="class_value" name="class_list">
             <input class="form-control post-params" lay-skin="tag" name="class_ids[{$class_value.id}]"
                    title="{$class_value.name}"
                    type="checkbox"
-            <if condition="$class_value.checked">
+            <if condition="in_array($class_value.id,$class_ids)">
                 checked
             </if>
             >
@@ -194,7 +185,7 @@ edit编辑
 -->
 <div class="form-group">
     <label class="col-sm-2 control-label">养宠物吗</label>
-    <div class="layui-input-block col-md-6 col-sm-10">
+    <div class="layui-input-block col-sm-6">
         <foreach item="value" name="pet_list">
             <input class="form-control post-params" lay-skin="tag" name="pet[{$value}]"
                    title="{$value}"
@@ -211,7 +202,7 @@ edit编辑
 <!--layui单选框 (radio) -->
 <div class="form-group">
     <label class="col-sm-2 control-label">实名:</label>
-    <div class="layui-input-block col-md-6 col-sm-10">
+    <div class="layui-input-block col-sm-6">
         <input class="form-control post-params" name="is_real" title="是" type="radio" value="1"
         <if condition="$is_real == 1">
             checked
@@ -238,7 +229,7 @@ edit编辑
  -->
 <div class="form-group">
     <label class="col-sm-2 control-label">实名:</label>
-    <div class="layui-input-block col-md-6 col-sm-10">
+    <div class="layui-input-block col-sm-6">
         <input lay-skin="switch" lay-text="是|否" name="is_real" type="checkbox"
         <if condition="$is_real == 1">checked</if>
         >
@@ -250,133 +241,20 @@ edit编辑
 if ($item['image']) $item['image'] = cmf_get_asset_url($item['image']);
 <div class="form-group">
     <label class="col-sm-2 control-label">图片</label>
-    <div class="layui-input-block col-md-6 col-sm-10">
+    <div class="layui-input-block col-sm-6">
         <input class="form-control post-params item-left" id="photo-1000000" name="image" type="hidden"
                value="{$image|default=''}">
         <if condition="!empty($image)">
             <a href="javascript:imagePreviewDialog('{:cmf_get_image_preview_url($image)}');">
                 <img id="photo-1000000-preview"
-                     src="{:cmf_get_image_preview_url($image)}" style="width: 80px;height: 80px">
+                     src="{:cmf_get_image_preview_url($image)}" style="height: 80px">
             </a>
             <else/>
             <img id="photo-1000000-preview"
-                 src="/static/images/default.png" style="width: 80px;height: 80px">
+                 src="/static/images/default.png" style="height: 80px">
         </if>
         <a href="javascript:uploadOneImage('图片上传','#photo-1000000');">上传</a>
         <a onclick="$('#photo-1000000-preview').attr('src','__TMPL__/public/assets/images/default-thumbnail.png');$('#photo-1000000').val('');return false;">取消图片</a>
-    </div>
-</div>
-
-
-<!--轮播图  (images)-->
-if ($item['images']) $item['images'] = $this->getImagesUrl($item['images']);
-<div class="form-group">
-    <label class="col-sm-2 control-label">轮播图 <p
-            style="font-size: 4px;color: red;">
-        建议尺寸750*400
-        <br>
-        第一个为展示图
-    </p></label>
-    <div class="layui-input-block col-md-6 col-sm-10">
-        <if condition="!empty($images)">
-            <ul class="pic-list list-unstyled form-inline" id="photosGoods000000001">
-                <foreach item="vo" name="images">
-                    <li id="saved-goods-image-0000001-{$key}">
-                        <div style="float:left; width:80px;">
-                            <input id="photo-goods-0000001-{$key}" name="images[{$key}]" type="hidden" value="{$vo}">
-                            <img id="photo-goods-0000001-{$key}-preview" onclick="parent.imagePreviewDialog(this.src);"
-                                 src="{:cmf_get_image_preview_url($vo)}" width="80">
-                            <a href="javascript:uploadOneImage('图片上传','#photo-goods-0000001-{$key}');">替换</a>
-                            <a href="javascript:(function(){$('#saved-goods-image-0000001-{$key}').remove();})();">移除</a>
-                        </div>
-                    </li>
-                </foreach>
-            </ul>
-            <else/>
-            <ul class="pic-list list-unstyled form-inline" id="photosGoods000000001">
-                <li id="saved-goods-image-0000001">
-                    <div style="float:left; width:80px;">
-                    </div>
-                </li>
-            </ul>
-        </if>
-        <a class="btn btn-sm btn-default"
-           href="javascript:uploadMultiImage('图片上传','#photosGoods000000001','photos-goods-item-tpl-0000001');">选择图片</a>
-        <script id="photos-goods-item-tpl-0000001" type="text/html">
-            <li id="saved-goods-image-0000001-{id}">
-                <div style="float:left; width:80px;">
-                    <input id="photo-goods-0000001-{id}" type="hidden" name="images[{id}]" value="{filepath}">
-                    <img id="photo-goods-0000001-{id}-preview" src="{url}" width="80"
-                         onclick="imagePreviewDialog(this.src);">
-                    <a href="javascript:uploadOneImage('图片上传','#photo-goods-0000001-{id}');">替换</a>
-                    <a href="javascript:(function(){$('#saved-goods-image-0000001-{id}').remove();})();">移除</a>
-                </div>
-            </li>
-        </script>
-        <script>
-            // 多图上传支持排序
-            new Sortable(photosGoods000000001, {
-                animation: 150,
-                ghostClass: 'blue-background-class'
-            });
-        </script>
-    </div>
-</div>
-
-
-<!--轮播图 副本 (images2)-->
-if ($item['images2']) $item['images2'] = $this->getImagesUrl($item['images2']);
-<div class="form-group">
-    <label class="col-sm-2 control-label">轮播图 副本 <p
-            style="font-size: 4px;color: red;">
-        建议尺寸750*400
-        <br>
-        第一个为展示图
-    </p></label>
-    <div class="layui-input-block col-md-6 col-sm-10">
-        <if condition="!empty($images0000002)">
-            <ul class="pic-list list-unstyled form-inline" id="photosGoods000000002">
-                <foreach item="vo" name="images0000002">
-                    <li id="saved-goods-image-0000002-{$key}">
-                        <div style="float:left; width:80px;">
-                            <input id="photo-goods-0000002-{$key}" name="images0000002[{$key}]" type="hidden"
-                                   value="{$vo}">
-                            <img id="photo-goods-0000002-{$key}-preview" onclick="parent.imagePreviewDialog(this.src);"
-                                 src="{:cmf_get_image_preview_url($vo)}" width="80">
-                            <a href="javascript:uploadOneImage('图片上传','#photo-goods-0000002-{$key}');">替换</a>
-                            <a href="javascript:(function(){$('#saved-goods-image-0000002-{$key}').remove();})();">移除</a>
-                        </div>
-                    </li>
-                </foreach>
-            </ul>
-            <else/>
-            <ul class="pic-list list-unstyled form-inline" id="photosGoods000000002">
-                <li id="saved-goods-image-0000002">
-                    <div style="float:left; width:80px;">
-                    </div>
-                </li>
-            </ul>
-        </if>
-        <a class="btn btn-sm btn-default"
-           href="javascript:uploadMultiImage('图片上传','#photosGoods000000002','photos-goods-item-tpl-0000002');">选择图片</a>
-        <script id="photos-goods-item-tpl-0000002" type="text/html">
-            <li id="saved-goods-image-0000002-{id}">
-                <div style="float:left; width:80px;">
-                    <input id="photo-goods-0000002-{id}" type="hidden" name="images0000002[{id}]" value="{filepath}">
-                    <img id="photo-goods-0000002-{id}-preview" src="{url}" width="80"
-                         onclick="imagePreviewDialog(this.src);">
-                    <a href="javascript:uploadOneImage('图片上传','#photo-goods-0000002-{id}');">替换</a>
-                    <a href="javascript:(function(){$('#saved-goods-image-0000002-{id}').remove();})();">移除</a>
-                </div>
-            </li>
-        </script>
-        <script>
-            // 多图上传支持排序
-            new Sortable(photosGoods000000002, {
-                animation: 150,
-                ghostClass: 'blue-background-class'
-            });
-        </script>
     </div>
 </div>
 
@@ -386,7 +264,7 @@ if ($item['images']) $item['images'] = $this->getImagesUrl($item['images']);
 <!--轮播图 - 换行展示 可拖拽 -->
 <div class="form-group">
     <label class="col-sm-2 control-label">图集:</label>
-    <div class="layui-input-block col-md-6 col-sm-10">
+    <div class="layui-input-block col-sm-6">
         <div class="help-block text-danger">长按图片可上下拖动,调整图片顺序</div>
         <if condition="!empty($images)">
             <ul id="imagesId00001" class="pic-list list-unstyled form-inline">
@@ -394,7 +272,7 @@ if ($item['images']) $item['images'] = $this->getImagesUrl($item['images']);
                     <li id="savedImages-00001-{$key}" style="margin-bottom: 5px;">
                         <input id="photoImages-00001-{$key}" type="hidden" name="images[{$key}]" value="{$vo}">
                         <img id="photoImages-00001-{$key}-preview" src="{:cmf_get_image_preview_url($vo)}"
-                             width="50" height="50" onclick="parent.imagePreviewDialog(this.src);">
+                             height="50" onclick="parent.imagePreviewDialog(this.src);">
                         <a href="javascript:uploadOneImage('图片上传','#photoImages-00001-{$key}');">替换</a>
                         <a href="javascript:(function(){$('#savedImages-00001-{$key}').remove();})();">移除</a>
                     </li>
@@ -411,7 +289,7 @@ if ($item['images']) $item['images'] = $this->getImagesUrl($item['images']);
         <script type="text/html" id="itemImages-00001">
             <li id="savedImages-00001-{id}" style="margin-bottom: 5px;">
                 <input id="photoImages-00001-{id}" type="hidden" name="images[{id}]" value="{filepath}">
-                <img id="photoImages-00001-{id}-preview" src="{url}" width="50" height="50"
+                <img id="photoImages-00001-{id}-preview" src="{url}" height="50"
                      onclick="imagePreviewDialog(this.src);">
                 <a href="javascript:uploadOneImage('图片上传','#photoImages-00001-{id}');">替换</a>
                 <a href="javascript:(function(){$('#savedImages-00001-{id}').remove();})();">移除</a>
@@ -428,16 +306,14 @@ if ($item['images']) $item['images'] = $this->getImagesUrl($item['images']);
 </div>
 
 
-
-<!--
-图集 - 换行展示  (images2 副本)
+<!-- 图集 - 换行展示  (images2 副本)
 imagesId00001 改为 imagesId00002
 将所有00001 改为 00002 即可
  -->
 if ($item['images']) $item['images'] = $this->getImagesUrl($item['images']);
 <div class="form-group">
     <label class="col-sm-2 control-label">图集:</label>
-    <div class="layui-input-block col-md-6 col-sm-10">
+    <div class="layui-input-block col-sm-6">
         <div class="help-block text-danger">长按图片可上下拖动,调整图片顺序</div>
         <if condition="!empty($images00002)">
             <ul id="imagesId00002" class="pic-list list-unstyled form-inline">
@@ -445,7 +321,7 @@ if ($item['images']) $item['images'] = $this->getImagesUrl($item['images']);
                     <li id="savedImages-00002-{$key}" style="margin-bottom: 5px;">
                         <input id="photoImages-00002-{$key}" type="hidden" name="images00002[{$key}]" value="{$vo}">
                         <img id="photoImages-00002-{$key}-preview" src="{:cmf_get_image_preview_url($vo)}"
-                             width="50" height="50" onclick="parent.imagePreviewDialog(this.src);">
+                             height="50" onclick="parent.imagePreviewDialog(this.src);">
                         <a href="javascript:uploadOneImage('图片上传','#photoImages-00002-{$key}');">替换</a>
                         <a href="javascript:(function(){$('#savedImages-00002-{$key}').remove();})();">移除</a>
                     </li>
@@ -462,7 +338,7 @@ if ($item['images']) $item['images'] = $this->getImagesUrl($item['images']);
         <script type="text/html" id="itemImages-00002">
             <li id="savedImages-00002-{id}" style="margin-bottom: 5px;">
                 <input id="photoImages-00002-{id}" type="hidden" name="images00002[{id}]" value="{filepath}">
-                <img id="photoImages-00002-{id}-preview" src="{url}" width="50" height="50"
+                <img id="photoImages-00002-{id}-preview" src="{url}" height="50"
                      onclick="imagePreviewDialog(this.src);">
                 <a href="javascript:uploadOneImage('图片上传','#photoImages-00002-{id}');">替换</a>
                 <a href="javascript:(function(){$('#savedImages-00002-{id}').remove();})();">移除</a>
@@ -477,8 +353,6 @@ if ($item['images']) $item['images'] = $this->getImagesUrl($item['images']);
         </script>
     </div>
 </div>
-
-
 
 
 <!--多文件,轮播图格式-->
@@ -560,14 +434,10 @@ if($params['begin_time']) $params['begin_time'] = strtotime($params['begin_time'
 if($params['end_time']) $params['end_time'] = strtotime($params['end_time']);
 <div class="form-group">
     <label class="col-sm-2 control-label">开始时间:</label>
-    <div class="layui-input-block col-md-6 col-sm-10">
-        <if condition='$begin_time'>
-            <input class="form-control post-params item-left js-datetime" name="begin_time" required
-                   type="text"
-                   value="{$begin_time|date='Y-m-d H:i'}">
-            <else/>
-            <input class="form-control post-params item-left js-datetime" name="begin_time" required type="text">
-        </if>
+    <div class="layui-input-block col-sm-6">
+        <input class="form-control post-params item-left js-datetime" name="begin_time" required
+               type="text"
+               value="{:isset($begin_time) && $begin_time > 10000 ? date('Y-m-d H:i', $begin_time) : ''}">
     </div>
 </div>
 
@@ -576,13 +446,10 @@ if($params['begin_time']) $params['begin_time'] = strtotime($params['begin_time'
 if($params['end_time']) $params['end_time'] = strtotime($params['end_time']);
 <div class="form-group">
     <label class="col-sm-2 control-label">结束时间:</label>
-    <div class="layui-input-block col-md-6 col-sm-10">
-        <if condition='$end_time'>
-            <input class="form-control post-params item-left js-datetime" name="end_time" required type="text"
-                   value="{$end_time|date='Y-m-d H:i'}">
-            <else/>
-            <input class="form-control post-params item-left js-datetime" name="end_time" required type="text">
-        </if>
+    <div class="layui-input-block col-sm-6">
+        <input class="form-control post-params item-left js-datetime" name="end_time" required
+               type="text"
+               value="{:isset($end_time) && $end_time > 10000 ? date('Y-m-d H:i', $end_time) : ''}">
     </div>
 </div>
 
@@ -592,14 +459,10 @@ if($params['begin_time']) $params['begin_time'] = strtotime($params['begin_time'
 if($params['end_time']) $params['end_time'] = strtotime($params['end_time']." 23:59:59");
 <div class="form-group">
     <label class="col-sm-2 control-label">开始时间:</label>
-    <div class="layui-input-block col-md-6 col-sm-10">
-        <if condition='$begin_time'>
-            <input class="form-control post-params item-left js-date" name="begin_time" required
-                   type="text"
-                   value="{$begin_time|date='Y-m-d'}">
-            <else/>
-            <input class="form-control post-params item-left js-date" name="begin_time" required type="text">
-        </if>
+    <div class="layui-input-block col-sm-6">
+        <input class="form-control post-params item-left js-date" name="end_time" required
+               type="text"
+               value="{:isset($end_time) && $end_time > 10000 ? date('Y-m-d H:i', $end_time) : ''}">
     </div>
 </div>
 
@@ -608,18 +471,177 @@ if($params['begin_time']) $params['begin_time'] = strtotime($params['begin_time'
 if($params['end_time']) $params['end_time'] = strtotime($params['end_time']." 23:59:59");
 <div class="form-group">
     <label class="col-sm-2 control-label">结束时间:</label>
-    <div class="layui-input-block col-md-6 col-sm-10">
-        <if condition='$end_time'>
-            <input class="form-control post-params item-left js-date" name="end_time" required type="text"
-                   value="{$end_time|date='Y-m-d'}">
-            <else/>
-            <input class="form-control post-params item-left js-date" name="end_time" required type="text">
-        </if>
+    <div class="layui-input-block col-sm-6">
+        <input class="form-control post-params item-left js-date" name="end_time" required
+               type="text"
+               value="{:isset($end_time) && $end_time > 10000 ? date('Y-m-d H:i', $end_time) : ''}">
     </div>
 </div>
 
 
-<!--自定义表单 单独input-->
+
+<!--自定义表单 图片+input框  -->
+<!--控制器写法
+
+        //处理自定义标签
+        $data_key   = $params['data_image'];
+        $data_value = $params['data_value'];
+        if (!empty($data_key) && !empty($data_value)) {
+            $post_data = [];
+            foreach ($data_key as $key => $value) {
+                if ($value && $data_value[$key]) {
+                    $post_data[$key]['image'] = cmf_get_asset_url($value);
+                    $post_data[$key]['value'] = $data_value[$key];
+                }
+            }
+        }
+        $params['post_data'] = json_encode($post_data, JSON_UNESCAPED_UNICODE);
+
+
+        //查询详情
+        if ($item['post_data']) $item['post_data'] = json_decode($item['post_data'], true);
+-->
+<style>
+    .custom-form-container {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 10px;
+    }
+
+    .custom-form-group {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .form-image-preview {
+        height: 45px;
+        width: 45px;
+        cursor: pointer;
+    }
+
+    .form-actions {
+        gap: 5px;
+    }
+
+    .data-value {
+        margin-left: 30px;
+    }
+
+    .layui-btn .layui-icon {
+        vertical-align: middle !important;
+    }
+</style>
+<div class="form-group">
+    <div class="layui-form-item">
+        <label class="col-sm-2 control-label">服务内容:</label>
+        <div class="col-md-6 col-sm-10" id="data_value_container">
+            <!-- 已有数据循环 -->
+            <if condition="!empty($post_data)">
+                <foreach item="value" key="key" name="$post_data">
+                    <div class="custom-form-container">
+                        <div class="custom-form-group">
+                            <input class="form-control post-params" id="photo_{$key}" name="data_image[]" type="hidden"
+                                   value="{$value.image|default=''}">
+                            <a href="javascript:imagePreviewDialog('{:cmf_get_image_preview_url($value.image)}');">
+                                <img class="form-image-preview" id="photo_{$key}-preview"
+                                     src="{:cmf_get_image_preview_url($value.image)}"
+                                     onerror="this.src='/static/images/default.png'">
+                            </a>
+                            <div class="form-actions">
+                                <a href="javascript:uploadOneImage('图片上传','#photo_{$key}');">上传</a>
+                                <br>
+                                <a onclick="resetImage('#photo_{$key}')">取消</a>
+                            </div>
+                        </div>
+                        <div class="custom-form-group data-value">
+                            <input class="form-control post-params" name="data_value[]" placeholder="值" type="text"
+                                   value="{$value.value}">
+                            <button class="layui-btn layui-btn-danger layui-btn-sm remove-item" type="button">
+                                <i class="layui-icon">&#xe67e;</i>
+                            </button>
+                        </div>
+                    </div>
+                </foreach>
+            </if>
+
+            <!-- 新增项模板 -->
+            <div class="custom-form-container">
+                <div class="custom-form-group">
+                    <input class="form-control post-params" id="photo_new_aa99999" name="data_image[]" type="hidden">
+                    <img class="form-image-preview" id="photo_new_aa99999-preview" src="/static/images/default.png">
+                    <div class="form-actions">
+                        <a href="javascript:uploadOneImage('图片上传','#photo_new_aa99999');">上传</a>
+                        <br>
+                        <a onclick="resetImage('#photo_new_aa99999')">取消</a>
+                    </div>
+                </div>
+                <div class="custom-form-group data-value">
+                    <input class="form-control post-params" name="data_value[]" placeholder="值" type="text">
+                    <button class="layui-btn layui-btn-warm layui-btn-sm add-item" type="button">
+                        <i class="layui-icon">&#xe654;</i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    layui.use(['jquery', 'form'], function () {
+        var $ = layui.$,
+            form = layui.form;
+
+        // 计数器用于生成唯一ID
+        var itemCounter = 1;
+
+        // 重置图片函数
+        window.resetImage = function (selector) {
+            $(selector + '-preview').attr('src', '/static/images/default.png');
+            $(selector).val('');
+        };
+
+        // 添加新项
+        $('body').on('click', '.add-item', function () {
+            var newId = 'photo_new_' + itemCounter++;
+            var newItem = `
+        <div class="custom-form-container">
+            <div class="custom-form-group">
+                <input class="form-control post-params" id="${newId}" name="data_image[]" type="hidden">
+                <img class="form-image-preview" id="${newId}-preview" src="/static/images/default.png"  onclick="imagePreviewDialog(this.src);">
+                <div class="form-actions" style="display: block;!important;">
+                    <a href="javascript:uploadOneImage('图片上传','#${newId}');">上传</a>
+                    <br>
+                    <a onclick="resetImage('#${newId}')">取消</a>
+                </div>
+            </div>
+            <div class="custom-form-group data-value">
+                <input class="form-control post-params" name="data_value[]" placeholder="值" type="text">
+                <button class="layui-btn layui-btn-danger layui-btn-sm remove-item" type="button">
+                    <i class="layui-icon">&#xe67e;</i>
+                </button>
+            </div>
+        </div>
+        `;
+
+            $('#data_value_container').append(newItem);
+            form.render();
+        });
+
+        // 删除项
+        $('body').on('click', '.remove-item', function () {
+            $(this).closest('.custom-form-container').remove();
+        });
+    });
+
+
+</script>
+
+
+
+
+<!--自定义表单 一个input-->
 <style>
     .layui-btn .layui-icon {
         vertical-align: middle !important;
@@ -702,7 +724,7 @@ if($params['end_time']) $params['end_time'] = strtotime($params['end_time']." 23
 </style>
 <div class="form-group" style="min-height: 1px;">
     <label class="col-sm-2 control-label" style="min-height: 1px;"></label>
-    <div class="layui-input-block col-md-6 col-sm-10" style="min-height: 1px;">
+    <div class="layui-input-block col-sm-6" style="min-height: 1px;">
         <div class="layui-input-block col-md-2" style="margin-top: 10px;min-height: 1px;">
             名称
         </div>
@@ -723,7 +745,7 @@ if($params['end_time']) $params['end_time'] = strtotime($params['end_time']." 23
 </style>
 <div class="form-group">
     <label class="col-sm-2 control-label">标签:</label>
-    <div class="layui-input-block col-md-6 col-sm-10" id="value">
+    <div class="layui-input-block col-sm-6" id="value">
         <if condition="!empty($tag)">
             <foreach item="tag_val" key="tag_key" name="$tag">
                 <div class="layui-form-item" style="display: flex">
@@ -793,7 +815,7 @@ if($params['end_time']) $params['end_time'] = strtotime($params['end_time']." 23
 <div class="form-group">
     <label class="col-sm-2 control-label">值:</label>
 
-    <div class="layui-input-block col-md-6 col-sm-10" id="value">
+    <div class="layui-input-block col-sm-6" id="value">
         <if condition="!empty($values)">
             <foreach item="val" key="key" name="$values">
                 <div class="layui-form-item" style="display: flex">
@@ -884,7 +906,7 @@ if($params['end_time']) $params['end_time'] = strtotime($params['end_time']." 23
                         '</div>';
 
                     $("#value").append(str);
-                    form.render('select');
+                    form.render();
                 });
             }
         )
@@ -990,7 +1012,7 @@ if($params['end_time']) $params['end_time'] = strtotime($params['end_time']." 23
                     '</div>' +
                     '</div>';
                 $("#data_value00001").append(str);
-                form.render('select');
+                form.render();
             });
         }
     )
@@ -1097,7 +1119,7 @@ if($params['end_time']) $params['end_time'] = strtotime($params['end_time']." 23
                     '</div>' +
                     '</div>';
                 $("#data_value00001").append(str);
-                form.render('select');
+                form.render();
             });
         }
     )
@@ -1107,7 +1129,7 @@ if($params['end_time']) $params['end_time'] = strtotime($params['end_time']." 23
 if ($item['images']) $item['images'] = $this->getImagesUrl($item['images']);
 <div class="form-group">
     <label class="col-sm-2 control-label">多图:</label>
-    <div class="layui-input-block col-md-6 col-sm-10">
+    <div class="layui-input-block col-sm-6">
         <notempty name="$vo.images">
             <foreach item="val" name="$vo.images">
                 <li id="saved-goods-image{$key}">
@@ -1128,7 +1150,7 @@ if ($item['images']) $item['images'] = $this->getImagesUrl($item['images']);
 <!--下拉框-类型 (gender)(固定值) 男/女 -->
 <div class="form-group">
     <label class="col-sm-2 control-label">性别:</label>
-    <div class="layui-input-block col-md-6 col-sm-10" style="">
+    <div class="layui-input-block col-sm-6" style="">
         <select class="post-params" lay-search lay-filter="gender" name="gender">
             <option value="男"
             <if condition="$gender eq '男' ">selected</if>
@@ -1145,7 +1167,7 @@ if ($item['images']) $item['images'] = $this->getImagesUrl($item['images']);
 <!--下拉框-类型 (type)(type_list) 数组格式转给后台是key  展示的数组的值 -->
 <div class="form-group">
     <label class="col-sm-2 control-label">类型:</label>
-    <div class="layui-input-block col-md-6 col-sm-10" style="">
+    <div class="layui-input-block col-sm-6" style="">
         <if condition="!empty($type)">
             <select class="form-control post-params" lay-search lay-filter="type" name="type">
                 <foreach item="vo" key="key" name="type_list">
@@ -1168,7 +1190,7 @@ if ($item['images']) $item['images'] = $this->getImagesUrl($item['images']);
 <!--下拉框-类型 (type)(type_list) 数组格式转给后台是value  展示的数组的值 -->
 <div class="form-group">
     <label class="col-sm-2 control-label">类型:</label>
-    <div class="layui-input-block col-md-6 col-sm-10" style="">
+    <div class="layui-input-block col-sm-6" style="">
         <if condition="!empty($type)">
             <select class="form-control post-params" lay-search lay-filter="type" name="type">
                 <foreach item="vo" key="key" name="type_list">
@@ -1191,7 +1213,7 @@ if ($item['images']) $item['images'] = $this->getImagesUrl($item['images']);
 <!--下拉框-分类 (class_id)(class_list) 传给后台的是id值 展示的name -->
 <div class="form-group">
     <label class="col-sm-2 control-label">分类:</label>
-    <div class="layui-input-block col-md-6 col-sm-10" style="">
+    <div class="layui-input-block col-sm-6" style="">
         <if condition="!empty($class_id)">
             <select class="form-control post-params" lay-search lay-filter="class_id" name="class_id">
                 <foreach item="vo" key="key" name="class_list">
@@ -1214,7 +1236,7 @@ if ($item['images']) $item['images'] = $this->getImagesUrl($item['images']);
 <!--下拉框-门店 (shop_id)(shop_list) 传给后台的是id值 展示的name -->
 <div class="form-group">
     <label class="col-sm-2 control-label">门店:</label>
-    <div class="layui-input-block col-md-6 col-sm-10" style="">
+    <div class="layui-input-block col-sm-6" style="">
         <if condition="!empty($shop_id)">
             <select class="form-control post-params" lay-search lay-filter="shop_id" name="shop_id">
                 <foreach item="vo" key="key" name="shop_list">
@@ -1237,7 +1259,7 @@ if ($item['images']) $item['images'] = $this->getImagesUrl($item['images']);
 <!-- 用户选择 (user_id)(user_list) 传给后台的是用户id值 展示的是id,nickname,phone-->
 <div class="form-group">
     <label class="col-sm-2 control-label">用户:</label>
-    <div class="layui-input-block col-md-6 col-sm-10" style="">
+    <div class="layui-input-block col-sm-6" style="">
         <if condition="!empty($user_id)">
             <select class="form-control post-params" lay-search lay-filter="user_id" name="user_id">
                 <foreach item="vo" key="key" name="user_list">
@@ -1338,7 +1360,7 @@ if ($item['images']) $item['images'] = $this->getImagesUrl($item['images']);
 
          //edit代码
          if ($params['class_id']) $params['search_class_id'] = $params['class_id'];
-         if ($params['second_class_id']) $params['search_class_id'] = $params['second_class_id'];
+         if ($params['class_two_id']) $params['search_class_id'] = $params['class_two_id'];
 
          *
          **/
@@ -1473,8 +1495,8 @@ if ($item['images']) $item['images'] = $this->getImagesUrl($item['images']);
             </div>
 
             <div class="layui-inline">
-                <select class="form-control post-params second_class" lay-filter="second_class_id" lay-search
-                        name="second_class_id">
+                <select class="form-control post-params second_class" lay-filter="class_two_id" lay-search
+                        name="class_two_id">
                 </select>
             </div>
 
@@ -1486,7 +1508,7 @@ if ($item['images']) $item['images'] = $this->getImagesUrl($item['images']);
     <!--   后台代码
 
         字段:
-        second_class_id :二级分类id
+        class_two_id :二级分类id
         class_id :分类id
         search_class_id :用于搜索
 
@@ -1535,7 +1557,7 @@ if ($item['images']) $item['images'] = $this->getImagesUrl($item['images']);
             ->select()
             ->each(function ($item, $key) use ($info) {
                 //如果详情中,分类存在,回显
-                if ($info['second_class_id'] == $item['id']) $item['selected'] = 'selected';
+                if ($info['class_two_id'] == $item['id']) $item['selected'] = 'selected';
                 return $item;
             });
         if (empty(count($result))) $this->error('暂无数据!');
@@ -1545,7 +1567,7 @@ if ($item['images']) $item['images'] = $this->getImagesUrl($item['images']);
 
        //find展示代码
         $one_info        = $PlayClassModel->where('id', '=', $item['class_id'])->find();
-        $two_info = $PlayClassModel->where('id', '=', $item['second_class_id'])->find();
+        $two_info = $PlayClassModel->where('id', '=', $item['class_two_id'])->find();
         if ($one_info) $item['class_name'] = $one_info['name'];
         if ($two_info) $item['class_name'] = $two_info['name'];
         if ($two_info && $one_info) $item['class_name'] = $one_info['name'] . ' - ' . $two_info['name'];
@@ -1553,14 +1575,14 @@ if ($item['images']) $item['images'] = $this->getImagesUrl($item['images']);
 
        //edit代码
         if ($params['class_id']) $params['search_class_id'] = $params['class_id'];
-        if ($params['second_class_id']) $params['search_class_id'] = $params['second_class_id'];
+        if ($params['class_two_id']) $params['search_class_id'] = $params['class_two_id'];
        -->
 
     <input class="post-params" id="class_id" type="hidden" value="{$class_id|default=''}">
-    <input class="post-params" id="second_class_id" type="hidden" value="{$second_class_id|default=''}">
+    <input class="post-params" id="class_two_id" type="hidden" value="{$class_two_id|default=''}">
     <input class="post-params" id="id" type="hidden" value="{$id|default=''}">
     <script>
-        $(".second_class_id").hide();//默认隐藏二级分类
+        $(".class_two_id").hide();//默认隐藏二级分类
 
         //加载页面自动执行
         layui.use(['form', 'element'], function () {
@@ -1581,7 +1603,7 @@ if ($item['images']) $item['images'] = $this->getImagesUrl($item['images']);
                 success: function (res) {
                     //console.log(res);
                     if (res.code == 1) {
-                        $(".second_class_id").show();//二级分类展示
+                        $(".class_two_id").show();//二级分类展示
                         List = res.data;
                         var tmp = '<option value="">请选择</option>';
                         for (var i in List) {
@@ -1591,7 +1613,7 @@ if ($item['images']) $item['images'] = $this->getImagesUrl($item['images']);
                         $(".second_class").html(tmp);//赋值一级分类下拉选择
                     } else {
                         $(".second_class").hide();//没有二级分类隐藏
-                        $("#second_class_id").val(0);//二级分类赋值0
+                        $("#class_two_id").val(0);//二级分类赋值0
                     }
                     form.render('select');
                 }
@@ -1611,7 +1633,7 @@ if ($item['images']) $item['images'] = $this->getImagesUrl($item['images']);
                     async: false,
                     success: function (res) {
                         if (res.code == 1) {
-                            $(".second_class_id").show();//展示二级分类
+                            $(".class_two_id").show();//展示二级分类
                             List = res.data;
                             var tmp = '<option value="">请选择</option>';
                             for (var i in List) {
@@ -1620,7 +1642,7 @@ if ($item['images']) $item['images'] = $this->getImagesUrl($item['images']);
                             $(".second_class").html(tmp);//赋值一级分类下拉选择
                         } else {
                             $(".second_class").hide();//二级分类隐藏
-                            $("#second_class_id").val(0);//二级分类赋值0
+                            $("#class_two_id").val(0);//二级分类赋值0
                         }
                         form.render('select');
                     }
@@ -1766,20 +1788,7 @@ if ($item['images']) $item['images'] = $this->getImagesUrl($item['images']);
 
 <!--下拉框,选中显示隐藏    显示隐藏 直显示一个    -->
 <span>
-<div class="form-group show_type show_type1">
-    <label class="col-sm-2 control-label">内容11111:</label>
-    <div class="layui-input-block col-md-6 col-sm-10">
-         <input type="text" name="nickname" class="form-control post-params item-left" value="{$nickname|default=''}">
-        <textarea name="content" class="form-control post-params item-left">{$content|default=''}</textarea>
-    </div>
-</div>
-<div class="form-group show_type show_type2">
-    <label class="col-sm-2 control-label">内容222222:</label>
-    <div class="layui-input-block col-md-6 col-sm-10">
-        <input type="text" name="nickname" class="form-control post-params item-left" value="{$nickname|default=''}">
-        <textarea name="content" class="form-control post-params item-left">{$content|default=''}</textarea>
-    </div>
-</div>
+
 
 
 普通写法
@@ -1800,7 +1809,7 @@ $this->assign('show_type_list', $RecommendInit->show_type);
 后台循环写法   show_type_list:数组
 <div class="form-group">
     <label class="col-sm-2 control-label">显示类型:</label>
-    <div class="layui-input-block col-md-6 col-sm-10" style="">
+    <div class="layui-input-block col-sm-6" style="">
         <if condition="!empty($show_type)">
             <select class="form-control post-params" name="show_type" lay-filter="show_type" id="show_type">
                 <foreach item="vo" key="key" name="show_type_list">
@@ -1810,7 +1819,7 @@ $this->assign('show_type_list', $RecommendInit->show_type);
                 </foreach>
             </select>
             <else/>
-            <select class="form-control post-params" lay-filter="show_type" name="show_type" id="show_type">
+            <select class="form-control post-params" name="show_type" lay-filter="show_type" id="show_type">
                 <foreach item="vo" key="key" name="show_type_list">
                     <option value="{$key}">{$vo}</option>
                 </foreach>
@@ -1820,18 +1829,34 @@ $this->assign('show_type_list', $RecommendInit->show_type);
 </div>
 
 
+<div class="form-group show_type show_type1">
+    <label class="col-sm-2 control-label">内容11111:</label>
+    <div class="layui-input-block col-sm-6">
+         <input type="text" name="nickname" class="form-control post-params item-left" value="{$nickname|default=''}">
+        <textarea name="content" class="form-control post-params item-left">{$content|default=''}</textarea>
+    </div>
+</div>
+<div class="form-group show_type show_type2">
+    <label class="col-sm-2 control-label">内容222222:</label>
+    <div class="layui-input-block col-sm-6">
+        <input type="text" name="nickname" class="form-control post-params item-left" value="{$nickname|default=''}">
+        <textarea name="content" class="form-control post-params item-left">{$content|default=''}</textarea>
+    </div>
+</div>
+
+
 <script>
     layui.use(['layer', 'form'], function () {
         let layer = layui.layer, form = layui.form;
-        const type = $("#type").val();
-        setShow(type)
-        form.on('select(type)', function (data) {
+        const showType = $("#show_type").val();
+        setShow(showType)
+        form.on('select(show_type)', function (data) {
             setShow(data.value)
         })
 
-        function setShow(type) {
+        function setShow(showType) {
             $('.show_type').css('display', 'none');
-            $('.show_type' + type).css('display', 'block');
+            $('.show_type' + showType).css('display', 'block');
             //可以初始化值为空
         }
     });
@@ -1939,7 +1964,7 @@ $this->assign('show_type_list', $RecommendInit->show_type);
     <!--下拉框4.0  二级联动 复选框-->
 <div class="form-group">
     <label class="col-sm-2 control-label">班级:</label>
-    <div class="layui-input-block col-md-6 col-sm-10">
+    <div class="layui-input-block col-sm-6">
         <span class="grade">
         </span>
     </div>
@@ -1949,7 +1974,7 @@ $this->assign('show_type_list', $RecommendInit->show_type);
 <!--视频-->
 <div class="form-group">
     <label class="col-sm-2 control-label">视频:</label>
-    <div class="layui-input-block col-md-6 col-sm-10">
+    <div class="layui-input-block col-sm-6">
         <input id="video-00000001" class="form-control post-params" type="text" name="video"
                readonly="readonly" value="{$video|default=''}" placeholder="请上传视频">
         <notempty name="$video">
@@ -1965,7 +1990,7 @@ $this->assign('show_type_list', $RecommendInit->show_type);
 <!--文件-->
 <div class="form-group">
     <label class="col-sm-2 control-label">文件:</label>
-    <div class="layui-input-block col-md-6 col-sm-10">
+    <div class="layui-input-block col-sm-6">
         <input id="file-00000002" class="form-control post-params" type="text" name="video"
                readonly="readonly" value="{$video|default=''}" placeholder="请上传文件">
         <notempty name="$video">
@@ -1981,7 +2006,7 @@ $this->assign('show_type_list', $RecommendInit->show_type);
 <!--音频|mp3-->
 <div class="form-group">
     <label class="col-sm-2 control-label">视频:</label>
-    <div class="layui-input-block col-md-6 col-sm-10">
+    <div class="layui-input-block col-sm-6">
         <input id="audio-00000001" class="form-control post-params" type="text" name="mp3"
                readonly="readonly" value="{$mp3|default=''}" placeholder="请上传视频">
         <notempty name="$mp3">
@@ -1997,7 +2022,7 @@ $this->assign('show_type_list', $RecommendInit->show_type);
 <!--radio单选-->
 <div class="form-group">
     <label class="col-sm-2 control-label">是否为团长:</label>
-    <div class="layui-input-block col-md-6 col-sm-10">
+    <div class="layui-input-block col-sm-6">
         <if condition="isset($is_team)">
             <input name="is_team" type="radio" value="1"
             <if condition="$is_team eq 1">checked</if>
@@ -2016,7 +2041,7 @@ $this->assign('show_type_list', $RecommendInit->show_type);
 <!--radio单选 隐藏显示input-->
 <div class="form-group">
     <label class="col-sm-2 control-label">会员限购:</label>
-    <div class="layui-input-block col-md-6 col-sm-10">
+    <div class="layui-input-block col-sm-6">
         <if condition="isset($vip_goods)">
             <input name="vip_goods" onclick="showdiv()" type="radio" value="1"
             <if condition="$vip_goods eq 1">checked</if>
@@ -2069,7 +2094,7 @@ $this->assign('show_type_list', $RecommendInit->show_type);
 <span>
 <div class="form-group">
     <label class="col-sm-2 control-label">商品类型:</label>
-    <div class="layui-input-block col-md-6 col-sm-10" style="">
+    <div class="layui-input-block col-sm-6" style="">
         <if condition="!empty($type)">
             <select class="form-control post-params" lay-filter="type" lay-search name="type">
                 <foreach item="vo" key="key" name="type_list">
@@ -2290,7 +2315,7 @@ $this->assign('show_type_list', $RecommendInit->show_type);
         if (empty(count($map))) $this->success('请求成功');
 
         //二级列表
-        $two_list = $ShopGoodsModel->where($map)->order('id desc')->select();
+        $two_list = $ShopGoodsClassModel->where($map)->order('id desc')->select();
         //查询数据,方便展示二级下拉框选中值
         if ($params['item_id']) {
             $item_info = $ShopGoodsModel->where(['id' => $params['item_id']])->find();
@@ -2320,7 +2345,7 @@ $this->assign('show_type_list', $RecommendInit->show_type);
 
          //edit代码
          if ($params['class_id']) $params['search_class_id'] = $params['class_id'];
-         if ($params['second_class_id']) $params['search_class_id'] = $params['second_class_id'];
+         if ($params['class_two_id']) $params['search_class_id'] = $params['class_two_id'];
 
          *
          **/

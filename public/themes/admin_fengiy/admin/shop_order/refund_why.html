@@ -26,21 +26,21 @@
 
         <div class="form-group">
             <label class="col-sm-2 control-label">退款原由:</label>
-            <div class="layui-input-block col-md-6 col-sm-10">
+            <div class="layui-input-block col-sm-6">
                 {$refund_type}
             </div>
         </div>
 
         <div class="form-group">
             <label class="col-sm-2 control-label">退款补充:</label>
-            <div class="layui-input-block col-md-6 col-sm-10">
+            <div class="layui-input-block col-sm-6">
                 {$refund_why}
             </div>
         </div>
 
         <div class="form-group">
             <label class="col-sm-2 control-label">图片:</label>
-            <div class="layui-input-block col-md-6 col-sm-10">
+            <div class="layui-input-block col-sm-6">
                 <if condition="!empty($refund_image)">
                     <a href="javascript:imagePreviewDialog('{:cmf_get_image_preview_url($refund_image)}');">
                         <img src="{:cmf_get_image_preview_url($refund_image)}"

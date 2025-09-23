@@ -21,22 +21,47 @@ use think\facade\Db;
 
 class ShopOrderInit extends Base
 {
-    public $Field         = '*';//过滤字段,默认全部
-    public $Limit         = 100000;//如不分页,展示条数
-    public $PageSize      = 15;//分页每页,数据条数
-    public $Order         = 'id desc';//排序
-    public $InterfaceType = 'api';//接口类型:admin=后台,api=前端
 
-    public $status   = [1 => '待付款', 2 => '已付款', 4 => '已发货', 6 => '已收货', 8 => '已完成', 10 => '已取消', 12 => '退款申请', 14 => '退款不通过', 16 => '退款通过'];
-    public $pay_type = [1 => '微信支付', 2 => '余额支付', 3 => '积分支付', 4 => '支付宝支付', 5 => '组合支付'];
+
+    public $type = [
+        'goods' => '普通商品'
+    ];//商品类型
+
+    public $type_simple = [
+        'goods' => '普',
+    ];//商品类型简写
+
+
+    //后台展示状态列表,统计数量
+    //    public $status_list = [1 => '待付款', 2 => '已付款', 4 => '已发货', 6 => '已收货', 8 => '已完成', 10 => '已取消', 12 => '退款申请', 14 => '退款不通过', 16 => '退款通过'];
+    public $status_list = [1 => '待付款', 2 => '已付款', 4 => '已发货', 6 => '已收货', 8 => '已完成', 10 => '已取消'];
+
+    //后台状态,名字,条件
+    public $admin_status       = [1 => '待付款', 2 => '待发货', 4 => '已发货', 6 => '已收货', 8 => '已完成', 10 => '已取消', 12 => '退款审核中', 14 => '退款驳回', 16 => '退款成功'];
+    public $admin_status_where = [1 => [1], 2 => [2], 4 => [4], 6 => [6], 8 => [8], 10 => [10], 12 => [12], 14 => [14], 15 => [15], 16 => [16]];
+
+    //前端状态,名字,条件
+    public $api_status       = [1 => '待付款', 2 => '待发货', 4 => '已发货', 6 => '待评价', 8 => '已完成', 10 => '已取消', 12 => '退款审核中', 14 => '退款驳回', 16 => '退款成功'];
+    public $api_status_where = [1 => [1], 2 => [2, 20], 4 => [4], 6 => [6], 8 => [8], 10 => [10], 12 => [12, 14, 15, 16]];
+
+    public $pay_type = [1 => '微信支付', 2 => '余额支付', 3 => '积分支付', 4 => '支付宝支付', 5 => '组合支付', 6 => '免费'];
+
+
+    protected $Field         = '*';//过滤字段,默认全部
+    protected $Limit         = 100000;//如不分页,展示条数
+    protected $PageSize      = 15;//分页每页,数据条数
+    protected $Order         = 'id desc';//排序
+    protected $InterfaceType = 'api';//接口类型:admin=后台,api=前端
 
 
     //本init和model
     public function _init()
     {
-        $ShopOrderInit        = new \init\ShopOrderInit();//订单管理
+        $ShopOrderInit  = new \init\ShopOrderInit();//订单管理
+        $ShopOrderModel = new \initmodel\ShopOrderModel(); //订单管理  (ps:InitModel)
+
+
         $ShopOrderDetailInit  = new \init\ShopOrderDetailInit();//订单详情   (ps:InitController)
-        $ShopOrderModel       = new \initmodel\ShopOrderModel(); //订单管理  (ps:InitModel)
         $ShopOrderDetailModel = new \initmodel\ShopOrderDetailModel();//订单详情  (ps:InitModel)
     }
 
@@ -48,12 +73,13 @@ class ShopOrderInit extends Base
      */
     public function common_item($item = [], $params = [])
     {
-        $ShopOrderDetailInit  = new \init\ShopOrderDetailInit();//订单详情   (ps:InitController)
-        $MemberInit           = new \init\MemberInit();//会员管理 (ps:InitController)
+        $ShopOrderDetailInit = new \init\ShopOrderDetailInit();//订单详情   (ps:InitController)
+        $MemberInit          = new \init\MemberInit();//会员管理 (ps:InitController)
+
 
         //状态,支付方式,信息
-        $item['status_name']   = $this->status[$item['status']];
         $item['pay_type_name'] = $this->pay_type[$item['pay_type']];
+        $item['type_name']     = $this->type[$item['type']];
 
         //用户,商品信息
         $item["user_info"] = $MemberInit->get_find(['id' => $item['user_id']]);
@@ -73,10 +99,12 @@ class ShopOrderInit extends Base
         if ($params['InterfaceType']) $this->InterfaceType = $params['InterfaceType'];
         if ($this->InterfaceType == 'api') {
             //api处理文件
+            $item['status_name'] = $this->api_status[$item['status']];
 
 
         } else {
             //admin处理文件
+            $item['status_name'] = $this->admin_status[$item['status']];
 
         }
 

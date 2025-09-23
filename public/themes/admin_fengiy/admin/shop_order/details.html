@@ -1,8 +1,53 @@
 <include file="public@header"/>
 <link href="__TMPL__/public/assets/css/common.css" rel="stylesheet">
+
+<style>
+    .price-summary {
+        /*margin-top: 20px;*/
+        /*padding-top: 10px;*/
+        width: 200px;
+        margin-left: auto;
+    }
+
+    .price-row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 5px;
+    }
+
+    .price-row:last-child {
+        font-weight: bold;
+        border-top: 1px solid #eee;
+        padding-top: 5px;
+    }
+
+    .price-label {
+        width: 80px;
+        text-align: left;
+    }
+
+    .price-value {
+        width: 120px;
+        text-align: left;
+    }
+
+    /* 新增：仅用于左边时间信息的样式（纯文本，无布局） */
+    .time-info {
+        margin-bottom: 15px; /* 与右边价格信息隔开 */
+    }
+    .time-row {
+        margin-bottom: 5px;
+    }
+</style>
+
+
+
 </head>
 <body>
-<div class="steps-section">
+
+
+
+<div class="steps-section" style="display: none;">
     <div class="warp">
         <div class="step">
             <div class="left">
@@ -101,9 +146,12 @@
                 <div class="line"></div>
             </div>
         </div>
-
     </div>
 </div>
+
+
+
+
 <div class="order-details">
     <div class="warp">
         <div class="layui-font-16"><b>订单信息</b></div>
@@ -161,14 +209,14 @@
                     <div class="sub-title">买家留言：</div>
                     <span>{$remark}</span>
                 </div>
-                <div class="list-cell">
-                    <div class="sub-title">商家备注：</div>
-                    <span>{$admin_remark}</span>
-                    <!-- 如无留言为“添加备注”，否则为“修改备注” -->
-                    <i class="layui-icon layui-icon-edit layui-font-blue cursor" data-id="{$id}"
-                       data-notes="{$admin_remark}" data-toggle="tooltip" lay-on="order-tips"
-                       title="{$admin_remark?'修改备注':'添加备注'}"></i>
-                </div>
+                <!--                <div class="list-cell">-->
+                <!--                    <div class="sub-title">商家备注：</div>-->
+                <!--                    <span>{$admin_remark}</span>-->
+                <!--                    &lt;!&ndash; 如无留言为“添加备注”，否则为“修改备注” &ndash;&gt;-->
+                <!--                    <i class="layui-icon layui-icon-edit layui-font-blue cursor" data-id="{$id}"-->
+                <!--                       data-notes="{$admin_remark}" data-toggle="tooltip" lay-on="order-tips"-->
+                <!--                       title="{$admin_remark?'修改备注':'添加备注'}"></i>-->
+                <!--                </div>-->
             </div>
         </div>
     </div>
@@ -179,11 +227,10 @@
             <thead>
             <tr class="active">
                 <th class="text-center">商品信息</th>
-                <th class="text-center" width="10%">规格</th>
-                <th class="text-center" width="10%">单价</th>
-                <th class="text-center" width="10%">划线价</th>
-                <th class="text-center" width="10%">数量</th>
-                <th class="text-center" width="10%">合计</th>
+                <th class="text-center">规格</th>
+                <th class="text-center">单价</th>
+                <th class="text-center">数量</th>
+                <th class="text-center">合计</th>
             </tr>
             </thead>
             <tbody>
@@ -191,58 +238,113 @@
                 <tr>
                     <!--					<td class="text-center">{$key+1}</td>-->
                     <td class="goods-list">
-                        <if condition="$goods.image">
-                            <div class="img">
-                                <img alt="" class="img-rounded" height="70"
-                                     src="{:cmf_get_image_preview_url($goods.image)}"
-                                     width="70">
-                            </div>
-                        </if>
-                        <div class="title">{$goods.goods_name}</div>
+                        <div style="display: flex; align-items: center;">
+                            <if condition="$goods.goods_id">
+                                <if condition="$goods.image">
+                                    <div class="img">
+                                        <a href="javascript:imagePreviewDialog('{:cmf_get_image_preview_url($goods.image)}');">
+                                            <img alt=""
+                                                 class="img-rounded" height="70"
+                                                 src="{:cmf_get_image_preview_url($goods.image)}"
+                                                 width="70">
+                                        </a>
+                                    </div>
+                                </if>
+                                <div style="">
+                                    <div class="title">
+                                        <a href="{:url('index',array('page'=>$page,'type'=>$type,'order_num'=>$order_num,'goods_name'=>$goods.goods_name,'order_date'=>$order_date))}">
+                                            {$goods.goods_name}
+                                        </a>
+                                    </div>
+                                    <if condition="$goods.sku_name">
+                                        <!--                                        <span class="tags">{$goods.sku_name}</span>-->
+                                    </if>
+                                </div>
+                            </if>
+
+                            <if condition="$goods.status != 0">
+                                <div style="margin-top: 5px;">
+                                    <a class="layui-btn layui-btn-primary layui-border-red layui-btn-xs"
+                                       href="javascript:parent.openIframeLayer('{:url('shop_order_refund/find',array('detail_id'=>$goods.id))}','',{ area: ['65%', '85%'],move:'.layui-layer-title'},false);"
+                                    >退款原因</a>
+                                </div>
+                            </if>
+                        </div>
                     </td>
                     <td class="text-center">
                         <if condition="$goods.sku_name">
                             <span class="tags">{$goods.sku_name}</span>
                         </if>
+                        <if condition="$goods.status != 0">
+                            <div style="margin-top: 5px;">
+                                <a class="layui-btn layui-btn-primary layui-border-red layui-btn-xs"
+                                   href="javascript:parent.openIframeLayer('{:url('shop_order_refund/find',array('detail_id'=>$goods.id))}','',{ area: ['65%', '85%'],move:'.layui-layer-title'},false);"
+                                >退款原因</a>
+                            </div>
+                        </if>
+                        <if condition="$goods.id == $detail_id">
+                            <div style="margin-top: 5px;">
+                                本单
+                            </div>
+                        </if>
                     </td>
                     <td class="text-center">&yen; {$goods.goods_price|default='0'}</td>
-                    <td class="text-center">&yen; {$goods.line_price|default='0'}</td>
                     <td class="text-center">{$goods.count|default='1'}</td>
                     <td class="text-center">&yen; {$goods.total_amount|default='0'}</td>
                 </tr>
             </foreach>
             </tbody>
         </table>
-        <div class="text-right" style="margin-top: 10px;">
-            <span>运费</span>
-            <b style="margin-left: 5px;">&yen; {$freight_amount}</b>
+
+
+        <div style="display: flex;justify-content: space-between;align-items: center;">
+            <!-- 左边时间信息（纯文本，无样式） -->
+            <div class="time-info">
+                <div class="time-row"><cite>下单时间：</cite> {$create_time|date='Y-m-d H:i:s'}</div>
+                <notempty name="$pay_time">
+                    <div class="time-row"><cite>支付时间：</cite> {$pay_time|date='Y-m-d H:i:s'}</div>
+                </notempty>
+                <notempty name="$send_time">
+                    <div class="time-row"><cite>发货时间：</cite> {$send_time|date='Y-m-d H:i:s'}</div>
+                </notempty>
+                <notempty name="$accomplish_time">
+                    <div class="time-row"><cite>完成时间：</cite> {$accomplish_time|date='Y-m-d H:i:s'}</div>
+                </notempty>
+            </div>
+
+            <!-- 右边价格信息（完全保持原样） -->
+            <div class="price-summary">
+                <div class="price-row">
+                    <div class="price-label"><cite>优惠金额：</cite></div>
+                    <div class="price-value">&yen; {$coupon_amount}</div>
+                </div>
+                <div class="price-row">
+                    <div class="price-label"><cite>运费：</cite></div>
+                    <div class="price-value">&yen; {$freight_amount}</div>
+                </div>
+                <div class="price-row">
+                    <div class="price-label"><cite>使用积分：</cite></div>
+                    <div class="price-value">&yen; {$point}</div>
+                </div>
+                <div class="price-row">
+                    <div class="price-label"><cite>积分抵扣：</cite></div>
+                    <div class="price-value">&yen; {$point_balance}</div>
+                </div>
+                <div class="price-row">
+                    <div class="price-label"><cite>实际支付：</cite></div>
+                    <div class="price-value">&yen; {$amount}</div>
+                </div>
+
+                <!-- 总计行（加粗显示） -->
+                <div class="price-row" style="font-weight: bold; border-top: 1px solid #eee; padding-top: 5px;">
+                    <div class="price-label"><cite>总计：</cite></div>
+                    <div class="price-value">&yen; {$total_amount}</div>
+                </div>
+            </div>
         </div>
-        <div class="text-right" style="margin-top: 10px;">
-            <span>实际支付</span>
-            <b style="margin-left: 5px;">&yen; {$amount}</b>
-        </div>
-        <div class="text-right" style="margin-top: 10px;">
-            <span>总计</span>
-            <b style="margin-left: 5px;">&yen; {$total_amount}</b>
-        </div>
-        <!--		<div class="text-right" style="margin-top: 10px;">-->
-        <!--			<span>实付款</span>-->
-        <!--			<b class="layui-font-red" style="margin-left: 5px;">&yen; {$amount}</b>-->
-        <!--			<cite>(优惠券 -{$coupon_amount})</cite>-->
-        <!--		</div>-->
+
     </div>
-    <!--	<div class="operate">-->
-    <!--		<if condition="$status == 2 || $status == 14">-->
-    <!--			<a class="layui-btn layui-bg-blue layui-btn-sm" onclick="send({$id});">立即发货</a>-->
-    <!--			<elseif condition="$status == 12 or $status == 13"/>-->
-    <!--			<div class="layui-btn layui-bg-red layui-btn-sm" lay-on="order-refund" data-toggle="tooltip" title="处理退款" data-id="{$id}">处理退款</div>-->
-    <!--			<elseif condition="$status == 18"/>-->
-    <!--			<a class="layui-bg-red-light layui-circle op-btn js-ajax-dialog-btn" href="{:url('order/confirmCancel',['id'=>$info['id']])}" data-msg="确定退款吗？">-->
-    <!--				<i class="layui-icon layui-icon-util"></i>-->
-    <!--			</a>-->
-    <!--		</if>-->
-    <!--		&lt;!&ndash;<div class="layui-btn layui-btn-sm" lay-on="order-print">打印小票</div>&ndash;&gt;-->
-    <!--	</div>-->
+
 </div>
 <script src="__STATIC__/js/admin.js"></script>
 <script>

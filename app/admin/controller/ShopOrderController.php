@@ -22,23 +22,22 @@ namespace app\admin\controller;
  */
 
 
-use init\ShopOrderInit;
-use initmodel\MemberModel;
-use initmodel\ShopOrderModel;
+use api\wxapp\controller\WxBaseController;
+use initmodel\AssetModel;
 use plugins\weipay\lib\PayController;
+use think\App;
 use think\facade\Cache;
 use think\facade\Db;
+use think\facade\Log;
 use cmf\controller\AdminBaseController;
 
 
 class ShopOrderController extends AdminBaseController
 {
-
-//    public function initialize()
-//    {
-//        //订单管理
-//        parent::initialize();
-//    }
+    //    public function initialize()
+    //    {
+    //        parent::initialize();
+    //    }
 
 
     //检测是否有新订单
@@ -67,14 +66,16 @@ class ShopOrderController extends AdminBaseController
     public function index()
     {
         $params         = $this->request->param();
-        $ShopOrderInit  = new ShopOrderInit();//订单管理
-        $ShopOrderModel = new ShopOrderModel();//订单管理
+        $ShopOrderInit  = new \init\ShopOrderInit();//订单管理
+        $ShopOrderModel = new \initmodel\ShopOrderModel();//订单管理
 
 
         $where = [];
-        if ($params['keyword']) $where[] = ['order_num', 'like', "%{$params['keyword']}%"];
+        if ($params['keyword']) $where[] = ['phone|username|order_num', 'like', "%{$params['keyword']}%"];
         if ($params['order_num']) $where[] = ['order_num', 'like', "%{$params['order_num']}%"];
-        if ($params['goods_name']) $where[] = ['goods_name', '=', $params['goods_name']];
+        if ($params['goods_name']) $where[] = ['goods_name', 'like', "%{$params['goods_name']}%"];
+        if ($params['user_id']) $where[] = ['user_id', '=', $params['user_id']];
+
 
         if ($params['order_date']) {
             $order_date_arr = explode(' - ', $params['order_date']);
@@ -84,7 +85,7 @@ class ShopOrderController extends AdminBaseController
 
         //状态筛选
         $status_where = [];
-        if ($params['status']) $status_where[] = ['status', '=', $params['status']];
+        if ($params['status']) $status_where[] = ['status', 'in', $ShopOrderInit->admin_status_where[$params['status']]];
         //if (empty($params['status'])) $status_where[] = ['status', 'in', [2, 3]];
 
 
@@ -92,22 +93,21 @@ class ShopOrderController extends AdminBaseController
         $params['InterfaceType'] = 'admin';//身份类型,后台
 
 
-
         //导出数据
         if ($params["is_export"]) $this->export_excel(array_merge($where, $status_where), $params);
         $result = $ShopOrderInit->get_list_paginate(array_merge($where, $status_where), $params);
 
 
-
         $this->assign("list", $result);
-        $this->assign('page', $result->render());//单独提取分页出来
+        $this->assign('pagination', $result->render());//单独提取分页出来
+        $this->assign("page", $result->currentPage());
 
         //全部数量
         $this->assign("total", $ShopOrderModel->where($where)->count());//总数量
 
 
         //数据统计
-        $status_arr = $ShopOrderInit->status;
+        $status_arr = $ShopOrderInit->status_list;
         $count      = [];
         foreach ($status_arr as $key => $status) {
             $map                    = [];
@@ -131,12 +131,20 @@ class ShopOrderController extends AdminBaseController
     //编辑详情
     public function edit()
     {
-        $params        = $this->request->param();
-        $ShopOrderInit = new ShopOrderInit();//订单管理
+
+        $ShopOrderInit = new \init\ShopOrderInit();//订单管理
 
 
-        $where   = [];
-        $where[] = ['id', '=', $params['id']];
+        /** 获取参数 **/
+        $params = $this->request->param();
+
+        /** 查询条件 **/
+        $where = [];
+        if ($params['id']) $where[] = ["id", "=", $params["id"]];
+        if ($params['order_num']) $where[] = ["order_num", "=", $params["order_num"]];
+        if ($params['cav_code']) $where[] = ["cav_code", "=", $params["cav_code"]];
+
+
         $result  = $ShopOrderInit->get_find($where);
 
 
@@ -155,7 +163,7 @@ class ShopOrderController extends AdminBaseController
     public function edit_post()
     {
         $params        = $this->request->param();
-        $ShopOrderInit = new ShopOrderInit();//订单管理
+        $ShopOrderInit = new \init\ShopOrderInit();//订单管理
 
 
         $result = $ShopOrderInit->admin_edit_post($params);
@@ -170,7 +178,7 @@ class ShopOrderController extends AdminBaseController
     public function setRemark()
     {
         $params        = $this->request->param();
-        $ShopOrderInit = new ShopOrderInit();//订单管理
+        $ShopOrderInit = new \init\ShopOrderInit();//订单管理
 
         $result = $ShopOrderInit->admin_edit_post($params);
         if (empty($result)) $this->error('失败请重试');
@@ -190,7 +198,7 @@ class ShopOrderController extends AdminBaseController
     public function add_post()
     {
         $params        = $this->request->param();
-        $ShopOrderInit = new ShopOrderInit();//订单管理
+        $ShopOrderInit = new \init\ShopOrderInit();//订单管理
 
 
         $result = $ShopOrderInit->admin_edit_post($params);
@@ -204,13 +212,22 @@ class ShopOrderController extends AdminBaseController
     //查看详情
     public function details()
     {
-        $params        = $this->request->param();
-        $ShopOrderInit = new ShopOrderInit();//订单管理
+        $ShopOrderInit = new \init\ShopOrderInit();//订单管理
 
 
-        $where   = [];
-        $where[] = ['id', '=', $params['id']];
-        $result  = $ShopOrderInit->get_find($where);
+        /** 获取参数 **/
+        $params = $this->request->param();
+
+        /** 查询条件 **/
+        $where = [];
+        if ($params['id']) $where[] = ["id", "=", $params["id"]];
+        if ($params['order_num']) $where[] = ["order_num", "=", $params["order_num"]];
+        if ($params['cav_code']) $where[] = ["cav_code", "=", $params["cav_code"]];
+
+
+
+
+        $result = $ShopOrderInit->get_find($where);
 
 
         if (empty($result)) $this->error("暂无数据");
@@ -229,13 +246,20 @@ class ShopOrderController extends AdminBaseController
     //退款理由
     public function reason()
     {
-        $params        = $this->request->param();
-        $ShopOrderInit = new ShopOrderInit();//订单管理
+        $ShopOrderInit = new \init\ShopOrderInit();//订单管理
 
 
-        $where   = [];
-        $where[] = ['id', '=', $params['id']];
-        $result  = $ShopOrderInit->get_find($where);
+        /** 获取参数 **/
+        $params = $this->request->param();
+
+        /** 查询条件 **/
+        $where = [];
+        if ($params['id']) $where[] = ["id", "=", $params["id"]];
+        if ($params['order_num']) $where[] = ["order_num", "=", $params["order_num"]];
+        if ($params['cav_code']) $where[] = ["cav_code", "=", $params["cav_code"]];
+
+
+        $result = $ShopOrderInit->get_find($where);
 
 
         if (empty($result)) $this->error("暂无数据");
@@ -252,11 +276,20 @@ class ShopOrderController extends AdminBaseController
     //发货
     public function send()
     {
-        $params        = $this->request->param();
-        $ShopOrderInit = new ShopOrderInit();//订单管理
-        $where         = [];
-        $where[]       = ['id', '=', $params['id']];
-        $result        = $ShopOrderInit->get_find($where);
+        $ShopOrderInit = new \init\ShopOrderInit();//订单管理
+
+
+        /** 获取参数 **/
+        $params = $this->request->param();
+
+        /** 查询条件 **/
+        $where = [];
+        if ($params['id']) $where[] = ["id", "=", $params["id"]];
+        if ($params['order_num']) $where[] = ["order_num", "=", $params["order_num"]];
+        if ($params['cav_code']) $where[] = ["cav_code", "=", $params["cav_code"]];
+
+
+        $result = $ShopOrderInit->get_find($where);
         if (empty($result)) $this->error("暂无数据");
         $toArray = $result->toArray();
         foreach ($toArray as $k => $v) {
@@ -264,7 +297,7 @@ class ShopOrderController extends AdminBaseController
         }
 
         //快递公司
-        $express = Db::name('express')->select();
+        $express = Db::name('base_express')->select();
         $this->assign('express', $express);
 
         return $this->fetch();
@@ -274,42 +307,49 @@ class ShopOrderController extends AdminBaseController
     //发货提交
     public function send_post()
     {
-        $ShopOrderInit = new ShopOrderInit();//订单管理
+        $ShopOrderInit = new \init\ShopOrderInit();//订单管理
 
-        $params = $this->request->param();
-        $info   = $ShopOrderInit->get_find($params['id']);
-        if (empty($info)) $this->error('订单信息错误');
+        //订单发货后自动完成时间 单位/天
+        $order_auto_completion_time = cmf_config('order_auto_completion_time');
+
+        $params     = $this->request->param();
+        $order_info = $ShopOrderInit->get_find($params['id']);
+        if (empty($order_info)) $this->error('订单信息错误');
+
+        if (empty($params['exp_num'])) $this->error('快递单号不能为空');
+
 
         //快递信息
-        $express_info = Db::name('express')->find($params['exp_id']);
+        $express_info = Db::name('base_express')->find($params['exp_id']);
 
         //更改订单信息
-        $params['exp_name']  = $express_info['name'];//快递名称
-        $params['status']    = 4;
-        $params['send_time'] = time();
+        $params['exp_name']             = $express_info['name'];//快递名称
+        $params['status']               = 4;
+        $params['send_time']            = time();
+        $params['auto_accomplish_time'] = time() + $order_auto_completion_time * 86400;//自动完成时间
         $ShopOrderInit->edit_post($params);
 
 
         //        $map     = [];
-        //        $map[]   = ['order_num', '=', $info['order_num']];
+        //        $map[]   = ['order_num', '=', $order_info['order_num']];
         //        $map[]   = ['status', '=', 2];
-        //        $pay_num = Db::name('order_pay')->where($map)->value('pay_num');
+        //        $pay_num = Db::name('base_order_pay')->where($map)->value('pay_num');
         //
         //        //微信支付&发货
-        //        if ($info['pay_type'] != 2) {
-        //            $phone   = $info['phone'];
+        //        if ($order_info['pay_type'] != 2) {
+        //            $phone   = $order_info['phone'];
         //            $exp_num = $params['exp_num'];
         //            //发货
-        //            $openid           = $info['openid'];
-        //            $WeChatController = new WeChatController();
+        //            $openid           = $order_info['openid'];
+        //            $WxBaseController = new WxBaseController();
         //
         //
         //            if ($params['is_virtual'] == 2) {
         //                //虚拟发货
-        //                $send_result = $WeChatController->uploadShippingInfo($pay_num, $openid, '订单发货', 3);
+        //                $send_result = $WxBaseController->uploadShippingInfo($pay_num, $openid, '订单发货', 3);
         //            } else {
         //                //快递发货
-        //                $send_result = $WeChatController->uploadShippingInfo($pay_num, $openid, '订单发货', 1, $express_info['abbr'], $exp_num, $phone);
+        //                $send_result = $WxBaseController->uploadShippingInfo($pay_num, $openid, '订单发货', 1, $express_info['abbr'], $exp_num, $phone);
         //            }
         //
         //            if ($send_result) {
@@ -323,11 +363,48 @@ class ShopOrderController extends AdminBaseController
     }
 
 
+    //核销订单
+    public function verification_order()
+    {
+        $ShopOrderModel = new \initmodel\ShopOrderModel(); //订单管理  (ps:InitModel)
+
+        /** 获取参数 **/
+        $params = $this->request->param();
+
+        /** 查询条件 **/
+        $where = [];
+        if ($params['id']) $where[] = ["id", "=", $params["id"]];
+        if ($params['order_num']) $where[] = ["order_num", "=", $params["order_num"]];
+        if ($params['cav_code']) $where[] = ["cav_code", "=", $params["cav_code"]];
+
+
+        /** 查询数据 **/
+        $order_info = $ShopOrderModel->where($where)->find();
+        if (empty($order_info)) $this->error("暂无数据");
+        if ($order_info['status'] != 2) $this->error("订单状态错误");
+
+
+        $result = $ShopOrderModel->where($where)->strict(false)->update([
+            "status"          => 8,
+            "update_time"     => time(),
+            "accomplish_time" => time(),
+        ]);
+        if (empty($result)) $this->error("失败请重试");
+
+        //订单完成,发佣金等操作
+        //        $InitController = new InitController();//基础接口
+        //        $InitController->orderCommentPoint($order_info['user_id'], $order_info['order_num']);
+
+
+        $this->success("操作成功");
+    }
+
+
     //删除
     public function delete()
     {
         $params        = $this->request->param();
-        $ShopOrderInit = new ShopOrderInit();//订单管理
+        $ShopOrderInit = new \init\ShopOrderInit();//订单管理
 
 
         $where = [];
@@ -345,13 +422,35 @@ class ShopOrderController extends AdminBaseController
         $this->success("删除成功", 'index' . $this->params_url);
     }
 
+    //删除
+    public function delete_order()
+    {
+        $params        = $this->request->param();
+        $ShopOrderInit = new \init\ShopOrderInit();//订单管理
+
+
+        $where = [];
+        if ($params['id']) $where[] = ['id', '=', $params['id']];
+        if (empty($params['id'])) {
+            $ids     = $this->request->param('ids/a');
+            $where[] = ['id', 'in', $ids];
+        }
+
+
+        $result = $ShopOrderInit->delete_post($where, 2);
+        if (empty($result)) $this->error('失败请重试');
+
+
+        $this->success("删除成功", 'index' . $this->params_url);
+    }
+
 
     //修改状态
     public function status_post()
     {
         $params        = $this->request->param();
         $status        = $this->request->param('status');
-        $ShopOrderInit = new ShopOrderInit();//订单管理
+        $ShopOrderInit = new \init\ShopOrderInit();//订单管理
 
 
         $id = $this->request->param('id/a');
@@ -373,7 +472,7 @@ class ShopOrderController extends AdminBaseController
     public function refuse()
     {
         $params        = $this->request->param();
-        $ShopOrderInit = new ShopOrderInit();//订单管理
+        $ShopOrderInit = new \init\ShopOrderInit();//订单管理
 
 
         $where   = [];
@@ -395,51 +494,65 @@ class ShopOrderController extends AdminBaseController
     //退款操作,退款全部金额
     public function reject_post()
     {
-        $params        = $this->request->param();
-        $ShopOrderInit = new ShopOrderInit();//订单管理
-        $Pay           = new PayController();
+        $params           = $this->request->param();
+        $ShopOrderInit    = new \init\ShopOrderInit();//订单管理
+        $WxBaseController = new WxBaseController();//微信基础类
 
 
         if ($params['status'] == 14) $params['refund_reject_time'] = time();
 
 
         if ($params['status'] == 16) {
-            $info = $ShopOrderInit->get_find($params['id']);
+            $order_info = $ShopOrderInit->get_find($params['id']);
             //退款金额
-            $refund_amount = $info['amount'];
-            if ($info['pay_type'] == 2) $refund_amount = $info['balance'];
+            $refund_amount = $order_info['amount'];
+            if ($order_info['pay_type'] == 2) $refund_amount = $order_info['balance'];
             //退款通过时间
             $params['refund_pass_time'] = time();
 
-            //获取支付单号
-            $map     = [];
-            $map[]   = ['order_num', '=', $info['order_num']];
-            $map[]   = ['status', '=', 2];
-            $pay_num = Db::name('order_pay')->where($map)->value('pay_num');
-
             //退款 && 微信退款
-            if ($info['pay_type'] == 1) {
-                $refund_result = $Pay->wx_pay_refund($pay_num, $refund_amount);
-                $refund_result = json_decode($refund_result['data'], true);
-                if (!isset($refund_result['amount'])) $this->error($refund_result['message']);
+            if ($order_info['pay_type'] == 1) {
+                $refund_result = $WxBaseController->wx_refund($order_info['pay_num'], $refund_amount, $order_info['amount']);//后台  退款操作,退款全部金额 &&微信
+                if ($refund_result['code'] == 0) $this->error($refund_result['msg']);
             }
             //余额退款
-            if ($info['pay_type'] == 2) {
+            if ($order_info['pay_type'] == 2) {
                 $admin_id_and_name = cmf_get_current_admin_id() . '-' . session('name');//管理员信息
-                $remark            = "操作人[{$admin_id_and_name}];操作说明[同意退款订单:{$info['order_num']};金额:{$info['balance']}];操作类型[管理员同意退款申请];";//管理备注
-                MemberModel::inc_balance($info['user_id'], $refund_amount, '订单退款成功', $remark, $info['id'], $info['order_num'], 200);
+                $remark            = "操作人[{$admin_id_and_name}];操作说明[同意退款订单:{$order_info['order_num']};金额:{$order_info['balance']}];操作类型[管理员同意退款申请];";//管理备注
+                AssetModel::incAsset('后台余额,订单退款成功,增加余额,全额退款 [110]', [
+                    'operate_type'  => 'balance',//操作类型，balance|point ...
+                    'identity_type' => 'member',//身份类型，member| ...
+                    'user_id'       => $order_info['user_id'],
+                    'price'         => $refund_amount,
+                    'order_num'     => $order_info['order_num'],
+                    'order_type'    => 110,
+                    'content'       => '订单退款成功',
+                    'remark'        => $remark,
+                    'order_id'      => $order_info['id'],
+                ]);
             }
             //组合支付 &&微信+余额
-            if ($info['pay_type'] == 5) {
+            if ($order_info['pay_type'] == 5) {
                 //余额
                 $admin_id_and_name = cmf_get_current_admin_id() . '-' . session('name');//管理员信息
-                $remark            = "操作人[{$admin_id_and_name}];操作说明[同意退款订单:{$info['order_num']};金额:{$info['balance']}];操作类型[管理员同意退款申请];";//管理备注
-                MemberModel::inc_balance($info['user_id'], $info['balance'], '订单退款成功', $remark, $info['id'], $info['order_num'], 200);
+                $remark            = "操作人[{$admin_id_and_name}];操作说明[同意退款订单:{$order_info['order_num']};金额:{$order_info['balance']}];操作类型[管理员同意退款申请];";//管理备注
+
+                AssetModel::incAsset('后台余额,订单退款成功,组合支付,部分退款 [110]', [
+                    'operate_type'  => 'balance',//操作类型，balance|point ...
+                    'identity_type' => 'member',//身份类型，member| ...
+                    'user_id'       => $order_info['user_id'],
+                    'price'         => $order_info['balance'],
+                    'order_num'     => $order_info['order_num'],
+                    'order_type'    => 110,
+                    'content'       => '订单退款成功',
+                    'remark'        => $remark,
+                    'order_id'      => $order_info['id'],
+                ]);
+
 
                 //微信
-                $refund_result = $Pay->wx_pay_refund($pay_num, $info['amount']);
-                $refund_result = json_decode($refund_result['data'], true);
-                if (!isset($refund_result['amount'])) $this->error($refund_result['message']);
+                $refund_result = $WxBaseController->wx_refund($order_info['pay_num'], $refund_amount, $order_info['amount']);//后台  退款操作,退款全部金额 &&微信+余额
+                if ($refund_result['code'] == 0) $this->error($refund_result['msg']);
             }
         }
 
@@ -455,49 +568,65 @@ class ShopOrderController extends AdminBaseController
     //部分金额退款
     public function reject_post2()
     {
-        $params        = $this->request->param();
-        $ShopOrderInit = new ShopOrderInit();//订单管理
-        $Pay           = new PayController();
+        $params           = $this->request->param();
+        $ShopOrderInit    = new \init\ShopOrderInit();//订单管理
+        $WxBaseController = new WxBaseController();//微信基础类
 
         //退款金额
         $refund_amount              = $params['refund_amount'];
-        $info                       = $ShopOrderInit->get_find($params['id']);
+        $order_info                 = $ShopOrderInit->get_find($params['id']);
         $params['refund_pass_time'] = time();//退款通过时间
         $params['status']           = 16;
 
 
-        //获取支付单号
-        $map     = [];
-        $map[]   = ['order_num', '=', $info['order_num']];
-        $map[]   = ['status', '=', 2];
-        $pay_num = Db::name('order_pay')->where($map)->value('pay_num');
-
-        if ($refund_amount > $info['amount']) $this->error('请输入有效金额!');
+        if ($refund_amount > $order_info['amount']) $this->error('请输入有效金额!');
 
 
         //退款 && 微信退款
-        if ($info['pay_type'] == 1) {
-            $refund_result = $Pay->wx_pay_refund($pay_num, $refund_amount);
-            $refund_result = json_decode($refund_result['data'], true);
-            if (!isset($refund_result['amount'])) $this->error($refund_result['message']);
+        if ($order_info['pay_type'] == 1) {
+            $refund_result = $WxBaseController->wx_refund($order_info['pay_num'], $refund_amount, $order_info['amount']);//后台  部分金额退款  &&微信
+            if ($refund_result['code'] == 0) $this->error($refund_result['msg']);
         }
         //余额退款
-        if ($info['pay_type'] == 2) {
+        if ($order_info['pay_type'] == 2) {
             $admin_id_and_name = cmf_get_current_admin_id() . '-' . session('name');//管理员信息
-            $remark            = "操作人[{$admin_id_and_name}];操作说明[同意退款订单:{$info['order_num']};金额:{$info['balance']}];操作类型[管理员同意退款申请];";//管理备注
-            MemberModel::inc_balance($info['user_id'], $refund_amount, '订单退款成功', $remark, $info['id'], $info['order_num'], 200);
+            $remark            = "操作人[{$admin_id_and_name}];操作说明[同意退款订单:{$order_info['order_num']};金额:{$order_info['balance']}];操作类型[管理员同意退款申请];";//管理备注
+
+            AssetModel::incAsset('后台余额,订单退款成功,手动输入金额退款 [110]', [
+                'operate_type'  => 'balance',//操作类型，balance|point ...
+                'identity_type' => 'member',//身份类型，member| ...
+                'user_id'       => $order_info['user_id'],
+                'price'         => $refund_amount,
+                'order_num'     => $order_info['order_num'],
+                'order_type'    => 110,
+                'content'       => '订单退款成功',
+                'remark'        => $remark,
+                'order_id'      => $order_info['id'],
+            ]);
+
         }
         //组合支付 &&微信+余额
-        if ($info['pay_type'] == 5) {
+        if ($order_info['pay_type'] == 5) {
             //余额
             $admin_id_and_name = cmf_get_current_admin_id() . '-' . session('name');//管理员信息
-            $remark            = "操作人[{$admin_id_and_name}];操作说明[同意退款订单:{$info['order_num']};金额:{$info['balance']}];操作类型[管理员同意退款申请];";//管理备注
-            MemberModel::inc_balance($info['user_id'], $info['balance'], '订单退款成功', $remark, $info['id'], $info['order_num'], 200);
+            $remark            = "操作人[{$admin_id_and_name}];操作说明[同意退款订单:{$order_info['order_num']};金额:{$order_info['balance']}];操作类型[管理员同意退款申请];";//管理备注
+
+            AssetModel::incAsset('后台余额,订单退款成功,组合支付,手动输入金额退款 [110]', [
+                'operate_type'  => 'balance',//操作类型，balance|point ...
+                'identity_type' => 'member',//身份类型，member| ...
+                'user_id'       => $order_info['user_id'],
+                'price'         => $order_info['balance'],
+                'order_num'     => $order_info['order_num'],
+                'order_type'    => 110,
+                'content'       => '订单退款成功',
+                'remark'        => $remark,
+                'order_id'      => $order_info['id'],
+            ]);
 
             //微信
-            $refund_result = $Pay->wx_pay_refund($pay_num, $info['amount']);
-            $refund_result = json_decode($refund_result['data'], true);
-            if (!isset($refund_result['amount'])) $this->error($refund_result['message']);
+            $refund_amount = $order_info['amount'];
+            $refund_result = $WxBaseController->wx_refund($order_info['pay_num'], $refund_amount, $order_info['amount']);//后台  部分金额退款  &&微信+余额
+            if ($refund_result['code'] == 0) $this->error($refund_result['msg']);
         }
 
 
@@ -513,7 +642,7 @@ class ShopOrderController extends AdminBaseController
     public function refund_why()
     {
         $params        = $this->request->param();
-        $ShopOrderInit = new ShopOrderInit();//订单管理
+        $ShopOrderInit = new \init\ShopOrderInit();//订单管理
         $where         = [];
         $where[]       = ['id', '=', $params['id']];
         $result        = $ShopOrderInit->get_find($where);
@@ -533,12 +662,15 @@ class ShopOrderController extends AdminBaseController
      */
     public function export_excel($where = [], $params = [])
     {
-        $ShopOrderInit = new ShopOrderInit();//订单管理
+        $ShopOrderInit = new \init\ShopOrderInit();//订单管理
 
         $result = $ShopOrderInit->get_list($where, $params);
         $result = $result->toArray();
 
         foreach ($result as $k => &$item) {
+            //背景颜色
+            if ($item['unit'] == '测试8') $item['BackgroundColor'] = 'red';
+
 
             //订单号过长问题
             if ($item["order_num"]) $item["order_num"] = $item["order_num"] . "\t";
@@ -579,8 +711,8 @@ class ShopOrderController extends AdminBaseController
             ["rowName" => "ID", "rowVal" => "id", "width" => 10],
             ["rowName" => "用户信息", "rowVal" => "userInfo", "width" => 30],
             ["rowName" => "订单号", "rowVal" => "order_num", "width" => 30],
-            ["rowName" => "状态", "rowVal" => "status_text", "width" => 30],
-            ["rowName" => "支付方式", "rowVal" => "pay_type_text", "width" => 30],
+            ["rowName" => "状态", "rowVal" => "status_name", "width" => 30],
+            ["rowName" => "支付方式", "rowVal" => "pay_type_name", "width" => 30],
             ["rowName" => "订单金额", "rowVal" => "total_amount", "width" => 30],
             ["rowName" => "收货地址", "rowVal" => "addressInfo", "width" => 30],
             ["rowName" => "商品信息", "rowVal" => "goodsInfo", "width" => 30],

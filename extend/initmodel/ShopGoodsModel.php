@@ -10,7 +10,7 @@ namespace initmodel;
     *     "model_name"       =>"ShopGoodsModel",
     *     "remark"           =>"商品管理",
     *     "author"           =>"",
-    *     "create_time"      =>"2024-08-26 10:46:44",
+    *     "create_time"      =>"2025-06-18 17:05:22",
     *     "version"          =>"1.0",
     *     "use"              => new \initmodel\ShopGoodsModel();
     * )

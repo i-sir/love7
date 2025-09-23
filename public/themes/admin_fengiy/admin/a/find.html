@@ -27,14 +27,15 @@
           action="{:url('edit_post',['id'=>$id,'page'=>$page,'params'=>$params])}">
 
 
+        <!--用户信息-->
         <div class="form-group">
             <label class="col-sm-2 control-label">用户信息:</label>
-            <div class="layui-input-block col-md-6 col-sm-10">
+            <div class="layui-input-block col-sm-6">
                 <if condition='!empty($user_info)'>
                     <p>(ID:{$user_info.id})</p>
                     <a href="javascript:imagePreviewDialog('{:cmf_get_image_preview_url($user_info.avatar)}');">
                         <img src='{:cmf_get_image_preview_url($user_info.avatar)}'
-                             style='width: 45px;'>
+                             style='height: 45px;'>
                     </a>
                     <span ondblclick="copyContent('{$user_info.openid}')">{$user_info.nickname}</span>
                     <else/>
@@ -44,14 +45,42 @@
         </div>
 
 
+
+        <!--图片视频 一块显示-->
+        <div class="form-group">
+            <label class="col-sm-2 control-label">附件信息:</label>
+            <div class="layui-input-block col-sm-6">
+                <if condition="!empty($images)">
+                    <foreach name="$images" item="value">
+                        <if condition="strpos($value, '.mp4') !== false">
+                            <div>
+                                <video src="{$value}" controls="controls" width="150px;"
+                                       height="150px;"></video>
+                                <!--                                    <a href="{$value}" target="_blank">查看视频</a>-->
+                            </div>
+                            <else/>
+                            <div>
+                                <a href="javascript:imagePreviewDialog('{:cmf_get_image_preview_url($value)}');">
+                                    <img src="{:cmf_get_image_preview_url($value)}"
+                                         style="height:40px; ">
+                                </a>
+                            </div>
+                        </if>
+                    </foreach>
+                </if>
+            </div>
+        </div>
+
+
+        <!--多图-->
         <div class="form-group">
             <label class="col-sm-2 control-label">多图:</label>
-            <div class="layui-input-block col-md-6 col-sm-10">
+            <div class="layui-input-block col-sm-6">
                 <if condition="!empty($images)">
                     <foreach name="images" item="value">
                         <a href="javascript:imagePreviewDialog('{:cmf_get_image_preview_url($value)}');">
                             <img src="{:cmf_get_image_preview_url($value)}"
-                                 style="width:40px;height:40px; ">
+                                 style="height:40px; ">
                         </a>
                     </foreach>
                 </if>
@@ -59,17 +88,40 @@
         </div>
 
 
+        <!--单图-->
         <div class="form-group">
             <label class="col-sm-2 control-label">单图:</label>
-            <div class="layui-input-block col-md-6 col-sm-10">
+            <div class="layui-input-block col-sm-6">
                 <if condition="!empty($image)">
                     <a href="javascript:imagePreviewDialog('{:cmf_get_image_preview_url($image)}');">
                         <img src="{:cmf_get_image_preview_url($image)}"
-                             style="width:40px;height:40px; ">
+                             style="height:40px; ">
                     </a>
                 </if>
             </div>
         </div>
+
+        <!--文件-->
+        <div class="form-group">
+            <label class="col-sm-2 control-label">文件:</label>
+            <div class="layui-input-block col-sm-6">
+                <input type="hidden" name="video" value="{$video|default=''}">
+                <notempty name="$video">
+                    <a id="file-preview" href="{:cmf_get_file_download_url($video)}"
+                       target="_blank">下载</a>
+                </notempty>
+            </div>
+        </div>
+
+
+        <!--日期-->
+        <div class="form-group">
+            <label class="col-sm-2 control-label">有效终止日期:</label>
+            <div class="layui-input-block col-sm-6">
+                {:isset($end_time) && $end_time > 10000 ? date('Y-m-d H:i:s', $end_time) : ''}
+            </div>
+        </div>
+
 
 
         <!-- 主键id -->

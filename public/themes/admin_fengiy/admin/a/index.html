@@ -578,25 +578,23 @@
 
 
         <!--        控制器-->
-        <!--        $where[] = $this->getBetweenTime($params['beginTime'], $params['endTime']);  -->
-        开始时间：
+        <!--        $where[] = $this->getBetweenTime($params['begin_time'], $params['end_time']);  -->
+        时间筛选：
         <div class="form-group">
             <div class="layui-form-item">
-                <div class="col-md-6 col-sm-10"
-                     style="display: flex;margin-top: 10px;width: 180px;margin-right: 50px">
-                    <input type="text" class="form-control post-params js-date" name="beginTime"
-                           value="{:input('request.beginTime/s','')}" placeholder="请输入开始时间">
+                <div class="col-sm-6"
+                     style="display: flex;margin-top: 10px;width: 180px;margin-right: 40px">
+                    <input type="text" class="form-control post-params js-date" name="begin_time"
+                           value="{:input('request.begin_time/s','')}" placeholder="请输入开始时间">
                 </div>
             </div>
         </div>
-
-
-        结束时间：
+        ~
         <div class="form-group">
             <div class="layui-form-item">
-                <div class="col-md-6 col-sm-10" style="display: flex;margin-top: 10px;width: 150px;">
-                    <input type="text" class="form-control post-params js-date" name="endTime"
-                           value="{:input('request.endTime/s','')}" placeholder="请输入结束时间">
+                <div class="col-sm-6" style="display: flex;width: 150px;margin-top: 10px;!important;">
+                    <input type="text" class="form-control post-params js-date" name="end_time"
+                           value="{:input('request.end_time/s','')}" placeholder="请输入结束时间">
                 </div>
             </div>
         </div>
@@ -604,9 +602,10 @@
 
         <button type="submit" class="layui-btn" style="margin-left: 10px">搜索</button>
         <a style="text-decoration:none;" class="layui-btn layui-bg-orange"
-           href="javascript:parent.openIframeLayer('{:url('test_import')}','导入',{ area: ['65%', '85%'],move:'.layui-layer-title'},true);">
+           href="javascript:parent.openIframeLayer('{:url('import')}','导入',{ area: ['38%', '60%'],move:'.layui-layer-title'},true);">
             导入
         </a>
+
         <a type="button" class="layui-btn layui-bg-blue ajax-export" href="javascript:;">导出</a>
         <a class="layui-btn layui-bg-red" href="{:url('index',array('page'=>$page,'params'=>$params))}">清空</a>
         <input type="hidden" name="is_export" class="is_export" value="0">
@@ -643,23 +642,24 @@
         <table class="table table-hover table-bordered">
             <thead>
             <tr>
-                <th style="width: 16px">
+                <th style="text-align:center;width: 20px;line-height: 32px;">
                     <label>
-                        <input type="checkbox" class="js-check-all" data-direction="x" data-checklist="js-check-x">
+                        <input style="transform: scale(1.5);" type="checkbox" class="js-check-all" data-direction="x"
+                               data-checklist="js-check-x">
                     </label>
                 </th>
-                <th style="width: 60px">排序</th>
+                <th style="">排序</th>
 
-                <th style="width: 60px">ID</th>
-                <th style="width: 60px">用户信息</th>
-                <th style="width: 60px">礼物名字</th>
-                <th style="width: 60px">礼物价格</th>
-                <th style="width: 60px">礼物图片</th>
-                <th style="width: 60px">多图</th>
-                <th style="width: 60px">状态</th>
-                <th style="width: 60px">推荐</th>
-                <th style="width: 60px">创建时间</th>
-                <th style="width: 160px">操作</th>
+                <th style="">ID</th>
+                <th style="">用户信息</th>
+                <th style="">礼物名字</th>
+                <th style="">礼物价格</th>
+                <th style="">礼物图片</th>
+                <th style="">多图</th>
+                <th style="">状态</th>
+                <th style="">推荐</th>
+                <th style="">创建时间</th>
+                <th style="">操作</th>
             </tr>
             </thead>
             <tbody>
@@ -667,12 +667,13 @@
 
             <foreach name="list" item="vo">
                 <tr>
-                    <td>
+                    <td style="text-align:center;width: 20px;line-height: 32px;">
                         <input type="checkbox" class="js-check" data-yid="js-check-y" data-xid="js-check-x" name="ids[]"
-                               value="{$vo.id}">
+                               style="transform: scale(1.5);" value="{$vo.id}">
                     </td>
-                    <td>
-                        <input type="text" class="input input-order valid" name="list_order[{$vo.id}]"
+                    <td style="width: 90px;">
+                        <input style="width: 100%;!important;" type="text"
+                               class="form-control input input-order valid post-params" name="list_order[{$vo.id}]"
                                value="{$vo.list_order}">
                     </td>
 
@@ -711,7 +712,11 @@
                     <td>{$vo.price}</td>
                     <td>{$vo.particulars|mb_substr=0,10}...</td>
                     <td>截取前30位字符 {:mb_substr($vo.introduce,0,30,"utf-8")}</td>
-
+                    <td>
+                        时间戳时间格式化
+                        {:isset($vo.receive_time) && $vo.receive_time > 10000 ? date('Y-m-d H:i:s', $vo.receive_time) :
+                        ''}
+                    </td>
                     <td>{$vo.blacklist==1?'正常':'已拉黑'}</td>
                     <td>
                         <if condition="$vo.is_recommend == 1">
@@ -720,6 +725,15 @@
                             已推荐
                         </if>
                     </td>
+                    <td>
+                        <div data-toggle="tooltip"
+                             title="{$vo.introduce}"
+                             style="width: 200px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"
+                        >
+                            {$vo.introduce}
+                        </div>
+                    </td>
+                    <!--隐藏多余显示,并在上面放显示所有信息-->
                     <td>{$vo.createtime|date='Y-m-d H:i:s'}</td>
 
                     <!--复制按钮,用于邀请码,唯一code-->
@@ -740,11 +754,12 @@
                         <if condition="!empty($vo.user_info)">
                             <div style="display: flex;align-items: center;">
                                 <a href="javascript:imagePreviewDialog('{:cmf_get_image_preview_url($vo.user_info.avatar)}');">
-                                    <img src="{:cmf_get_image_preview_url($vo.user_info.avatar)}"
-                                         style="width:40px;height:40px;">
+                                    <img class='img-rounded' src="{:cmf_get_image_preview_url($vo.user_info.avatar)}"
+                                         style="height:40px;">
                                 </a>
                                 <div style="margin-left: 6px;">
-                                    <p ondblclick="copyContent('{$vo.user_info.openid}')">{$vo.user_info.nickname} ({$vo.user_info.id})</p>
+                                    <p ondblclick="copyContent('{$vo.user_info.openid}')">{$vo.user_info.nickname}
+                                        ({$vo.user_info.id})</p>
                                     <p>{$vo.user_info.phone}</p>
                                 </div>
                             </div>
@@ -757,6 +772,52 @@
                     <td>
                         <if condition="$vo.file_url">
                             <a href="{$vo.file_url}" target="_blank">查看</a>
+                        </if>
+                    </td>
+
+
+                    <!--图片视频 一块显示-->
+                    <td>
+                        <if condition="!empty($vo.images)">
+                            <foreach name="$vo.images" item="value">
+                                <if condition="strpos($value, '.mp4') !== false">
+                                    <div>
+                                        <video src="{$value}" controls="controls" width="150px;"
+                                               height="150px;"></video>
+                                        <!--                                    <a href="{$value}" target="_blank">查看视频</a>-->
+                                    </div>
+                                    <else/>
+                                    <div>
+                                        <a href="javascript:imagePreviewDialog('{:cmf_get_image_preview_url($value)}');">
+                                            <img src="{:cmf_get_image_preview_url($value)}"
+                                                 style="height:40px; ">
+                                        </a>
+                                    </div>
+                                </if>
+                            </foreach>
+                        </if>
+                    </td>
+
+                    <!--单张展示-->
+                    <td>
+                        <if condition="!empty($vo.image)">
+                            <a href="javascript:imagePreviewDialog('{:cmf_get_image_preview_url($vo.image)}');">
+                                <img src="{:cmf_get_image_preview_url($vo.image)}"
+                                     style="height:40px; ">
+                            </a>
+                        </if>
+                    </td>
+
+
+                    <!--多图展示-->
+                    <td>
+                        <if condition="!empty($vo.images)">
+                            <foreach name="$vo.images" item="value">
+                                <a href="javascript:imagePreviewDialog('{:cmf_get_image_preview_url($value)}');">
+                                    <img src="{:cmf_get_image_preview_url($value)}"
+                                         style="height:40px; ">
+                                </a>
+                            </foreach>
                         </if>
                     </td>
 
@@ -791,31 +852,6 @@
                         </script>
                     </td>
 
-
-                    <!--单张展示-->
-                    <td>
-                        <if condition="!empty($vo.image)">
-                            <a href="javascript:imagePreviewDialog('{:cmf_get_image_preview_url($vo.image)}');">
-                                <img src="{:cmf_get_image_preview_url($vo.image)}"
-                                     style="width:40px;height:40px; ">
-                            </a>
-                        </if>
-                    </td>
-
-
-                    <!--多图展示-->
-                    <td>
-                        <if condition="!empty($vo.images)">
-                            <foreach name="$vo.images" item="value">
-                                <a href="javascript:imagePreviewDialog('{:cmf_get_image_preview_url($value)}');">
-                                    <img src="{:cmf_get_image_preview_url($value)}"
-                                         style="width:40px;height:40px; ">
-                                </a>
-                            </foreach>
-                        </if>
-                    </td>
-
-
                     <td>
                         <!--状态-->
                         <!--开关 class加上 layui-form-->
@@ -832,25 +868,7 @@
 
 
                                 form.on('switch(status)', function (data) {
-                                    var id = data.value;
-                                    var status = 2;//未选中状态值
-                                    if (this.checked) {
-                                        status = 1;//选中状态值
-                                    }
-                                    $.ajax({
-                                        url: "{:url('batch_post')}",
-                                        type: "POST",
-                                        data: {id: id, status: status},
-                                        success: function (res) {
-                                            //console.log(res);
-                                            if (res.code == 1) {
-                                                layer.msg(res.msg, {icon: 1});
-                                                location.reload();
-                                            } else {
-                                                layer.msg(res.msg, {icon: 7});
-                                            }
-                                        }
-                                    });
+                                    batchPost(data.value, 'status', this.checked ? 1 : 2)
                                 });
 
 
@@ -873,27 +891,8 @@
                             layui.use(['layer', 'form', 'slider'], function () {
                                 var layer = layui.layer, form = layui.form;
 
-
                                 form.on('switch(is_recommend)', function (data) {
-                                    var id = data.value;
-                                    var is_recommend = 2;//未选中状态值
-                                    if (this.checked) {
-                                        is_recommend = 1;//选中状态值
-                                    }
-                                    $.ajax({
-                                        url: "{:url('batch_post')}",
-                                        type: "POST",
-                                        data: {id: id, is_recommend: is_recommend},
-                                        success: function (res) {
-                                            //console.log(res);
-                                            if (res.code == 1) {
-                                                layer.msg(res.msg, {icon: 1});
-                                                location.reload();
-                                            } else {
-                                                layer.msg(res.msg, {icon: 7});
-                                            }
-                                        }
-                                    });
+                                    batchPost(data.value, 'is_recommend', this.checked ? 1 : 2)
                                 });
 
 
@@ -919,25 +918,7 @@
 
 
                                 form.on('switch(is_show)', function (data) {
-                                    var id = data.value;
-                                    var is_show = 2;//未选中状态值
-                                    if (this.checked) {
-                                        is_show = 1;//选中状态值
-                                    }
-                                    $.ajax({
-                                        url: "{:url('batch_post')}",
-                                        type: "POST",
-                                        data: {id: id, is_show: is_show},
-                                        success: function (res) {
-                                            //console.log(res);
-                                            if (res.code == 1) {
-                                                layer.msg(res.msg, {icon: 1});
-                                                location.reload();
-                                            } else {
-                                                layer.msg(res.msg, {icon: 7});
-                                            }
-                                        }
-                                    });
+                                    batchPost(data.value, 'is_show', this.checked ? 1 : 2)
                                 });
 
 
@@ -962,27 +943,8 @@
                                 var layer = layui.layer, form = layui.form;
 
                                 form.on('switch(is_index)', function (data) {
-                                    var id = data.value;
-                                    var is_index = 2;//未选中状态值
-                                    if (this.checked) {
-                                        is_index = 1;//选中状态值
-                                    }
-                                    $.ajax({
-                                        url: "{:url('batch_post')}",
-                                        type: "POST",
-                                        data: {id: id, is_index: is_index},
-                                        success: function (res) {
-                                            //console.log(res);
-                                            if (res.code == 1) {
-                                                layer.msg(res.msg, {icon: 1});
-                                                location.reload();
-                                            } else {
-                                                layer.msg(res.msg, {icon: 7});
-                                            }
-                                        }
-                                    });
+                                    batchPost(data.value, 'is_index', this.checked ? 1 : 2)
                                 });
-
 
                             });
                         </script>
@@ -1116,8 +1078,41 @@
 </body>
 </html>
 
+
+<script>
+    layui.use(['layer', 'form', 'slider'], function () {
+        var layer = layui.layer, form = layui.form;
+
+        form.on('switch(status)', function (data) {
+            batchPost(data.value, 'status', this.checked ? 1 : 2)
+        });
+
+    });
+</script>
+
 <!--导出-->
 <script>
+    function batchPost(id, field, value) {
+        $.ajax({
+            url: "{:url('batch_post')}",
+            type: "POST",
+            data: {id: id, [field]: value},
+            success: function (res) {
+                if (res.code === 1) {
+                    layer.msg(res.msg, {icon: 1});
+
+                    let time1 = setInterval(function () {
+                        //页面自动刷新
+                        location.reload();
+                    }, 500);
+                } else {
+                    layer.msg(res.msg, {icon: 7});
+                }
+            }
+        });
+    }
+
+
     //导出
     $(".ajax-export").click(function () {
         //alert("正在开发中...");

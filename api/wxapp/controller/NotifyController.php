@@ -229,6 +229,7 @@ class NotifyController extends AuthController
         $MemberModel               = new \initmodel\MemberModel();//用户管理
         $MemberRechargeOrderModel  = new \initmodel\MemberRechargeOrderModel(); //充值订单   (ps:InitModel)
         $MemberVipModel            = new \initmodel\MemberVipModel(); //用户等级   (ps:InitModel)
+        $ShopOrderModel = new \initmodel\ShopOrderModel(); //订单管理  (ps:InitModel)
 
 
         /** 查询出支付信息,以及关联的订单号 */
@@ -312,6 +313,12 @@ class NotifyController extends AuthController
             $MemberModel->inc_balance($order_info['user_id'], $order_info['total_balance'], '充值', $remark, $order_info['id'], $order_info['order_num'], 400);
         }
 
+
+        //商城订单 & 类型注意
+        if ($pay_info['order_type'] == 100) {
+            $result     = $ShopOrderModel->where($map)->strict(false)->update($updata);//更新订单信息
+            $order_info = $ShopOrderModel->where($map)->find();//查询订单信息
+        }
 
 //        Log::write('processOrder:order_info');
 //        Log::write($order_info);

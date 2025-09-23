@@ -66,6 +66,7 @@ class OrderPayController extends AuthController
         $ShopManageOrderModel      = new \initmodel\ShopManageOrderModel(); //管理费订单管理   (ps:InitModel)
         $MemberVipOrderModel       = new \initmodel\MemberVipOrderModel(); //充值会员   (ps:InitModel)
         $MemberRechargeOrderModel  = new \initmodel\MemberRechargeOrderModel(); //充值订单   (ps:InitModel)
+        $ShopOrderModel = new \initmodel\ShopOrderModel(); //订单管理  (ps:InitModel)
 
         $map   = [];
         $map[] = ['order_num', '=', $params['order_num']];
@@ -82,6 +83,9 @@ class OrderPayController extends AuthController
 
         //充值
         if ($params['order_type'] == 40) $order_info = $MemberRechargeOrderModel->where($map)->find();
+
+        //商城订单
+        if ($params['order_type'] == 100) $order_info = $ShopOrderModel->where($map)->find();
 
 
         if (empty($order_info)) $this->error('订单不存在');

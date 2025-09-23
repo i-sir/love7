@@ -10,7 +10,7 @@
 
         <div class="form-group">
             <label class="col-sm-2 control-label">拒绝理由:</label>
-            <div class="layui-input-block col-md-6 col-sm-10">
+            <div class="layui-input-block col-sm-6">
                 <textarea name="refuse" class="form-control post-params item-left">{$refuse|default=''}</textarea>
             </div>
         </div>
@@ -93,8 +93,7 @@
                     let time1 = setInterval(function () {
                         //父级弹框关闭
                         parent.layer.closeAll();
-                        //父级页面刷新
-                        parent.location.reload();
+                        //父页面自动刷新
                     }, 500);
                 }
 

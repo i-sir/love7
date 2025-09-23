@@ -26,11 +26,11 @@ class ShopOrderDetailInit extends Base
     public $is_vip = [0 => '否', 1 => '是'];//是否是会员
     public $status = [0 => '未提交', 1 => '审核中', 2 => '已通过', 3 => '已驳回'];//退款状态
 
-    public $Field         = "*";//过滤字段,默认全部
-    public $Limit         = 100000;//如不分页,展示条数
-    public $PageSize      = 15;//分页每页,数据条数
-    public $Order         = "id desc";//排序
-    public $InterfaceType = "api";//接口类型:admin=后台,api=前端
+    protected $Field         = "*";//过滤字段,默认全部
+    protected $Limit         = 100000;//如不分页,展示条数
+    protected $PageSize      = 15;//分页每页,数据条数
+    protected $Order         = "id desc";//排序
+    protected $InterfaceType = "api";//接口类型:admin=后台,api=前端
 
     //本init和model
     public function _init()
