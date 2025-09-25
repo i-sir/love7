@@ -118,12 +118,13 @@
                 <th style="width: 60px">用户信息</th>
                 <th style="width: 60px">手机号</th>
                 <th style="width: 60px">爱心</th>
+                <th style="width: 60px">佣金</th>
                 <th style="width: 60px">性别</th>
                 <th style="width: 60px">出生日期</th>
                 <if condition="empty($admin_recommend_id) && empty($admin_matchmaker_id)">
                     <th style="width: 120px">平台认证/交往中/平台推荐</th>
                 </if>
-                <th style="width: 60px">引荐人</th>
+                <th style="width: 60px">上级</th>
                 <th style="width: 60px">状态</th>
                 <th style="width: 60px">会员等级</th>
                 <th style="width: 60px">到期时间</th>
@@ -141,7 +142,7 @@
                             <if condition="!empty($vo['avatar'])">
                                 <a href="javascript:imagePreviewDialog('{:cmf_get_image_preview_url($vo.avatar)}');">
                                     <img src="{:cmf_get_image_preview_url($vo.avatar)}"
-                                         style="width:30px;height:30px;border-radius:30px;">
+                                         style="width:30px;height:30px;">
                                 </a>
                             </if>
                             <span ondblclick="copyContent('{$vo.openid}')">{$vo.nickname}</span>
@@ -158,6 +159,7 @@
                         </if>
                     </td>
                     <td>{$vo.balance}</td>
+                    <td>{$vo.commission}</td>
                     <td>{$vo.gender}</td>
                     <td>{$vo.birth}</td>
                     <if condition="empty($admin_recommend_id) && empty($admin_matchmaker_id)">
@@ -181,7 +183,11 @@
                             </div>
                         </td>
                     </if>
-                    <td>{$vo.p_invite_code}</td>
+                    <td>
+                        <if condition="!empty($vo.p_user_info)">
+                            [{$vo.pid}]{$vo.p_user_info.nickname}
+                        </if>
+                    </td>
                     <td>{$vo.status_name}</td>
                     <td>
                         <if condition="empty($admin_recommend_id) && empty($admin_matchmaker_id)">
@@ -227,10 +233,11 @@
                                href="{:url('delete',array('id'=>$vo.id,'params'=>$params))}">删除</a>
                         </if>
 
+
                         <if condition="empty($admin_recommend_id) && empty($admin_matchmaker_id)">
-                            <a class="layui-btn layui-btn-primary layui-border-blue layui-btn-xs"
-                               href="javascript:parent.openIframeLayer('{:url('operate',array('id'=>$vo.id))}','操作',{ area: ['45%', '65%'],move:'.layui-layer-title'});"
-                            >操作</a>
+<!--                            <a class="layui-btn layui-btn-primary layui-border-blue layui-btn-xs"-->
+<!--                               href="javascript:parent.openIframeLayer('{:url('operate',array('id'=>$vo.id))}','操作',{ area: ['45%', '65%'],move:'.layui-layer-title'});"-->
+<!--                            >操作</a>-->
                         </if>
 
 

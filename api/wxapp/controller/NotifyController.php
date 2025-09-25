@@ -229,8 +229,8 @@ class NotifyController extends AuthController
         $MemberModel               = new \initmodel\MemberModel();//用户管理
         $MemberRechargeOrderModel  = new \initmodel\MemberRechargeOrderModel(); //充值订单   (ps:InitModel)
         $MemberVipModel            = new \initmodel\MemberVipModel(); //用户等级   (ps:InitModel)
-        $ShopOrderModel = new \initmodel\ShopOrderModel(); //订单管理  (ps:InitModel)
-
+        $ShopOrderModel            = new \initmodel\ShopOrderModel(); //订单管理  (ps:InitModel)
+        $InitController            = new InitController();
 
         /** 查询出支付信息,以及关联的订单号 */
         $pay_info = $OrderPayModel->where('pay_num', $pay_num)->find();
@@ -291,15 +291,20 @@ class NotifyController extends AuthController
 
 
             //给引荐人送佣金
-            $vip_info    = $MemberVipModel->where('id', '=', $order_info['vip_id'])->find();
-            $member_info = $MemberModel->where('id', '=', $order_info['user_id'])->find();
+            //            $vip_info    = $MemberVipModel->where('id', '=', $order_info['vip_id'])->find();
+            //            $member_info = $MemberModel->where('id', '=', $order_info['user_id'])->find();
+            //
+            //            if ($vip_info['commission'] && $member_info['pid']) {
+            //                $balance = round($order_info['amount'] * ($vip_info['commission'] / 100), 2);
+            //                //签到奖励
+            //                $remark = "操作人[佣金];操作说明[邀请用户:{$order_info['user_id']},奖励:{$balance}];操作类型[佣金奖励];";//管理备注
+            //                $MemberRecommendModel->inc_balance($member_info['pid'], $balance, '佣金', $remark, $order_info['id'], $order_info['order_num'], 50);
+            //            }
 
-            if ($vip_info['commission'] && $member_info['pid']) {
-                $balance = round($order_info['amount'] * ($vip_info['commission'] / 100), 2);
-                //签到奖励
-                $remark = "操作人[佣金];操作说明[邀请用户:{$order_info['user_id']},奖励:{$balance}];操作类型[佣金奖励];";//管理备注
-                $MemberRecommendModel->inc_balance($member_info['pid'], $balance, '佣金', $remark, $order_info['id'], $order_info['order_num'], 50);
-            }
+            //给上级送佣金
+            $InitController->send_vip_commission($order_num, $order_info['user_id'], 1);
+            //升级
+            $InitController->upgrade($order_info['user_id']);
         }
 
 
@@ -320,8 +325,8 @@ class NotifyController extends AuthController
             $order_info = $ShopOrderModel->where($map)->find();//查询订单信息
         }
 
-//        Log::write('processOrder:order_info');
-//        Log::write($order_info);
+        //        Log::write('processOrder:order_info');
+        //        Log::write($order_info);
 
         return ['result' => $result, 'order_info' => $order_info];
     }

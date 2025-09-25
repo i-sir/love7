@@ -703,7 +703,6 @@ class MemberController extends AdminBaseController
     }
 
 
-
     //查询下级列表
     public function children()
     {
@@ -728,8 +727,6 @@ class MemberController extends AdminBaseController
     }
 
 
-
-
     //会员关系图
     public function children_tree()
     {
@@ -740,8 +737,10 @@ class MemberController extends AdminBaseController
     //会员关系图 用户数据
     public function get_user_list()
     {
-        $MemberModel = new \initmodel\MemberModel();//用户管理
-        $params      = $this->request->param();
+        $MemberModel    = new \initmodel\MemberModel();//用户管理
+        $MemberVipModel = new \initmodel\MemberVipModel(); //用户等级   (ps:InitModel)
+
+        $params = $this->request->param();
 
         //条件
         $map = [];
@@ -750,10 +749,13 @@ class MemberController extends AdminBaseController
         if (isset($params['phone']) && $params['phone']) $map[] = ['phone', '=', $params['phone']];
 
         $result = $MemberModel->where($map)
-            ->field('id,nickname,avatar,phone,create_time')
+            ->field('id,nickname,avatar,phone,create_time,vip_id,is_captain')
             ->order('id')
             ->select()
-            ->each(function ($item, $key) use ($MemberModel) {
+            ->each(function ($item, $key) use ($MemberModel, $MemberVipModel) {
+
+                $item['vip_name'] = $MemberVipModel->where('id', $item['vip_id'])->value('name');
+                if ($item['is_captain'] == 1) $item['vip_name'] .= '[团队长]';
 
 
                 //判断是否有子级

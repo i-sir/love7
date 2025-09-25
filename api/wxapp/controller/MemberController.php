@@ -179,7 +179,8 @@ class MemberController extends AuthController
             $member_info['id'] = $MemberModel->strict(false)->insert([
                 'openid'      => $params['openid'],
                 'phone'       => $params['phone'],
-                'status'      => 2,//默认通过
+                'invite_code' => uniqid(),
+                'status'      => 0,//需要审核
                 'vip_id'      => 1,//默认初级会员
                 'end_time'    => 4102415999,
                 'create_time' => time(),
@@ -248,6 +249,17 @@ class MemberController extends AuthController
      *         name="token",
      *         in="query",
      *         description="token",
+     *         required=false,
+     *         @OA\Schema(
+     *             type="string",
+     *         )
+     *     ),
+     *
+     *
+     *     @OA\Parameter(
+     *         name="invite_code",
+     *         in="query",
+     *         description="邀请码",
      *         required=false,
      *         @OA\Schema(
      *             type="string",
@@ -338,14 +350,16 @@ class MemberController extends AuthController
         if ($member['pid']) unset($params['pid']);
 
         //绑定上级
-        if ($params['p_invite_code']) {
-            //检测是否存在
-            $is_recommend = $MemberRecommendModel->where('invite_code', '=', $params['p_invite_code'])->find();
-            if (!$is_recommend) $this->error("该邀请码不存在!");
-        }
-        if ($params['p_invite_code'] && empty($member['pid'])) {
-            $recommend_info = $MemberRecommendModel->where('invite_code', $params['p_invite_code'])->find();
-            if ($recommend_info) $params['pid'] = $recommend_info['id'];
+//        if ($params['p_invite_code']) {
+//            //检测是否存在
+//            $is_recommend = $MemberRecommendModel->where('invite_code', '=', $params['p_invite_code'])->find();
+//            if (!$is_recommend) $this->error("该邀请码不存在!");
+//        }
+
+        //绑定上级
+        if ($params['invite_code'] && empty($member['pid'])) {
+            $user_info = $MemberModel->where('invite_code', $params['invite_code'])->find();
+            if ($user_info) $params['pid'] = $user_info['id'];
         }
 
         //修改密码

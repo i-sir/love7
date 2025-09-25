@@ -61,7 +61,11 @@ class MemberInit extends Base
 
 
         //查看引荐人
-
+        $p_user_info = $MemberModel->where('id', '=', $item['pid'])->field('id,nickname,avatar')->find();
+        if ($p_user_info) {
+            $p_user_info['avatar'] = cmf_get_asset_url($p_user_info['avatar']);
+            $item['p_user_info']   = $p_user_info;
+        }
 
         //会员等级
         $vip_info = $MemberVipModel->where('id', '=', $item['vip_id'])->find();
@@ -69,7 +73,6 @@ class MemberInit extends Base
             $item['vip_info'] = $vip_info;
             $item['vip_name'] = $vip_info['name'];
         }
-
 
 
         if ($item['avatar']) $item['avatar'] = cmf_get_asset_url($item['avatar']);
