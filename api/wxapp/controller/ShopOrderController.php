@@ -207,7 +207,7 @@ class ShopOrderController extends AuthController
         $params = $this->request->param();
 
         /** 查询条件 **/
-        $where = [];
+        $where   = [];
         $where[] = ['user_id', '=', $this->user_id];
         if ($params['id']) $where[] = ["id", "=", $params["id"]];
         if ($params['order_num']) $where[] = ["order_num", "=", $params["order_num"]];
@@ -344,13 +344,12 @@ class ShopOrderController extends AuthController
     public function get_amount()
     {
         $this->checkAuth();
-        $params              = $this->request->param();
-        $ShopAddressModel    = new \initmodel\ShopAddressModel();//地址管理
-        $ShopCartModel       = new \initmodel\ShopCartModel();//购物车
-        $SkuModel            = new \initmodel\sku\ShopGoodsSkuModel();//sku
-        $ShopGoodsModel      = new \initmodel\ShopGoodsModel();//商品
-        $ShopCouponUserModel = new \initmodel\ShopCouponUserModel(); //优惠券领取记录   (ps:InitModel)
-        $count               = (empty($params['count']) ? 1 : $params['count']) ?? 1;
+        $params           = $this->request->param();
+        $ShopAddressModel = new \initmodel\ShopAddressModel();//地址管理
+        $ShopCartModel    = new \initmodel\ShopCartModel();//购物车
+        $SkuModel         = new \initmodel\sku\ShopGoodsSkuModel();//sku
+        $ShopGoodsModel   = new \initmodel\ShopGoodsModel();//商品
+        $count            = (empty($params['count']) ? 1 : $params['count']) ?? 1;
 
 
         //地址信息
@@ -362,12 +361,6 @@ class ShopOrderController extends AuthController
         //        $params['city']     = $address_info['city'];
         //        $params['county']   = $address_info['county'];
 
-
-        //优惠券信息
-        if ($params['coupon_id']) {
-            $coupon_info = $ShopCouponUserModel->where('id', '=', $params['coupon_id'])->find();
-            if (empty($coupon_info) || $coupon_info['used'] != 1) $this->error('优惠券信息错误');
-        }
 
         $amount         = 0;//实际支付金额
         $goods_amount   = 0;//商品金额
@@ -419,14 +412,6 @@ class ShopOrderController extends AuthController
             }
 
 
-            //优惠券金额
-            if ($coupon_info) {
-                //优惠券类型:1满减券,2折扣券
-                if ($coupon_info['coupon_type'] == 1) $coupon_amount = $coupon_info['amount'];
-                if ($coupon_info['coupon_type'] == 2) $coupon_amount = round($goods_amount - ($goods_amount * ($coupon_info['discount'] / 100)), 2);
-            }
-
-
             //订单总金额,商品金额+运费金额
             $total_amount = $goods_amount + $freight_amount;
 
@@ -449,13 +434,6 @@ class ShopOrderController extends AuthController
             //商品金额
             $goods_amount += round($sku_info['price'] * $count, 2);
 
-
-            //优惠券金额
-            if ($coupon_info) {
-                //优惠券类型:1满减券,2折扣券
-                if ($coupon_info['coupon_type'] == 1) $coupon_amount = $coupon_info['amount'];
-                if ($coupon_info['coupon_type'] == 2) $coupon_amount = round($goods_amount - ($goods_amount * ($coupon_info['discount'] / 100)), 2);
-            }
 
             //订单总金额,商品金额+运费金额
             $total_amount = $goods_amount + $freight_amount;
@@ -679,9 +657,6 @@ class ShopOrderController extends AuthController
         $order_insert['create_time'] = time();
 
 
-
-
-
         //订单自动取消时间
         $automatic_cancellation_order     = cmf_config('order_automatic_cancellation_time');
         $order_insert['auto_cancel_time'] = time() + ($automatic_cancellation_order * 60);
@@ -694,7 +669,10 @@ class ShopOrderController extends AuthController
         $freight_amount = 0;//运费
         $total_amount   = 0;//订单总金额,实际支付金额+优惠金额+运费
         $type           = '';//商品类型:商品类型:goods=普通商品,customized=定制商品
-
+        $commission     = 0;
+        $commission2    = 0;
+        $commission3    = 0;
+        $commission4    = 0;
 
         //下单
         if ($params['cart_ids']) {
@@ -745,6 +723,12 @@ class ShopOrderController extends AuthController
                 //商品数量
                 $count += $cart['count'];
 
+                //佣金
+                $commission  += round($goods_amount * ($goods_info['commission'] / 100), 2);
+                $commission2 += round($goods_amount * ($goods_info['commission2'] / 100), 2);
+                $commission3 += round($goods_amount * ($goods_info['commission3'] / 100), 2);
+                $commission4 += round($goods_amount * ($goods_info['commission4'] / 100), 2);
+
 
                 //扣除库存
                 $StockInit->dec_stock('shop_goods', $sku_info['id'], $cart['count'], $sku_info['goods_id'], $order_num);
@@ -752,8 +736,6 @@ class ShopOrderController extends AuthController
 
 
             $goods_name .= $goods_info['goods_name'] . '/';
-
-
 
 
             //订单总金额,商品金额+运费金额
@@ -806,6 +788,10 @@ class ShopOrderController extends AuthController
             $order_detail['shop_id']      = $params['shop_id'] ?? $goods_info['shop_id'];
             $order_detail['image']        = cmf_get_asset_url($goods_info['image']);
 
+            $commission  = round(($sku_info['price'] * $count) * ($goods_info['commission'] / 100), 2);
+            $commission2 = round(($sku_info['price'] * $count) * ($goods_info['commission2'] / 100), 2);
+            $commission3 = round(($sku_info['price'] * $count) * ($goods_info['commission3'] / 100), 2);
+            $commission4 = round(($sku_info['price'] * $count) * ($goods_info['commission4'] / 100), 2);
 
             //商品金额
             $goods_amount += round($sku_info['price'] * $count, 2);
@@ -813,8 +799,6 @@ class ShopOrderController extends AuthController
 
             //商品名字
             $goods_name = $goods_info['goods_name'];
-
-
 
 
             //订单总金额,商品金额+运费金额
@@ -838,6 +822,10 @@ class ShopOrderController extends AuthController
 
         //价格信息
         $order_insert['count']          = $count;//下单数量
+        $order_insert['commission']     = $commission;
+        $order_insert['commission2']    = $commission2;
+        $order_insert['commission3']    = $commission3;
+        $order_insert['commission4']    = $commission4;
         $order_insert['amount']         = round($amount, 2);//实际支付金额
         $order_insert['freight_amount'] = round($freight_amount, 2);//运费
         $order_insert['goods_amount']   = round($goods_amount, 2);//商品金额
@@ -931,7 +919,7 @@ class ShopOrderController extends AuthController
         $params = $this->request->param();
 
 
-        $where = [];
+        $where   = [];
         $where[] = ['user_id', '=', $this->user_id];
         if ($params['id']) $where[] = ['id', '=', $params['id']];
         if ($params['order_num']) $where[] = ['order_num', '=', $params['order_num']];
@@ -971,9 +959,6 @@ class ShopOrderController extends AuthController
         foreach ($order_detail as $k => $v) {
             $StockInit->inc_stock('shop_goods', $v['sku_id'], $v['count'], $v['goods_id'], $order_info['order_num']);
         }
-
-
-
 
 
         // 提交事务
@@ -1042,8 +1027,7 @@ class ShopOrderController extends AuthController
         $params         = $this->request->param();
         $ShopOrderModel = new \initmodel\ShopOrderModel();//订单管理
 
-
-        $where = [];
+        $where   = [];
         $where[] = ['user_id', '=', $this->user_id];
         if ($params['id']) $where[] = ['id', '=', $params['id']];
         if ($params['order_num']) $where[] = ['order_num', '=', $params['order_num']];
@@ -1062,8 +1046,8 @@ class ShopOrderController extends AuthController
         if (empty($result)) $this->error('失败请重试');
 
         //这里处理订单完成后的逻辑
-        //        $InitController = new InitController();//基础接口
-        //        $InitController->sendShopOrderAccomplish($order_info['order_num']);
+        $InitController = new InitController();//基础接口
+        $InitController->send_order_commission($order_info['order_num'], $order_info['user_id'], 1);
 
         $this->success("操作成功");
     }
@@ -1134,7 +1118,7 @@ class ShopOrderController extends AuthController
         $params = $this->request->param();
 
 
-        $where = [];
+        $where   = [];
         $where[] = ['user_id', '=', $this->user_id];
         if ($params['id']) $where[] = ['id', '=', $params['id']];
         if ($params['order_num']) $where[] = ['order_num', '=', $params['order_num']];
@@ -1160,10 +1144,6 @@ class ShopOrderController extends AuthController
 
         $this->success("操作成功");
     }
-
-
-
-
 
 
     /**

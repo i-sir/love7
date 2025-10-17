@@ -58,6 +58,7 @@ class MemberVipInit extends Base
 
 
         /** 数据格式(公共部分),find详情,list列表 **/
+        if ($params['gender'] == '女') $item['price'] = $item['price2'];
 
 
         /** 数据格式,find详情,list列表 **/

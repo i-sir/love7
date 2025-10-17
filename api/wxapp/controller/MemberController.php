@@ -350,11 +350,11 @@ class MemberController extends AuthController
         if ($member['pid']) unset($params['pid']);
 
         //绑定上级
-//        if ($params['p_invite_code']) {
-//            //检测是否存在
-//            $is_recommend = $MemberRecommendModel->where('invite_code', '=', $params['p_invite_code'])->find();
-//            if (!$is_recommend) $this->error("该邀请码不存在!");
-//        }
+        //        if ($params['p_invite_code']) {
+        //            //检测是否存在
+        //            $is_recommend = $MemberRecommendModel->where('invite_code', '=', $params['p_invite_code'])->find();
+        //            if (!$is_recommend) $this->error("该邀请码不存在!");
+        //        }
 
         //绑定上级
         if ($params['invite_code'] && empty($member['pid'])) {
@@ -509,9 +509,20 @@ class MemberController extends AuthController
         $MemberInit = new \init\MemberInit();//用户管理
 
 
+
+        $field_lat = 'lat';// 数据库字段名 - 纬度  -90°到90°
+        $field_lng = 'lng';// 数据库字段名 - 经度  -180°到180°
+        $lat       = $params['lat'];// 数据库字段名 - 纬度  -90°到90°
+        $lng       = $params['lng'];// 数据库字段名 - 经度  -180°到180°
+        if (!empty($lat) && !empty($lng)) {
+            $field           = "(6378.137 * 2 * asin(sqrt(pow(sin((radians({$field_lat}) - radians({$lat})) / 2), 2) + cos(radians({$field_lat})) * cos(radians({$lat})) * pow(sin((radians({$field_lng}) - radians({$lng})) / 2), 2))))";
+            $params['field'] = '*,' . "{$field} as distance";
+        }
+
+
         $map    = [];
         $map[]  = ['id', '=', $params['id']];
-        $result = $MemberInit->get_find($map, ['field' => '*']);
+        $result = $MemberInit->get_find($map,$params);
         if (empty($result)) $this->error("暂无数据！");
 
 
@@ -647,10 +658,21 @@ class MemberController extends AuthController
         //引荐人只查看自己下级  查看所有
         //if ($this->user_info['identity_type'] == 'recommend') $map[] = ['pid', '=', $this->user_id];
 
+        $field_lat = 'lat';// 数据库字段名 - 纬度  -90°到90°
+        $field_lng = 'lng';// 数据库字段名 - 经度  -180°到180°
+        $lat       = $params['lat'];// 数据库字段名 - 纬度  -90°到90°
+        $lng       = $params['lng'];// 数据库字段名 - 经度  -180°到180°
+        if (!empty($lat) && !empty($lng)) {
+            $field           = "(6378.137 * 2 * asin(sqrt(pow(sin((radians({$field_lat}) - radians({$lat})) / 2), 2) + cos(radians({$field_lat})) * cos(radians({$lat})) * pow(sin((radians({$field_lng}) - radians({$lng})) / 2), 2))))";
+            $params['field'] = '*,' . "{$field} as distance";
+            $params['order'] = 'distance asc,ranking,top_time desc,id desc';
+        }else{
+            $params['field'] = '*';
+        }
+
 
         //刷新时间,id排序
         $params['order'] = 'ranking,top_time desc,id desc';
-        $params['field'] = '*';
 
 
         $result = $MemberInit->get_list_paginate($map, $params);

@@ -71,10 +71,10 @@ class InitController
         $pid = $MemberModel->where('id', '=', $user_id)->value('pid');
         if ($pid) {
             //分销比例(%)
-            $distribution = cmf_config($level_list[$level]);
+            $distribution = cmf_config($level_list[$level]) ?? 0;
             $commission   = $order_info['amount'] * $distribution / 100;
             if ($commission > 0) {
-                $remark = "操作人[下单得佣金];操作说明[下单得佣金];操作类型[下单得佣金];";//管理备注
+                $remark = "操作人[邀请开会员得佣金];操作说明[邀请开会员得佣金];操作类型[邀请开会员得佣金];";//管理备注
                 AssetModel::incAsset('下单得佣金,给上级发放佣金 [300]', [
                     'operate_type'  => 'commission',//操作类型，balance|point ...
                     'identity_type' => 'member',//身份类型，member| ...
@@ -91,10 +91,57 @@ class InitController
         }
 
 
+        return true;
+
+
+    }
+
+    /**
+     * 订单完成 给上级发放佣金
+     * @param $order_num
+     */
+    public function send_order_commission($order_num = 0, $user_id = 0, $level = 1)
+    {
+        $ShopOrderModel = new \initmodel\ShopOrderModel();//订单管理
+        $MemberModel    = new \initmodel\MemberModel();//用户管理
+
+        $map        = [];
+        $map[]      = ['order_num', '=', $order_num];
+        $order_info = $ShopOrderModel->where($map)->find();
+        if (empty($order_info)) return false;
+        if ($order_info['amount'] <= 0) return false;
+        if ($level > 4) return false;//最多4级
+
+        $level_list = [
+            1 => 'commission',
+            2 => 'commission2',
+            3 => 'commission3',
+            4 => 'commission4',
+        ];
+
+        //查找上级
+        $pid = $MemberModel->where('id', '=', $user_id)->value('pid');
+        if ($pid) {
+            $commission   = $order_info[$level_list[$level]];
+            if ($commission > 0) {
+                $remark = "操作人[邀请下单商品得佣金];操作说明[邀请下单商品得佣金];操作类型[邀请下单商品得佣金];";//管理备注
+                AssetModel::incAsset('下单得佣金,给上级发放佣金 [310]', [
+                    'operate_type'  => 'commission',//操作类型，balance|point ...
+                    'identity_type' => 'member',//身份类型，member| ...
+                    'user_id'       => $pid,
+                    'price'         => $commission,
+                    'order_num'     => $order_num,
+                    'order_type'    => 310,
+                    'content'       => '邀请奖励',
+                    'remark'        => $remark,
+                    'order_id'      => $order_info['id'],
+                ]);
+                $this->send_order_commission($order_num, $pid, $level + 1);
+            }
+        }
 
 
         return true;
-
 
 
     }
@@ -103,23 +150,21 @@ class InitController
     //升级
     public function upgrade($user_id = 0)
     {
-        $MemberModel         = new \initmodel\MemberModel();//用户管理
-
+        $MemberModel = new \initmodel\MemberModel();//用户管理
 
 
         $user_info = $MemberModel->where('id', '=', $user_id)->field('pid,id')->find();
         if (empty($user_info)) return false;
 
         //团队人数
-        $team_size=cmf_config('team_size');
+        $team_size = cmf_config('team_size');
 
 
         $team_number = $this->getAllChildIds($user_id);
         if ($team_number >= $team_size) {
             //升级会员
-            $MemberModel->where('id', '=', $user_id)->update(['is_captain' => 1,'update_time'=>time()]);
+            $MemberModel->where('id', '=', $user_id)->update(['is_captain' => 1, 'update_time' => time()]);
         }
-
 
 
         $this->upgrade($user_info['pid']);
@@ -154,7 +199,6 @@ class InitController
 
         return $childIds;
     }
-
 
 
 }

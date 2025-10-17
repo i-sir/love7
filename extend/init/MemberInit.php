@@ -82,6 +82,10 @@ class MemberInit extends Base
             $item['create_time'] = date('Y-m-d H:i:s', $item['create_time']);
         }
 
+        //回显,展示
+        $item['distance_km'] = '0km';
+        if ($item['distance']) $item['distance_km'] = round($item['distance'] , 2) . 'km';
+
         //宠物
         if ($item['pet']) $item['pet'] = $this->getParams($item['pet']);
         //爱好

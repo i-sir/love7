@@ -147,35 +147,33 @@ class AuthController extends RestBaseController
         $map[] = ['id', '=', $userToken['user_id']];
 
         //用户
-        if ($userToken['device_type'] == 'member') {
-            $result                  = $MemberInit->get_find($map, ['field' => '*']);
-            $result['identity_type'] = 'member';
+        $result                  = $MemberInit->get_find($map, ['field' => '*']);
+        $result['identity_type'] = 'member';
 
-            //检测是否为店铺
-            $shop_info             = $ShopInit->get_find(['user_id' => $result['id']], ['is_api' => true, 'field' => '*']);
-            $result['shop_status'] = 0;//没有提交
-            if ($shop_info) {
-                $result['shop_id']     = $shop_info['id'];
-                $result['shop_status'] = $shop_info['status'];
-                $result['end_time']    = $shop_info['end_time'];
-                $result['shop_info']   = $shop_info;
-                //$result['identity_type'] = 'shop';
-            }
+        //检测是否为店铺
+        $shop_info             = $ShopInit->get_find(['user_id' => $result['id']], ['is_api' => true, 'field' => '*']);
+        $result['shop_status'] = 0;//没有提交
+        if ($shop_info) {
+            $result['shop_id']     = $shop_info['id'];
+            $result['shop_status'] = $shop_info['status'];
+            $result['end_time']    = $shop_info['end_time'];
+            $result['shop_info']   = $shop_info;
+            //$result['identity_type'] = 'shop';
         }
 
 
         //引荐人
-        if ($userToken['device_type'] == 'recommend') {
-            $result                  = $MemberRecommendInit->get_find($map, ['field' => '*']);
-            $result['identity_type'] = 'recommend';
-        }
+        //        if ($userToken['device_type'] == 'recommend') {
+        //            $result                  = $MemberRecommendInit->get_find($map, ['field' => '*']);
+        //            $result['identity_type'] = 'recommend';
+        //        }
 
 
         //红娘
         if ($userToken['device_type'] == 'matchmaker') {
             $result                  = $MemberMatchmakerInit->get_find($map, ['field' => '*']);
             $result['identity_type'] = 'matchmaker';
-            $result['is_avatar'] = true;
+            $result['is_avatar']     = true;
         }
 
 

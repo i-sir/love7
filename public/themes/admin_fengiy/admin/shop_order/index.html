@@ -151,7 +151,7 @@
                                    title="{$vo.remark|default=''}"></i>
                             </if>
 
-                            <span style="margin-left: 1%;">
+                            <span style="margin-left: 1%;display: none;">
                                <cite>店铺:</cite>
                                 <a href="javascript:imagePreviewDialog('{:cmf_get_image_preview_url($vo.shop_info.logo_image)}');">
                                   <img class="" height="25" width="25" src="{$vo.shop_info.logo_image}">
@@ -220,22 +220,22 @@
 
                         <td class="text-center">
                             <div class="price-summary">
-                                <div class="price-row">
-                                    <div class="price-label"><cite>优惠：</cite></div>
-                                    <div class="price-value">&yen; {$vo.coupon_amount}</div>
-                                </div>
-                                <div class="price-row">
-                                    <div class="price-label"><cite>运费：</cite></div>
-                                    <div class="price-value">&yen; {$vo.freight_amount}</div>
-                                </div>
-                                <div class="price-row">
-                                    <div class="price-label"><cite>使用积分：</cite></div>
-                                    <div class="price-value">&yen; {$vo.point}</div>
-                                </div>
-                                <div class="price-row">
-                                    <div class="price-label"><cite>积分抵扣：</cite></div>
-                                    <div class="price-value">&yen; {$vo.point_balance}</div>
-                                </div>
+<!--                                <div class="price-row">-->
+<!--                                    <div class="price-label"><cite>优惠：</cite></div>-->
+<!--                                    <div class="price-value">&yen; {$vo.coupon_amount}</div>-->
+<!--                                </div>-->
+<!--                                <div class="price-row">-->
+<!--                                    <div class="price-label"><cite>运费：</cite></div>-->
+<!--                                    <div class="price-value">&yen; {$vo.freight_amount}</div>-->
+<!--                                </div>-->
+<!--                                <div class="price-row">-->
+<!--                                    <div class="price-label"><cite>使用积分：</cite></div>-->
+<!--                                    <div class="price-value">&yen; {$vo.point}</div>-->
+<!--                                </div>-->
+<!--                                <div class="price-row">-->
+<!--                                    <div class="price-label"><cite>积分抵扣：</cite></div>-->
+<!--                                    <div class="price-value">&yen; {$vo.point_balance}</div>-->
+<!--                                </div>-->
                                 <div class="price-row">
                                     <div class="price-label"><cite>支付金额：</cite></div>
                                     <div class="price-value">&yen; {$vo.amount}</div>
@@ -284,24 +284,24 @@
                                         <i class="layui-icon layui-icon-release"></i>
                                     </a>
 
-                                    <a class="layui-bg-gray-light layui-circle op-btn"
-                                       data-id="{$vo.id}"
-                                       data-toggle="tooltip"
-                                       lay-on="send-confirm"
-                                       title="确认配送？">
-                                        <i class="layui-icon layui-icon-release"></i>
-                                    </a>
+                                    <!--                                    <a class="layui-bg-gray-light layui-circle op-btn"-->
+                                    <!--                                       data-id="{$vo.id}"-->
+                                    <!--                                       data-toggle="tooltip"-->
+                                    <!--                                       lay-on="send-confirm"-->
+                                    <!--                                       title="确认配送？">-->
+                                    <!--                                        <i class="layui-icon layui-icon-release"></i>-->
+                                    <!--                                    </a>-->
                                 </if>
 
 
                                 <if condition="$vo.status==2">
-                                    <a class="layui-bg-gray-light layui-circle op-btn"
-                                       data-id="{$vo.id}"
-                                       data-toggle="tooltip"
-                                       lay-on="verification_order"
-                                       title="确认核销？">
-                                        <i class="layui-icon layui-icon-unlink"></i>
-                                    </a>
+                                    <!--                                    <a class="layui-bg-gray-light layui-circle op-btn"-->
+                                    <!--                                       data-id="{$vo.id}"-->
+                                    <!--                                       data-toggle="tooltip"-->
+                                    <!--                                       lay-on="verification_order"-->
+                                    <!--                                       title="确认核销？">-->
+                                    <!--                                        <i class="layui-icon layui-icon-unlink"></i>-->
+                                    <!--                                    </a>-->
                                 </if>
 
 
@@ -351,14 +351,13 @@
                                 </a>
 
 
-                                <a class="layui-bg-gray-light layui-circle op-btn"
-                                   data-id="{$vo.id}"
-                                   data-toggle="tooltip"
-                                   lay-on="delete_order"
-                                   title="删除订单？">
-                                    <i class="layui-icon layui-icon-delete"></i>
-                                </a>
-
+                                <!--                                <a class="layui-bg-gray-light layui-circle op-btn"-->
+                                <!--                                   data-id="{$vo.id}"-->
+                                <!--                                   data-toggle="tooltip"-->
+                                <!--                                   lay-on="delete_order"-->
+                                <!--                                   title="删除订单？">-->
+                                <!--                                    <i class="layui-icon layui-icon-delete"></i>-->
+                                <!--                                </a>-->
 
 
                             </div>
@@ -622,7 +621,6 @@
                     layer.msg('已取消!', {icon: 2});
                 });
             },
-
 
 
             //打印小票

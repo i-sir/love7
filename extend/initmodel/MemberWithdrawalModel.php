@@ -6,6 +6,6 @@ use think\Model;
 
 class MemberWithdrawalModel extends Model
 {
-    protected $name = 'member_withdrawal';
+    protected $name = 'base_withdrawal';
 
 }
